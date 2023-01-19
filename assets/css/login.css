@@ -1,0 +1,293 @@
+html,
+body,
+#main {
+  user-select: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+#main {
+  visibility: hidden;
+}
+
+/* loading page */
+#loadingPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: radial-gradient( farthest-corner at 20% 30% ,   #EF91FA, #82D8F7);
+  width: 100%;
+  height: 100%;
+}
+.lds-ripple {
+  transform: scale(1.5);
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid white;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+/* loading page */
+
+
+
+#loadingCircle{
+  border: 2px solid black;
+  width: 20px;
+  height: 20px;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("../images/login/bg_0.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+#bigIconContainer {
+  position: relative;
+  z-index: 3;
+}
+
+#bigIconContainer span {
+  /* background-color: rgb(44, 85, 179); */
+  background-image: radial-gradient(
+    farthest-corner at 20px 20px,
+    violet,
+    rgb(44, 85, 179),
+    black
+  );
+  color: white;
+  border-radius: 50%;
+  font-size: 125px;
+}
+
+.body {
+  z-index: 2;
+  position: relative;
+  top: -10%;
+  width: 430px;
+  height: 300px;
+  background-color: rgb(0, 50, 50, 0.2);
+  border-radius: 20px;
+}
+
+#inputs {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  top: 28%;
+  height: 45%;
+}
+
+#inputs .inputBox {
+  display: flex;
+  justify-content: flex-end;
+  margin: 5px 0;
+  width: 83%;
+  height: 38%;
+  background-color: rgb(81, 89, 125, 0.9);
+}
+
+.inputBox span {
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 17%;
+  color: white;
+  /* background-color: rgb(56, 82, 135, 0.8); */
+  background-color: rgb(81, 89, 125, 0.9);
+}
+
+/* try to change autofill style but not work!    */
+/* .inputBox input:autofill,
+    .inputBox input:-webkit-autofill,
+    .inputBox input:-webkit-autofill:hover,
+    .inputBox input:-webkit-autofill:focus,
+    .inputBox input:-webkit-autofill:active {
+        background-color: rgb(150, 119, 190);
+        background-image: none;
+        font-size: 30px;
+    } */
+
+/* .inputBox input:-webkit-autofill,
+    .inputBox input:-webkit-autofill:hover,
+    .inputBox input:-webkit-autofill:focus,
+    .inputBox textarea:-webkit-autofill,
+    .inputBox textarea:-webkit-autofill:hover,
+    .inputBox textarea:-webkit-autofill:focus,
+    .inputBox select:-webkit-autofill,
+    .inputBox select:-webkit-autofill:hover,
+    .inputBox select:-webkit-autofill:focus,
+    .inputBox input:-webkit-autofill::first-line {
+        transition: font-size 5s ease;
+        transition: background-color 5000s ease-in-out 0s;
+        font-size: 30px;
+    } */
+
+/* .inputBox input:-webkit-autofill::first-line {
+        font-size: 30px;
+    } */
+
+.inputBox input::placeholder {
+  /* color: blueviolet; */
+  color: rgb(255, 250, 250, 0.5);
+  font-style: italic;
+}
+
+.inputBox input {
+  user-select: none;
+  cursor: default;
+  caret-color: white;
+  color: white;
+  outline: none;
+  transition: background-color 9999s ease-in-out 0s;
+  padding-left: 10px;
+  letter-spacing: 1px;
+  font-size: 30px;
+  width: 83%;
+  background-color: rgb(150, 119, 190);
+  background-image: linear-gradient(
+    145deg,
+    violet -50%,
+    rgb(56, 82, 135, 0.8) 100%
+  );
+  box-sizing: border-box;
+  height: 100%;
+  border: none;
+}
+
+#inputfooter {
+  position: relative;
+  top: 36%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: -8px auto;
+  width: 75%;
+  font-size: 16px;
+}
+
+#inputfooter span:nth-child(2) {
+  color: darkblue;
+}
+
+#inputfooter span:nth-child(3) {
+  color: blue;
+  font-style: italic;
+}
+
+#checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#checkbox input {
+  width: 20px;
+  height: 20px;
+}
+
+#inputfooter span:hover {
+  transition: all 200ms ease;
+  transform: scale(1.07);
+}
+
+#checkbox span {
+  padding-left: 2px;
+}
+
+#loginContainer {
+  position: relative;
+  top: -13%;
+  height: 70px;
+  width: 275px;
+  background-image: linear-gradient(transparent 40%, rgb(0, 50, 50, 0.5) 100%);
+  border-radius: 20px;
+}
+
+#loginContainer:hover {
+  transition: all 1s ease;
+  top: -14%;
+}
+
+#loginContainer p:hover {
+  transition: 500ms ease;
+  font-size: 22px;
+  text-shadow: 0px 2px 1px black, 2px 2px 1px blueviolet,
+    -2px 2px 1px blueviolet;
+  top: 18%;
+}
+
+#loginContainer {
+  z-index: 1;
+}
+
+#loginContainer p {
+  height: 35px;
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  top: 20%;
+  font-weight: bold;
+  color: white;
+}
+
+/* icon */
+.material-symbols-outlined {
+  font-size: 50px;
+  font-variation-settings: "FILL" 1, "wght" 100, "GRAD" 200, "opsz" 48;
+}

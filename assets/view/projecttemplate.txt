@@ -1,0 +1,28 @@
+<ul id="sortContainer" draggable="true" ondrop="elementDropped(event)">
+                        <li class="sortable projectBoxContainer">
+                            <div class="left">
+                                <div class="header">Network Infrastructure Construction </div>
+                                <div class="developerContainer">
+                                    <span>Developers</span>
+                                    <div class="developerIconContainer">
+                                        <div class="developerIcon" style="background-image: url(../images/users/ahmet.jpg);"></div>
+                                        <div class="developerIcon" style="background-image: url(../images/users/ahmet.jpg);"></div>
+                                    </div>
+                                </div>
+                                <div class="remainTaskContainer">
+                                    <div class="taskIcon"></div>
+                                    <span>3/5</span>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="progressContainer">
+                                    <div class="progressCircleContainer">
+                                        <div class="progressCircleColor"></div>
+                                        <div class="progressNumber">50%</div>
+                                    </div>
+                                </div>
+                                <div class="dueBox">due 10 day</div>
+                                <div class="detail"></div>
+                            </div>
+                        </li>
+                    </ul>
