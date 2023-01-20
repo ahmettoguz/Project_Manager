@@ -211,3 +211,4 @@ function  addProject_PhotoToDatabase($tempLocation)
 
     return "false";
 }
+
