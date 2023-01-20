@@ -7,13 +7,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(performLoginOperation($_POST["username"], $_POST["password"], $_POST["remember"]));
 
     if ($_POST["opt"] == "addProject_MemberToDatabase")
-        echo json_encode(addProject_MemberToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"]));
-    if ($_POST["opt"] == "addProject_PhotoToDatabase")
-        echo json_encode(addProject_PhotoToDatabase($_FILES["addProjectFileUpload"]["tmp_name"]));
+        echo json_encode(addProject_MemberToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"], $_POST["hasPhoto"]));
+    if ($_POST["opt"] == "uploadPhotoToDatabase")
+        echo json_encode(addProject_PhotoToDatabase($_FILES["addProjectFileUpload"]["tmp_name"], $_POST["targetFileName"], $_POST["destinationLocationFile"]));
 
 
-
-        
+    // *************************
+    // *************************
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($_GET["opt"] == "getProjectStates")
         echo json_encode(getProjectStates());

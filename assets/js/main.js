@@ -607,6 +607,12 @@ function addProjectToDatabase() {
   ).val();
   let addProjectFileUpload = $("#addProjectFileUpload")[0].files[0];
 
+  let hasPhoto = null;
+  if (addProjectFileUpload == undefined) {
+    console.log("Project file is not entered.");
+    hasPhoto = "false";
+  } else hasPhoto = "true";
+
   console.log("project Added");
   console.log("projectName: ", projectName);
   console.log("description: ", description);
@@ -625,11 +631,11 @@ function addProjectToDatabase() {
 
   //create data
   var ajaxData = new FormData();
+  ajaxData.append("opt", "uploadPhotoToDatabase");
   ajaxData.append("addProjectFileUpload", addProjectFileUpload);
-  ajaxData.append("opt", "addProject_PhotoToDatabase");
   // ajaxData.append("addProjectSelectedMembers",addProjectSelectedMembers );
 
-  console.log("formdata:", ajaxData);
+  // console.log("formdata:", ajaxData);
 
   // valid input
   if (errors.length == 0) {
@@ -646,9 +652,12 @@ function addProjectToDatabase() {
         addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
         progress: progress,
         state: state,
+        hasPhoto: hasPhoto,
       },
       success: function (data) {
-        if (data == "true") {
+        if (data != "false" && hasPhoto == "true") {
+          ajaxData.append("targetFileName", "projectId_" + data + ".png");
+          ajaxData.append("destinationLocationFile", "../images/project/");
           $.ajax({
             url: url,
             type: "POST",
@@ -669,36 +678,21 @@ function addProjectToDatabase() {
 
                 // initialize selected members if operation successfull
                 addProjectSelectedMembers = [];
-              } else {
-                console.log("proje eklendi ama fotoğraf eklenmedi.");
               }
             },
           });
-        } else {
-          console.log("proje eklenemedi.");
+        } else if (hasPhoto == "false") {
+          // update and display projects
+          getProjects();
+          getProjectMembers();
+          performChangePage(0);
+          alertt("Project Successfully Uploaded.");
+
+          // initialize selected members if operation successfull
+          addProjectSelectedMembers = [];
         }
       },
     });
-
-    // $.post(url, {
-    //   opt: "addProjectToDatabase",
-    //   projectName: projectName,
-    //   description: description,
-    //   addProjectStartDate: addProjectStartDate,
-    //   addProjectEndDate: addProjectEndDate,
-    //   addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
-    //   progress: progress,
-    //   state: state,
-    // }).then(function (data) {
-    //   console.log(data);
-    //   if (data == "true") {
-    //     // update and display projects
-    //     getProjects();
-    //     getProjectMembers();
-    //     performChangePage(0);
-    //     alertt("Project Successfully Uploaded.");
-    //   }
-    // });
   } else {
     $("#addProjectName").removeClass("invalidInput");
     $("#addProjectDescription").removeClass("invalidInput");

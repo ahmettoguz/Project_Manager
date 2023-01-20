@@ -154,7 +154,7 @@ function getSpecificProject($id)
 }
 
 
-function addProject_MemberToDatabase($projectName, $description, $addProjectStartDate, $addProjectEndDate, $addProjectSelectedMembers, $progress, $state)
+function addProject_MemberToDatabase($projectName, $description, $addProjectStartDate, $addProjectEndDate, $addProjectSelectedMembers, $progress, $state, $hasPhoto)
 {
 
     if (($addProjectEndDate) == "")
@@ -176,10 +176,24 @@ function addProject_MemberToDatabase($projectName, $description, $addProjectStar
         $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
         $stmt->bindValue(":state_id", $state, PDO::PARAM_INT);
         $stmt->execute();
-        $proejctId = $db->lastInsertId();
+        $projectId = $db->lastInsertId();
     } catch (PDOException $ex) {
         die("<p>Insert Error : " . $ex->getMessage());
         return "false";
+    }
+
+    if ($hasPhoto == "true") {
+        $photoName = "projectId_" . $projectId;
+
+        try {
+            $sql = "UPDATE `project` SET `photo` = '$photoName' WHERE `project`.`id` = $projectId";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $projectId = $db->lastInsertId();
+        } catch (PDOException $ex) {
+            die("<p>Insert Error : " . $ex->getMessage());
+            return "false";
+        }
     }
 
     $addProjectSelectedMembers = json_decode($addProjectSelectedMembers);
@@ -190,7 +204,7 @@ function addProject_MemberToDatabase($projectName, $description, $addProjectStar
                 $sql = "insert into project_member (department_id, project_id, user_id) values (:department_id, :project_id, :user_id)";
                 $stmt = $db->prepare($sql);
                 $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
-                $stmt->bindValue(":project_id", $proejctId, PDO::PARAM_INT);
+                $stmt->bindValue(":project_id", $projectId, PDO::PARAM_INT);
                 $stmt->bindValue(":user_id", $addProjectSelectedMembers[$i], PDO::PARAM_INT);
                 $stmt->execute();
             } catch (PDOException $ex) {
@@ -199,16 +213,15 @@ function addProject_MemberToDatabase($projectName, $description, $addProjectStar
             }
         }
 
-    return "true";
+    return $projectId;
 }
 
 
-function  addProject_PhotoToDatabase($tempLocation)
+function  addProject_PhotoToDatabase($tempLocation, $fileName, $targetLocation)
 {
-    if (move_uploaded_file($tempLocation, "../images/project/projectId_0.png")) {
+    if (move_uploaded_file($tempLocation, $targetLocation . $fileName)) {
         return "true";
     }
 
     return "false";
 }
-

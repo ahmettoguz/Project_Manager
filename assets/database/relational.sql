@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 20, 2023 at 09:16 PM
+-- Generation Time: Jan 20, 2023 at 09:37 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -60,8 +60,10 @@ CREATE TABLE IF NOT EXISTS `project` (
   `progress` int(11) DEFAULT '0',
   `department_id` int(11) NOT NULL,
   `state_id` int(11) NOT NULL DEFAULT '2',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  PRIMARY KEY (`id`),
+  KEY `state_id` (`state_id`),
+  KEY `department_id` (`department_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project`
@@ -71,7 +73,10 @@ INSERT INTO `project` (`id`, `name`, `description`, `photo`, `start_date`, `end_
 (1, 'Network Project', 'Network construction of Ankara.', 'project_1.png', '2023-01-01 08:40:10', '2023-01-26 09:02:03', 67, 1, 1),
 (2, 'Educational Computer Programming', 'Aim is to give basic computer programming education.', 'project_0.png', '2023-01-12 15:39:18', NULL, 30, 1, 2),
 (3, 'Frontend Web Game', 'Best game ever!', 'project_0.png', '2023-01-12 16:57:33', '2023-01-10 06:44:16', 100, 1, 4),
-(4, 'this project name is too long to show how to see', 'dummy project', 'project_0.png', '2023-01-17 06:21:30', '2023-01-25 06:20:26', 10, 1, 1);
+(4, 'this project name is too long to show how to see', 'dummy project', 'project_0.png', '2023-01-17 06:21:30', '2023-01-25 06:20:26', 10, 1, 1),
+(32, 'selam', 'selam', 'project_default.png', '2023-01-05 21:00:00', NULL, 0, 1, 2),
+(33, 'helllllöö', 'hellllööö', 'projectId_33', '2023-01-05 21:00:00', NULL, 53, 1, 1),
+(34, 'helllllöö', 'hellllööö', 'projectId_34', '2023-01-05 21:00:00', NULL, 53, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -85,8 +90,11 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   `department_id` int(11) NOT NULL,
   `project_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+  PRIMARY KEY (`id`),
+  KEY `department_id` (`department_id`),
+  KEY `project_id` (`project_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_member`
@@ -96,8 +104,7 @@ INSERT INTO `project_member` (`id`, `department_id`, `project_id`, `user_id`) VA
 (1, 1, 1, 1),
 (2, 1, 1, 2),
 (3, 1, 2, 1),
-(4, 1, 2, 3),
-(5, 1, 1, 3);
+(4, 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -143,7 +150,11 @@ CREATE TABLE IF NOT EXISTS `task` (
   `description` varchar(150) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
   `comment` varchar(150) COLLATE utf8mb4_turkish_ci DEFAULT NULL,
   `state_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `state_id` (`state_id`),
+  KEY `user_id` (`user_id`),
+  KEY `project_id` (`project_id`),
+  KEY `department_id` (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
@@ -194,7 +205,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `phone` varchar(15) COLLATE utf8mb4_turkish_ci NOT NULL,
   `department_id` int(11) NOT NULL,
   `user_type_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `user_type_id` (`user_type_id`),
+  KEY `department_id` (`department_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
@@ -227,6 +240,41 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 INSERT INTO `user_type` (`id`, `type`) VALUES
 (1, 'boss'),
 (2, 'employee');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `project`
+--
+ALTER TABLE `project`
+  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`state_id`) REFERENCES `project_state` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `project_member`
+--
+ALTER TABLE `project_member`
+  ADD CONSTRAINT `project_member_ibfk_1` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_member_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `project_member_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `task`
+--
+ALTER TABLE `task`
+  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`state_id`) REFERENCES `task_state` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`project_id`) REFERENCES `project` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `task_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_type_id`) REFERENCES `user_type` (`id`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
