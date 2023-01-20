@@ -28,4 +28,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     elseif ($_GET["opt"] == "getSpecificProject")
         echo json_encode(getSpecificProject($_GET["id"]));
 }
-qweqweqweqwe
