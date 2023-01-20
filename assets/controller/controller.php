@@ -6,9 +6,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["opt"] == "login")
         echo json_encode(performLoginOperation($_POST["username"], $_POST["password"], $_POST["remember"]));
 
-    if ($_POST["opt"] == "addProjectToDatabase")
-        echo json_encode(addProjectToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"]));
-
+    if ($_POST["opt"] == "addProject_MemberToDatabase")
+        echo json_encode(addProject_MemberToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"]));
+    if ($_POST["opt"] == "addProject_PhotoToDatabase")
+        echo json_encode(addProject_PhotoToDatabase($_FILES["addProjectFileUpload"]["tmp_name"]));
 
 
 

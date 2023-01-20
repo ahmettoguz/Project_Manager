@@ -154,7 +154,7 @@ function getSpecificProject($id)
 }
 
 
-function addProjectToDatabase($projectName, $description, $addProjectStartDate, $addProjectEndDate, $addProjectSelectedMembers, $progress, $state)
+function addProject_MemberToDatabase($projectName, $description, $addProjectStartDate, $addProjectEndDate, $addProjectSelectedMembers, $progress, $state)
 {
 
     if (($addProjectEndDate) == "")
@@ -182,24 +182,6 @@ function addProjectToDatabase($projectName, $description, $addProjectStartDate, 
         return "false";
     }
 
-
-    // try {
-    //     $sql = "insert into project (name, description, start_date, end_date, progress, department_id, state_id) values (:name, :description, :start_date, :end_date, :progress, :department_id, :state_id)";
-    //     $stmt = $db->prepare($sql);
-    //     $stmt->bindValue(":name", $projectName, PDO::PARAM_STR);
-    //     $stmt->bindValue(":description", $description, PDO::PARAM_STR);
-    //     $stmt->bindValue(":start_date", $addProjectStartDate, PDO::PARAM_STR);
-    //     $stmt->bindValue(":end_date", $addProjectEndDate, PDO::PARAM_STR);
-    //     $stmt->bindValue(":progress", $progress, PDO::PARAM_INT);
-    //     $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
-    //     $stmt->bindValue(":state_id", $state, PDO::PARAM_INT);
-    //     $stmt->execute();
-    //     $proejctId = $db->lastInsertId();
-    // } catch (PDOException $ex) {
-    //     die("<p>Insert Error : " . $ex->getMessage());
-    //     return "false";
-    // }
-
     $addProjectSelectedMembers = json_decode($addProjectSelectedMembers);
 
     if (!empty($addProjectSelectedMembers))
@@ -218,4 +200,14 @@ function addProjectToDatabase($projectName, $description, $addProjectStartDate, 
         }
 
     return "true";
+}
+
+
+function  addProject_PhotoToDatabase($tempLocation)
+{
+    if (move_uploaded_file($tempLocation, "../images/project/projectId_0.png")) {
+        return "true";
+    }
+
+    return "false";
 }

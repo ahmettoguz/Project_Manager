@@ -626,6 +626,7 @@ function addProjectToDatabase() {
   //create data
   var ajaxData = new FormData();
   ajaxData.append("addProjectFileUpload", addProjectFileUpload);
+  ajaxData.append("opt", "addProject_PhotoToDatabase");
   // ajaxData.append("addProjectSelectedMembers",addProjectSelectedMembers );
 
   console.log("formdata:", ajaxData);
@@ -636,10 +637,8 @@ function addProjectToDatabase() {
       url: url,
       type: "POST",
       cache: false,
-      // contentType: false,
-      // processType: false,
       data: {
-        opt: "addProjectToDatabase",
+        opt: "addProject_MemberToDatabase",
         projectName: projectName,
         description: description,
         addProjectStartDate: addProjectStartDate,
@@ -649,16 +648,34 @@ function addProjectToDatabase() {
         state: state,
       },
       success: function (data) {
-        console.log(data);
         if (data == "true") {
-          // update and display projects
-          getProjects();
-          getProjectMembers();
-          performChangePage(0);
-          alertt("Project Successfully Uploaded.");
+          $.ajax({
+            url: url,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: "json",
+            enctype: "multipart/form-data",
+            data: ajaxData,
+            success: function (data) {
+              console.log(data);
+              if (data == "true") {
+                // update and display projects
+                getProjects();
+                getProjectMembers();
+                performChangePage(0);
+                alertt("Project Successfully Uploaded.");
 
-          // initialize selected members if operation successfull
-          addProjectSelectedMembers = [];
+                // initialize selected members if operation successfull
+                addProjectSelectedMembers = [];
+              } else {
+                console.log("proje eklendi ama fotoğraf eklenmedi.");
+              }
+            },
+          });
+        } else {
+          console.log("proje eklenemedi.");
         }
       },
     });
