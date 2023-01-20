@@ -489,9 +489,6 @@ function displayUserInformationPage() {
   $("section.pageBody").html(`asdds`);
 }
 
-// selectin içerisine boss verified olarak işaretleyebilecek
-// static content değişecek
-// dropdown seçilenler eklenicek çıkartılacak
 function addProject() {
   changeHeaderLocation("Add Project");
 
@@ -578,7 +575,6 @@ function addProject() {
   `;
 
   $(".pageBody .body").html(out);
-
   bindForSubmission();
 
   // set start date today
@@ -609,17 +605,17 @@ function addProjectToDatabase() {
   let state = $(
     ".addProjectContainer .down>.right>.bottom .top .stateContainer select"
   ).val();
-  let addProjectFileUpload = $("#addProjectFileUpload").val();
+  let addProjectFileUpload = $("#addProjectFileUpload")[0].files[0];
 
-  // console.log("project Added");
-  // console.log("projectName: ", projectName);
-  // console.log("description: ", description);
-  // console.log("addProjectStartDate: ", addProjectStartDate);
-  // console.log("addProjectEndDate: ", addProjectEndDate);
-  // console.log("addProjectFileUpload: ", addProjectFileUpload);
-  // console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
-  // console.log("progress:", progress);
-  // console.log("state:", state);
+  console.log("project Added");
+  console.log("projectName: ", projectName);
+  console.log("description: ", description);
+  console.log("addProjectStartDate: ", addProjectStartDate);
+  console.log("addProjectEndDate: ", addProjectEndDate);
+  console.log("addProjectFileUpload: ", addProjectFileUpload);
+  console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
+  console.log("progress:", progress);
+  console.log("state:", state);
 
   // check inputs for errors
   if (projectName.trim() == "") errors.push("empty name");
@@ -629,29 +625,29 @@ function addProjectToDatabase() {
   console.log("arrr", addProjectSelectedMembers);
   // valid input
   if (errors.length == 0) {
-    $.post(url, {
-      opt: "addProjectToDatabase",
-      projectName: projectName,
-      description: description,
-      addProjectStartDate: addProjectStartDate,
-      addProjectEndDate: addProjectEndDate,
-      addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
-      progress: progress,
-      state: state,
-    }).then(function (data) {
-      console.log(data);
+    // $.post(url, {
+    //   opt: "addProjectToDatabase",
+    //   projectName: projectName,
+    //   description: description,
+    //   addProjectStartDate: addProjectStartDate,
+    //   addProjectEndDate: addProjectEndDate,
+    //   addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
+    //   progress: progress,
+    //   state: state,
+    // }).then(function (data) {
+    //   console.log(data);
 
-      if (data == "true") {
-        // update and display projects
-        getProjects();
-        getProjectMembers();
-        performChangePage(0);
-        alertt("Project Successfully Uploaded.");
-      }
+    //   if (data == "true") {
+    //     // update and display projects
+    //     getProjects();
+    //     getProjectMembers();
+    //     performChangePage(0);
+    //     alertt("Project Successfully Uploaded.");
+    //   }
 
-      // initialize selected members if operation successfull
-      addProjectSelectedMembers = [];
-    });
+    //   // initialize selected members if operation successfull
+    //   addProjectSelectedMembers = [];
+    // });
   } else {
     $("#addProjectName").removeClass("invalidInput");
     $("#addProjectDescription").removeClass("invalidInput");
