@@ -5,13 +5,14 @@ header("Content-Type: application/json");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["opt"] == "login")
         echo json_encode(performLoginOperation($_POST["username"], $_POST["password"], $_POST["remember"]));
+
     if ($_POST["opt"] == "addProjectToDatabase")
         echo json_encode(addProjectToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"]));
-        
-        
-        
-        
 
+
+
+
+        
 } else if ($_SERVER["REQUEST_METHOD"] == "GET") {
     if ($_GET["opt"] == "getProjectStates")
         echo json_encode(getProjectStates());

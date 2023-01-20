@@ -616,15 +616,53 @@ function addProjectToDatabase() {
   console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
   console.log("progress:", progress);
   console.log("state:", state);
+  console.log("members", addProjectSelectedMembers);
 
   // check inputs for errors
   if (projectName.trim() == "") errors.push("empty name");
   if (description.trim() == "") errors.push("empty description");
   if (state == null) errors.push("empty state");
 
-  console.log("arrr", addProjectSelectedMembers);
+  //create data
+  var ajaxData = new FormData();
+  ajaxData.append("addProjectFileUpload", addProjectFileUpload);
+  // ajaxData.append("addProjectSelectedMembers",addProjectSelectedMembers );
+
+  console.log("formdata:", ajaxData);
+
   // valid input
   if (errors.length == 0) {
+    $.ajax({
+      url: url,
+      type: "POST",
+      cache: false,
+      // contentType: false,
+      // processType: false,
+      data: {
+        opt: "addProjectToDatabase",
+        projectName: projectName,
+        description: description,
+        addProjectStartDate: addProjectStartDate,
+        addProjectEndDate: addProjectEndDate,
+        addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
+        progress: progress,
+        state: state,
+      },
+      success: function (data) {
+        console.log(data);
+        if (data == "true") {
+          // update and display projects
+          getProjects();
+          getProjectMembers();
+          performChangePage(0);
+          alertt("Project Successfully Uploaded.");
+
+          // initialize selected members if operation successfull
+          addProjectSelectedMembers = [];
+        }
+      },
+    });
+
     // $.post(url, {
     //   opt: "addProjectToDatabase",
     //   projectName: projectName,
@@ -636,7 +674,6 @@ function addProjectToDatabase() {
     //   state: state,
     // }).then(function (data) {
     //   console.log(data);
-
     //   if (data == "true") {
     //     // update and display projects
     //     getProjects();
@@ -644,9 +681,6 @@ function addProjectToDatabase() {
     //     performChangePage(0);
     //     alertt("Project Successfully Uploaded.");
     //   }
-
-    //   // initialize selected members if operation successfull
-    //   addProjectSelectedMembers = [];
     // });
   } else {
     $("#addProjectName").removeClass("invalidInput");

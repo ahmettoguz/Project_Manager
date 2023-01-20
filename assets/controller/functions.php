@@ -159,7 +159,7 @@ function addProjectToDatabase($projectName, $description, $addProjectStartDate, 
 
     if (($addProjectEndDate) == "")
         $addProjectEndDate = null;
-        
+
     // change department id dynamic 
     $departmentId = 1;
 
@@ -181,6 +181,24 @@ function addProjectToDatabase($projectName, $description, $addProjectStartDate, 
         die("<p>Insert Error : " . $ex->getMessage());
         return "false";
     }
+
+
+    // try {
+    //     $sql = "insert into project (name, description, start_date, end_date, progress, department_id, state_id) values (:name, :description, :start_date, :end_date, :progress, :department_id, :state_id)";
+    //     $stmt = $db->prepare($sql);
+    //     $stmt->bindValue(":name", $projectName, PDO::PARAM_STR);
+    //     $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+    //     $stmt->bindValue(":start_date", $addProjectStartDate, PDO::PARAM_STR);
+    //     $stmt->bindValue(":end_date", $addProjectEndDate, PDO::PARAM_STR);
+    //     $stmt->bindValue(":progress", $progress, PDO::PARAM_INT);
+    //     $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
+    //     $stmt->bindValue(":state_id", $state, PDO::PARAM_INT);
+    //     $stmt->execute();
+    //     $proejctId = $db->lastInsertId();
+    // } catch (PDOException $ex) {
+    //     die("<p>Insert Error : " . $ex->getMessage());
+    //     return "false";
+    // }
 
     $addProjectSelectedMembers = json_decode($addProjectSelectedMembers);
 
