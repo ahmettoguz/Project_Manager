@@ -189,7 +189,7 @@ function addProject_MemberToDatabase($projectName, $description, $addProjectStar
             $sql = "UPDATE `project` SET `photo` = '$photoName' WHERE `project`.`id` = $projectId";
             $stmt = $db->prepare($sql);
             $stmt->execute();
-            $projectId = $db->lastInsertId();
+            // $projectId = $db->lastInsertId();
         } catch (PDOException $ex) {
             die("<p>Insert Error : " . $ex->getMessage());
             return "false";

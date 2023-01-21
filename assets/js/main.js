@@ -196,6 +196,9 @@ function getTasks() {
 }
 
 function sortByName(a, b) {
+   
+  // a.name = a.name.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+  // b.name = b.name.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
   if (a.name < b.name) {
     return -1;
   }
@@ -596,6 +599,7 @@ function addProjectToDatabase() {
   let errors = [];
 
   let projectName = $(".addProjectContainer .down .left .top input").val();
+  projectName = projectName.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
   let description = $(
     ".addProjectContainer .down .left .middle textarea"
   ).val();
