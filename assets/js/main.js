@@ -196,7 +196,6 @@ function getTasks() {
 }
 
 function sortByName(a, b) {
-   
   // a.name = a.name.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
   // b.name = b.name.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
   if (a.name < b.name) {
@@ -525,7 +524,8 @@ function addProject() {
             <div class="right">
                 <div class="top">
                     <div class="photoUploadContainer">
-                      <input type="file" id="addProjectFileUpload">
+                      <input accept="image/gif, image/jpeg, image/png" type="file" id="addProjectFileUpload" onchange="addProjectImageUploadStyle(event)">
+                        <div class="labelContainer"><label for="addProjectFileUpload">Click / drag file </br> to upload image</label></div>
                     </div>
                 </div>
                 <div class="middle">  
@@ -599,7 +599,9 @@ function addProjectToDatabase() {
   let errors = [];
 
   let projectName = $(".addProjectContainer .down .left .top input").val();
-  projectName = projectName.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+  projectName = projectName.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+    letter.toUpperCase()
+  );
   let description = $(
     ".addProjectContainer .down .left .middle textarea"
   ).val();
@@ -825,5 +827,37 @@ function removeFromArray(ar, element) {
     if (i > -1) {
       ar.splice(i, 1);
     }
+  }
+}
+
+function addProjectImageUploadStyle(event) {
+  let fileObject = $(
+    ".addProjectContainer .down>.right>.top>.photoUploadContainer input"
+  );
+  let fileName = fileObject.val();
+  fileName = fileName.substring(
+    fileName.indexOf(`fakepath`) + 9,
+    fileName.length
+  );
+
+  let fileExtension = fileName.split(".")[1];
+
+  if (fileExtension == "png" || fileExtension == "jpg") {
+    fileObject = URL.createObjectURL(event.target.files[0]);
+    $(
+      " .addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer"
+    ).css("background-image", `url(${fileObject})`);
+
+    $(" .addProjectContainer .down>.right>.top>.photoUploadContainer").css(
+      "border",
+      "5px dashed #1DE9B6"
+    );
+    $(
+      ".addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer label"
+    ).html("");
+  } else {
+    $(
+      ".addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer label"
+    ).html("Extension should be </br> png or jpg");
   }
 }

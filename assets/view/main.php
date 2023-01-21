@@ -933,14 +933,59 @@
     }
 
     .addProjectContainer .down>.right>.top>.photoUploadContainer {
-        width: 150px;
+        width: 80%;
         height: 100%;
         border: 5px dashed darkgray;
+        /* background-color: red; */
+
+        transition: all 1s;
+    }
+
+    .addProjectContainer .down>.right>.top>.photoUploadContainer:hover {
+        /* border: 5px dashed rgb(0,0,0,0.8); */
+        border: 5px dashed #087FFF;
+        /* font-size: 25px; */
+        box-shadow: rgba(50, 50, 93, 0.1) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.1) 0px 18px 36px -18px inset;
+    }
+
+    .addProjectContainer .down>.right>.top>.photoUploadContainer:hover label {
+        font-size: 25px;
+    }
+
+    .addProjectContainer .down>.right>.top>.photoUploadContainer input {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background-color: aqua;
+        /* visibility: hidden; */
+        border: none;
+        outline: none;
+        opacity: 0;
+        /* color: transparent; */
+        z-index: 11;
+    }
+
+    .addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer {
+        box-sizing: border-box;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        top: -105%;
+        text-align: center;
         display: flex;
         justify-content: center;
         align-items: center;
-        /* background-color: red; */
+        z-index: 10;
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
     }
+
+    .addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer label {
+        opacity: 1;
+        transition: 1s;
+    }
+
 
     .addProjectContainer .down>.right>.middle {
         margin-top: 10px;
@@ -971,6 +1016,13 @@
         align-items: center;
         flex-wrap: wrap;
         position: relative;
+        transition: 1s;
+    }
+
+    .addProjectContainer .down>.right>.middle .memberSelectHeader .selectedMemberContainer:hover {
+        box-shadow: 0px 6px 10px -10px black,
+            0px -15px 10px -20px black;
+        border: 3px solid rgb(29, 233, 182);
     }
 
 
@@ -1280,8 +1332,8 @@
     </div> -->
 
     <div onclick="clickMessage()" id="pageMessage">
-        project Uploaded Successfully 
-    </div> 
+        project Uploaded Successfully
+    </div>
 </body>
 
 </html>
