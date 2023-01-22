@@ -805,20 +805,20 @@ function changeLanguage() {
 // }
 
 function clickMessage() {
-  $("#pageMessage").removeClass("disapperMessage");
-  $("#pageMessage").removeClass("disapperMessageClicked");
+  alert("clicked");
+  $("#pageMessage").addClass("disapperMessage");
   setTimeout(() => {
-    $("#pageMessage").addClass("disapperMessageClicked");
-  }, 1);
+    $("#pageMessage").removeClass("disapperMessage");
+  }, 10);
 }
 
 function alertt(msg) {
   $("#pageMessage").html(msg);
-  $("#pageMessage").removeClass("disapperMessageClicked");
-  $("#pageMessage").removeClass("disapperMessage");
+
+  $("#pageMessage").addClass("disapperMessage");
   setTimeout(() => {
-    $("#pageMessage").addClass("disapperMessage");
-  }, 1);
+    $("#pageMessage").removeClass("disapperMessage");
+  }, 4000);
 }
 
 function removeFromArray(ar, element) {

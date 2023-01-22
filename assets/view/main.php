@@ -1332,7 +1332,7 @@
     </div> -->
 
     <div onclick="clickMessage()" id="pageMessage">
-        project Uploaded Successfully
+        dummy
     </div>
 </body>
 
