@@ -386,9 +386,9 @@
 
         --terminated1: rgb(244, 194, 199);
         --terminated2: rgb(254, 141, 143);
-        --terminated3: rgb(238, 63, 94);
-        --terminated4: rgb(220, 53, 68);
-        --terminated5: rgb(220, 53, 68);
+        --terminated3: rgb(238, 63, 94)  ;
+        --terminated4: rgb(220, 53, 68)  ;
+        --terminated5: rgb(220, 53, 68)  ;
         --terminated6: rgb(196, 21, 49);
 
         --inMaintenance1: rgb(233, 185, 225);
@@ -1331,9 +1331,7 @@
         </div>
     </div> -->
 
-    <div onclick="clickMessage()" id="pageMessage">
-        dummy
-    </div>
+    <div onclick="clickMessage()" id="pageMessage">dummy</div>
 </body>
 
 </html>

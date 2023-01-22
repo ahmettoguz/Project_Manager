@@ -10,6 +10,7 @@ let loadedTables = [];
 let tasks = [];
 let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
+let isMessageShow = false;
 
 $(function () {
   constructPageBody();
@@ -582,7 +583,7 @@ function addProject() {
 
   // set start date today
   let today = new Date();
-  let day = today.getDay();
+  let day = today.getDate();
   if (day < 10) day = "0" + day;
   let month = today.getMonth() + 1;
   if (month < 10) month = "0" + month;
@@ -680,7 +681,7 @@ function addProjectToDatabase() {
                 getProjects();
                 getProjectMembers();
                 performChangePage(0);
-                alertt("Project Successfully Uploaded.");
+                alertt("Project Successfully Uploaded.", "green");
 
                 // initialize selected members if operation successfull
                 addProjectSelectedMembers = [];
@@ -692,7 +693,7 @@ function addProjectToDatabase() {
           getProjects();
           getProjectMembers();
           performChangePage(0);
-          alertt("Project Successfully Uploaded.");
+          alertt("Project Successfully Uploaded.", "green");
 
           // initialize selected members if operation successfull
           addProjectSelectedMembers = [];
@@ -797,7 +798,7 @@ function bindForSubmission() {
 }
 
 function changeLanguage() {
-  alertt("helloooo");
+  alertt("helloooo", "green");
 }
 
 // function displayLayout() {
@@ -805,20 +806,54 @@ function changeLanguage() {
 // }
 
 function clickMessage() {
-  alert("clicked");
-  $("#pageMessage").addClass("disapperMessage");
-  setTimeout(() => {
-    $("#pageMessage").removeClass("disapperMessage");
-  }, 10);
+  if (isMessageShow) {
+    alertBox.removeClass("appearMessage");
+    alertBox.addClass("disappearMessage");
+    setTimeout(() => {
+      isMessageShow = false;
+    }, 1000);
+  }
 }
 
-function alertt(msg) {
-  $("#pageMessage").html(msg);
+function alertt(msg, state = null) {
+  alertBox = $("#pageMessage");
+  let gradient = null;
+  switch (state) {
+    case "green":
+      gradient = "linear-gradient(rgb(103, 250, 148), white)";
+      break;
 
-  $("#pageMessage").addClass("disapperMessage");
-  setTimeout(() => {
-    $("#pageMessage").removeClass("disapperMessage");
-  }, 4000);
+    case "yellow":
+      gradient = "linear-gradient(rgb(255, 175, 0),white)";
+      break;
+
+    case "red":
+      gradient = "linear-gradient(rgb(238, 63, 94), white)";
+      break;
+
+    default:
+      gradient = "linear-gradient(red, blue)";
+      break;
+  }
+  alertBox.css("background-image", gradient);
+
+  alertBox.html(msg);
+
+  if (isMessageShow == false) {
+    alertBox.addClass("appearMessage");
+    setTimeout(() => {
+      isMessageShow = true;
+    }, 1000);
+    setTimeout(() => {
+      if (isMessageShow) {
+        alertBox.removeClass("appearMessage");
+        alertBox.addClass("disappearMessage");
+        setTimeout(() => {
+          isMessageShow = false;
+        }, 1000);
+      }
+    }, 4000);
+  }
 }
 
 function removeFromArray(ar, element) {
