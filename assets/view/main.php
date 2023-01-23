@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/message.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,6 +18,9 @@
     <!-- font-family: 'Manrope', sans-serif; -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <!-- font-family: 'Roboto', sans-serif; -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- font-family: 'Inter', sans-serif; -->
     <!-- font -->
 
     <script src="../js/jquery-3.6.0.min.js"></script>
@@ -164,6 +168,7 @@
     #changeLanguageIcon {
         height: 100%;
         width: 48px;
+        min-width: 48px;
         background-image: url("../images/main/language.png");
         background-size: 100%;
         background-position: center;
@@ -386,9 +391,9 @@
 
         --terminated1: rgb(244, 194, 199);
         --terminated2: rgb(254, 141, 143);
-        --terminated3: rgb(238, 63, 94)  ;
-        --terminated4: rgb(220, 53, 68)  ;
-        --terminated5: rgb(220, 53, 68)  ;
+        --terminated3: rgb(238, 63, 94);
+        --terminated4: rgb(220, 53, 68);
+        --terminated5: rgb(220, 53, 68);
         --terminated6: rgb(196, 21, 49);
 
         --inMaintenance1: rgb(233, 185, 225);

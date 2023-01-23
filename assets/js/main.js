@@ -8,24 +8,20 @@ let projectMembers = null;
 let users = [];
 let loadedTables = [];
 let tasks = [];
+let taskStates = null;
 let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
 let isMessageShow = false;
 
 $(function () {
-  constructPageBody();
-  getProjects();
-  getProjectMembers();
-  getUsers();
-  getTasks();
-  getProjectStates();
+  // constructPageBody();
 
   performChangePage();
-  performChangePage(0);
+  // performChangePage(0);
 });
 
 function changeBodyPage(pageNumber) {
-  if (pageNumber == null) console.log("page content removed");
+  if (pageNumber == null) console.log("page content changed to dashboard");
   else console.log("page content changed to ", bodyPages[pageNumber]);
 
   changeBodyPageTabColors(pageNumber);
@@ -48,6 +44,7 @@ function changeBodyContent(pageNumber) {
   if (pageNumber == null) {
     constructPageBody();
     $("section.pageBody .body").html("");
+    displayDashboardContent();
   } else {
     let pageName = bodyPages[pageNumber];
 
@@ -55,7 +52,15 @@ function changeBodyContent(pageNumber) {
 
     // change content to projects
     if (pageName == "Projects") {
+      //get required data
+      getProjects();
+      getProjectMembers();
+      getUsers();
+      getTasks();
+      getProjectStates();
+
       let interval = setInterval(() => {
+        // console.log(loadedTables);
         if (
           loadedTables.includes("project") &&
           loadedTables.includes("project_state") &&
@@ -72,14 +77,6 @@ function changeBodyContent(pageNumber) {
       }, 100);
     }
   }
-}
-
-function getProjectStates() {
-  $.get(url, { opt: "getProjectStates" }, function (data) {
-    projectStates = data;
-  }).then(function () {
-    loadedTables.push("project_state");
-  });
 }
 
 function changeFilterProjectColor(tabNumber) {
@@ -141,59 +138,6 @@ function arrangeProgressBarAsRectangle() {
   // // });
 
   // console.log(height);
-}
-
-function getProjects() {
-  removeFromArray(loadedTables, "project");
-
-  $.get(url, { opt: "getProjects" }).then(function (data) {
-    projects = data;
-    // console.log(projects);
-    // projects.sort(sortByName);
-
-    loadedTables.push("project");
-  });
-}
-
-function getProjectMembers() {
-  removeFromArray(loadedTables, "project_member");
-
-  $.get(url, { opt: "getProjectMembers" }).then(function (data) {
-    projectMembers = data;
-    loadedTables.push("project_member");
-  });
-}
-
-function getUsers() {
-  removeFromArray(loadedTables, "getUsers");
-
-  $.get(url, { opt: "getUsers" }).then(function (data) {
-    // users = data;
-    let temp = data;
-
-    temp.forEach((element) => {
-      users[element.id] = element;
-    });
-
-    loadedTables.push("user");
-  });
-}
-
-function getTasks() {
-  removeFromArray(loadedTables, "getTasks");
-  $.get(url, { opt: "getTasks" }).then(function (data) {
-    let temp = data;
-
-    temp.forEach((element) => {
-      if (tasks[element.project_id] == undefined)
-        tasks[element.project_id] = [element];
-      else tasks[element.project_id].push(element);
-    });
-
-    // console.log(tasks);
-
-    loadedTables.push("task");
-  });
 }
 
 function sortByName(a, b) {
@@ -895,4 +839,214 @@ function addProjectImageUploadStyle(event) {
       ".addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer label"
     ).html("Extension should be </br> png or jpg");
   }
+}
+
+function displayDashboardContent() {
+  // get and update data
+  getProjects();
+  getProjectStates();
+  getProjectMembers();
+  getTasks();
+  getTaskStates();
+
+  let interval = setInterval(() => {
+    // console.log(loadedTables);
+    if (
+      loadedTables.includes("project") &&
+      loadedTables.includes("project_state") &&
+      loadedTables.includes("project_member") &&
+      loadedTables.includes("task") &&
+      loadedTables.includes("task_state")
+    ) {
+      clearInterval(interval);
+      displayDashboardContentReady();
+    }
+  }, 10);
+}
+
+function displayDashboardContentReady() {
+  let userId = 1; //değiştir sil dinak olmalı.
+
+  let userProjectCount = 0;
+  let totalProjectCount = 0;
+
+  let userTaskCount = 0;
+  let totalTaskCount = 0;
+
+  // count user and total project
+  totalProjectCount = projects.length;
+  projectMembers.forEach((member) => {
+    if (member.user_id == userId) userProjectCount++;
+  });
+  // console.log(totalProjectCount);
+  // console.log(userProjectCount);
+
+  // count user and total task
+  tasks.forEach((id_task) => {
+    totalTaskCount += id_task.length;
+    id_task.forEach((task) => {
+      if (task.user_id == userId) userTaskCount++;
+    });
+  });
+  output = "";
+
+  output += `
+    <div id="dashBoardContainer">
+      <div class="header">IT Department</div>
+
+      <div class="content">
+        <div class="left">
+          <div class="projectPart">
+            <div class="header">Total <span class="total">${totalProjectCount}</span> project, you took part in <span class="member">${userProjectCount}</span>.</div>
+            <div class="projectContainer">`;
+
+  projectStates.forEach((project_state) => {
+    let specificTotalCount = 0;
+    let specificUserCount = 0;
+    projects.forEach((project) => {
+      if (project.state_id == project_state.id) {
+        specificTotalCount++;
+
+        projectMembers.forEach((project_member) => {
+          if (
+            project_member.project_id == project.id &&
+            project_member.user_id == userId
+          )
+            specificUserCount++;
+        });
+      }
+    });
+
+    // console.log(project_state);
+    if(specificTotalCount!= 0) // dont show if there is no project with that state //değiş aç.
+    output += `
+              <div class="project"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${project_state.state}</span></div>`;
+  });
+
+  output += `
+            </div>
+          </div>
+
+          <div class="taskPart">
+            <div class="header">Total <span class="total">${totalTaskCount}</span> Tasks, you have been assigned to <span class="member">${userTaskCount}</span>.</div>
+            <div class="taskContainer">`;
+
+  // count tasks with states
+  taskStates.forEach((task_state) => {
+    specificTotalCount = 0;
+    specificUserCount = 0;
+    tasks.forEach((tasksOfId, id) => {
+      tasksOfId.forEach((task) => {
+        if (task.state_id == task_state.id) {
+          specificTotalCount++;
+          if (task.user_id == userId) specificUserCount++;
+        }
+      });
+    });
+
+    // tasks.forEach((projectId_task) => {
+    //   projectId_task.forEach((task) => {
+    //     if ((task_state.id = task.state_id)) {
+    //       console.log(task_state.id);
+    //       specificTotalCount++;
+    //     }
+    //   });
+    // });
+
+    if(specificTotalCount!= 0) //if there is no task with that do not show, değiştir aç.
+    output += `
+                  <div class="task"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${task_state.state}</span></div>`;
+  });
+
+  output += `
+            </div>
+          </div>
+        </div>
+     
+        <div class="right">
+          <div class="banner"></div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // output += "";
+  // output += "";
+  // output += "";
+  // output += "";
+  $("#main .body").html(output);
+}
+
+function getProjectStates() {
+  removeFromArray(loadedTables, "project_state");
+
+  $.get(url, { opt: "getProjectStates" }, function (data) {
+    projectStates = data;
+  }).then(function () {
+    loadedTables.push("project_state");
+  });
+}
+
+function getProjects() {
+  removeFromArray(loadedTables, "project");
+
+  $.get(url, { opt: "getProjects" }).then(function (data) {
+    projects = data;
+    // console.log(projects);
+    // projects.sort(sortByName);
+
+    loadedTables.push("project");
+  });
+}
+
+function getProjectMembers() {
+  removeFromArray(loadedTables, "project_member");
+
+  $.get(url, { opt: "getProjectMembers" }).then(function (data) {
+    projectMembers = data;
+    loadedTables.push("project_member");
+  });
+}
+
+function getUsers() {
+  removeFromArray(loadedTables, "getUsers");
+
+  $.get(url, { opt: "getUsers" }).then(function (data) {
+    // users = data;
+    let temp = data;
+
+    temp.forEach((element) => {
+      users[element.id] = element;
+    });
+
+    loadedTables.push("user");
+  });
+}
+
+function getTasks() {
+  tasks = [];
+
+  removeFromArray(loadedTables, "task");
+
+  $.get(url, { opt: "getTasks" }).then(function (data) {
+    let temp = data;
+
+    temp.forEach((element) => {
+      if (tasks[element.project_id] == undefined)
+        tasks[element.project_id] = [element];
+      else tasks[element.project_id].push(element);
+    });
+
+    loadedTables.push("task");
+  });
+}
+
+function getTaskStates() {
+  removeFromArray(loadedTables, "task_state");
+
+  $.get(url, { opt: "getTaskStates" }, function (data) {
+    taskStates = data;
+  }).then(function () {
+    loadedTables.push("task_state");
+  });
 }

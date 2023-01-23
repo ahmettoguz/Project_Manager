@@ -27,4 +27,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(getTasks());
     elseif ($_GET["opt"] == "getSpecificProject")
         echo json_encode(getSpecificProject($_GET["id"]));
+    elseif ($_GET["opt"] == "getTaskStates")
+        echo json_encode(getTaskStates());
 }

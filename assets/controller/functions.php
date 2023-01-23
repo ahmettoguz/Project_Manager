@@ -108,7 +108,7 @@ function getTasks()
     global $db;
 
     try {
-        $sql = "select task.id as task_id, department_id, project_id, 	user_id, progress_contribution, name, start_date, end_date, description, comment, state_id, task_state.state
+        $sql = "select task.id as task_id, department_id, project_id, user_id, name, start_date, end_date, description, comment, state_id, task_state.state
         from task inner join task_state ON  state_id = task_state.id";
         $stmt = $db->prepare($sql);
         $stmt->execute();
@@ -119,6 +119,23 @@ function getTasks()
 
     return $row;
 }
+
+function getTaskStates()
+{
+    global $db;
+
+    try {
+        $sql = "select * from task_state";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        die("Query Error : " . $ex->getMessage());
+    }
+
+    return $rows;
+}
+
 
 
 function getSpecificProject($id)

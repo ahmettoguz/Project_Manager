@@ -1,0 +1,216 @@
+/* output += `
+ <div id="dashBoardContainer">
+      <div class="header">IT Department</div>
+
+      <div class="content">
+        <div class="left">
+          <div class="projectPart">
+            <div class="header">Total 19 project, you have assigned 10</div>
+            <div class="projectContainer">
+              <div class="project"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+              <div class="project"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+              <div class="project"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+            </div>
+          </div>
+
+          <div class="taskPart">
+            <div class="header">Total 19 Tasks, you have assigned 10</div>
+            <div class="TaskContainer">
+              <div class="Task"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+              <div class="Task"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+              <div class="Task"><span class="total">18</span> / <span class="member">7</span> <span class="state">Waiting</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="right">
+          <div class="banner">asdfasdf</div>
+        </div>
+      </div>
+    </div>
+`; */
+
+#dashBoardContainer * {
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+#dashBoardContainer {
+  margin: 0 auto;
+  width: 75%;
+  height: 100%;
+
+  overflow: hidden;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* *********************************** */
+#dashBoardContainer > .header {
+  box-shadow: 0px 17px 7px -17px rgba(0, 0, 0, 0.45);
+  /* background-color: yellow; */
+  /* margin-top: 10px; */
+  text-align: center;
+  font-size: 30px;
+  height: 10%;
+  font-style: italic;
+  /* background-color: yellow; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+
+  animation-name: textShadow;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes textShadow {
+  0% {
+  }
+  100% {
+    text-shadow: 0px 0px 20px lightskyblue, 0px 0px 1px lightseagreen;
+  }
+}
+
+/* *********************************** */
+#dashBoardContainer > .content {
+  height: 90%;
+  display: flex;
+  justify-content: center;
+}
+
+/* *********************************** */
+#dashBoardContainer > .content .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  width: 65%;
+  /* border: 1px solid black; */
+}
+
+#dashBoardContainer > .content .left > * {
+  font-size: 25px;
+  padding: 10px;
+}
+
+#dashBoardContainer > .content .left > .projectPart,
+#dashBoardContainer > .content .left > .taskPart {
+  border: 4px ridge silver;
+  border-radius: 10px;
+  box-shadow: 3px 6px 10px -5px rgb(0, 0, 0, 0.5);
+  /* border-image: linear-gradient(135deg, orange, black) 1 1 1 1; */
+  background-image: radial-gradient(at 0% 0%, white 40%, rgb(181, 224, 250));
+  transition: 500ms;
+}
+
+#dashBoardContainer > .content .left > .projectPart:hover,
+#dashBoardContainer > .content .left > .taskPart:hover {
+  box-shadow: 15px 18px 11px -15px rgb(0, 0, 0, 1);
+}
+
+#dashBoardContainer > .content .left > .projectPart > .header,
+#dashBoardContainer > .content .left > .taskPart > .header {
+  padding: 5px 10px;
+  /* border: 1px solid black; */
+}
+
+#dashBoardContainer > .content .left > .projectPart > .projectContainer,
+#dashBoardContainer > .content .left > .taskPart > .taskContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px;
+  /* border: 1px solid black; */
+}
+
+#dashBoardContainer .projectContainer > .project,
+#dashBoardContainer .taskContainer > .task {
+  min-width: 280px;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 5px 10px;
+  border: 2px solid darkgray;
+  box-shadow: 0px 10px 7px -10px blue;
+}
+#dashBoardContainer .projectContainer > .project > .numbers,
+#dashBoardContainer .taskContainer > .task > .numbers {
+  /* border: 1px solid red; */
+  display: inline;
+  padding: 0 4px;
+  margin-right: 4px;
+}
+
+#dashBoardContainer .total {
+  text-shadow: 1px 1px 0px rgb(15, 217, 217);
+  font-weight: 500;
+  /* border: 1px solid black; */
+}
+
+#dashBoardContainer .member {
+  text-shadow: 1px 1px 0px rgb(0, 255, 0);
+  /* border: 1px solid black; */
+  font-weight: 500;
+}
+
+#dashBoardContainer .projectContainer > .project .state,
+#dashBoardContainer .taskContainer > .task .state {
+  color: lightskyblue;
+  color: black;
+  /* border: 1px solid black;s */
+}
+
+/* *********************************** */
+#dashBoardContainer > .content .left > .taskPart {
+  margin-top: 15px;
+  background-image: radial-gradient(at 0% 0%, white 40%, rgb(255, 197, 205));
+}
+
+/* *********************************** */
+#dashBoardContainer > .content .right {
+  height: 450px;
+  width: 35%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* background-color: lightgreen; */
+}
+
+#dashBoardContainer > .content .right .banner {
+  background-image: url(../images/department/IT.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding-top: 100%;
+  /* background-color: green; */
+}
+
+@media only screen and (max-width: 1400px) {
+  #dashBoardContainer > .content .left {
+    justify-content: flex-start;
+    overflow: auto;
+  }
+}
+
+@media only screen and (max-width: 1100px), screen and (max-height: 630px) {
+  #dashBoardContainer {
+    overflow: auto;
+  }
+  #dashBoardContainer > .content .left {
+    justify-content: flex-start;
+    overflow: auto;
+    width: 100%;
+  }
+
+  #dashBoardContainer > .content .right {
+    display: none;
+  }
+}
