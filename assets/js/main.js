@@ -17,7 +17,7 @@ $(function () {
   // constructPageBody();
 
   performChangePage();
-  // performChangePage(0);
+  displayCompanyInformation();
 });
 
 function changeBodyPage(pageNumber) {
@@ -360,11 +360,14 @@ function changeHeaderLocation(
       </div>
     `;
 
-  if (pageNumber == "User Informations") {
+  if (
+    pageNumber == "User Informations" ||
+    pageNumber == "Company Informations"
+  ) {
     output += ` 
      <div class="locationNode">
         <div class="rightArrow"></div>
-        <div class="targetLocation">User Informations</div>
+        <div class="targetLocation">${pageNumber}</div>
      </div>
     `;
   } else if (pageNumber == "Add Project") {
@@ -918,8 +921,9 @@ function displayDashboardContentReady() {
     });
 
     // console.log(project_state);
-    if(specificTotalCount!= 0) // dont show if there is no project with that state //değiş aç.
-    output += `
+    if (specificTotalCount != 0)
+      // dont show if there is no project with that state //değiş aç.
+      output += `
               <div class="project"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${project_state.state}</span></div>`;
   });
 
@@ -953,8 +957,9 @@ function displayDashboardContentReady() {
     //   });
     // });
 
-    if(specificTotalCount!= 0) //if there is no task with that do not show, değiştir aç.
-    output += `
+    if (specificTotalCount != 0)
+      //if there is no task with that do not show, değiştir aç.
+      output += `
                   <div class="task"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${task_state.state}</span></div>`;
   });
 
@@ -1049,4 +1054,37 @@ function getTaskStates() {
   }).then(function () {
     loadedTables.push("task_state");
   });
+}
+
+function displayCompanyInformation() {
+  changeHeaderLocation("Company Informations");
+
+  let output = "";
+
+  output += `
+    <div id="companyInformationsContainer">
+      <div class="top">
+        <div class="left">
+          <div class="icon"></div>
+        </div>
+        <div class="middle">
+          <div class="banner">
+            <div class="companyBox">
+              <div class="companyName">Company Name</div>
+              <div class="companyIcon"></div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="icon"></div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
+        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
+        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
+      </div>
+    </div>
+  `;
+  $("#main .pageBody").html(output);
 }

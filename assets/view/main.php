@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/message.css">
     <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/companyInformation.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -107,6 +108,21 @@
         /* background-color: yellow; */
     }
 
+    .companyContainer {
+        border-bottom: 2px solid transparent;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3px;
+        transition: 1s;
+    }
+
+    .companyContainer:hover {
+        border-bottom: 2px solid #087FFF;
+        transform: scale(1.05);
+    }
+
     #companyIcon {
         margin: 0 15px;
         width: 50px;
@@ -115,6 +131,11 @@
         background-size: 40px auto;
         background-position: center;
         background-repeat: no-repeat;
+        transition: 1s;
+    }
+
+    #companyName {
+        transition: 1s;
     }
 
     #headerMiddle {
@@ -1309,8 +1330,10 @@
     <div id="main">
         <header>
             <div id="headerLeft" class="headerElement">
-                <div id="companyIcon"></div>
-                <div id="companyName">Company Name</div>
+                <div class="companyContainer">
+                    <div id="companyIcon" onclick="displayCompanyInformation()"></div>
+                    <div id="companyName" onclick="displayCompanyInformation()">Company Name</div>
+                </div>
             </div>
             <div id="headerMiddle" class="headerElement"></div>
             <div id="headerRight" class="headerElement">

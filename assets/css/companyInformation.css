@@ -1,0 +1,122 @@
+/* <div id="companyInformationsContainer">
+      <div class="top">
+        <div class="left">
+          <div class="icon"></div>
+        </div>
+        <div class="middle">
+          <div class="banner">
+            <div class="companyBox">
+              <div class="companyName">Company Name</div>
+              <div class="companyIcon"></div>
+            </div>
+          </div>
+        </div>
+        <div class="right">
+          <div class="icon"></div>
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="infoBox">
+          <div class="icon"></div>
+          <div class="text"></div>
+        </div>
+      </div>
+    </div> */
+
+#companyInformationsContainer {
+  margin: 20px;
+  width: 90%;
+  height: 95%;
+  background-image: radial-gradient(at 80% 20%, white, rgb(220, 220, 220));
+  box-shadow: rgba(0, 0, 0, 1) 0px 10px 20px 0px,
+    rgba(0, 0, 0, 0.23) 0px 6px 6px 0px;
+  border: 4px solid silver;
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 20px;
+}
+/* *************************************** */
+#companyInformationsContainer .top {
+  width: 100%;
+  height: 40%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-between;
+}
+
+#companyInformationsContainer .top .left {
+  width: 5%;
+  height: 100%;
+  /* background-color: greenyellow; */
+}
+
+#companyInformationsContainer .top .left .icon {
+  background-image: url(../images/main/company/back_1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 30%;
+  /* background-color: red; */
+}
+
+#companyInformationsContainer .top .right {
+  width: 5%;
+  height: 100%;
+  /* background-color: lightcyan; */
+}
+
+#companyInformationsContainer .top .right .icon {
+  background-image: url(../images/main/company/edit_2.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 30%;
+  /* background-color: red; */
+}
+/* *************************************** */
+#companyInformationsContainer .top .middle::after {
+  position: relative;
+  top: -100%;
+  box-sizing: border-box;
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  background-image: url(../images/company/bg_2.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+  filter: blur(2px);
+}
+#companyInformationsContainer .top .middle {
+  /* z-index: ; */
+  width: 85%;
+  height: 100%;
+  /* background-color: lightgray; */
+  /* background-image: url(../images/company/bg_2.png); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid black;
+}
+/* *************************************** */
+#companyInformationsContainer .bottom {
+  width: 10%;
+  height: 10%;
+  background-color: pink;
+}
+
+#companyInformationsContainer .bottom .infoBox {
+  width: 10%;
+  height: 10%;
+  background-color: yellow;
+  border: 1px solid black;
+}
+
+/* *************************************** */
+/* *************************************** */
+/* *************************************** */
+/* *************************************** */
