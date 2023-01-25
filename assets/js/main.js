@@ -7,7 +7,7 @@ let projects = null;
 let projectMembers = null;
 let users = [];
 let loadedTables = [];
-let tasks = [];
+let tasks = null;
 let departments = null;
 let taskStates = null;
 let leftProjectTab = 99; //all
@@ -19,7 +19,9 @@ $(function () {
 
   performChangePage();
 
-  prepare_DisplayCompanyInformation();
+  performChangePage(0);
+
+  // prepare_DisplayCompanyInformation();
 });
 
 function changeBodyPage(pageNumber) {
@@ -169,6 +171,9 @@ function displayProjectInformation(project_id) {
 }
 
 function displayProjectsIn_SectionMain() {
+  // değiştir sil dinamik yap statik
+  departmentId = 1;
+
   // sort projects, if all,  sort by name   else sort by due
   if (leftProjectTab == 99) {
     projects.sort(sortByName);
@@ -189,12 +194,18 @@ function displayProjectsIn_SectionMain() {
   // console.log(users);
 
   let output = `<ul>`;
+  // console.log("*************************");
   // console.log(projects);
+
   projects.forEach((project) => {
     // filter according to states
     // console.log(project.state_id);
     // console.log(tabNumber);
-    if (project.state_id == leftProjectTab || leftProjectTab == 99) {
+    // console.log(project);
+    if (
+      (project.state_id == leftProjectTab || leftProjectTab == 99) &&
+      project.department_id == departmentId
+    ) {
       // console.log(tabNumber , project.state_id);
       // console.log(projectUsers);
       // console.log(project);
@@ -208,12 +219,14 @@ function displayProjectsIn_SectionMain() {
       // count total task and completed task
       let totalTask = 0;
       let completedTotalTask = 0;
-      if (tasks[project.id] != undefined) {
-        totalTask = tasks[project.id].length;
-        for (let i = 0; i < tasks[project.id].length; i++) {
-          if (tasks[project.id][i].state == "Completed") completedTotalTask++;
+
+      tasks.forEach((task) => {
+        if (project.id == task.project_id) {
+          totalTask++;
+
+          if (task.state == "Completed") completedTotalTask++;
         }
-      }
+      });
 
       let radialProgress = (project.progress * 360) / 100;
 
@@ -871,6 +884,7 @@ function displayDashboardContent() {
 
 function displayDashboardContentReady() {
   let userId = 1; //değiştir sil dinak olmalı.
+  let departmentId = 1; //değiştir sil dinamik olmalı.
 
   let userProjectCount = 0;
   let totalProjectCount = 0;
@@ -887,12 +901,16 @@ function displayDashboardContentReady() {
   // console.log(userProjectCount);
 
   // count user and total task
-  tasks.forEach((id_task) => {
-    totalTaskCount += id_task.length;
-    id_task.forEach((task) => {
+  userTaskCount = 0;
+  totalTaskCount = 0;
+
+  tasks.forEach((task) => {
+    if (task.department_id == departmentId) {
+      totalTaskCount++;
       if (task.user_id == userId) userTaskCount++;
-    });
+    }
   });
+
   output = "";
 
   output += `
@@ -921,10 +939,10 @@ function displayDashboardContentReady() {
         });
       }
     });
-
     // console.log(project_state);
+
+    // dont show if there is no project with that state
     if (specificTotalCount != 0)
-      // dont show if there is no project with that state //değiş aç.
       output += `
               <div class="project"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${project_state.state}</span></div>`;
   });
@@ -938,31 +956,22 @@ function displayDashboardContentReady() {
             <div class="taskContainer">`;
 
   // count tasks with states
-  taskStates.forEach((task_state) => {
+  taskStates.forEach((taskState) => {
     specificTotalCount = 0;
     specificUserCount = 0;
-    tasks.forEach((tasksOfId, id) => {
-      tasksOfId.forEach((task) => {
-        if (task.state_id == task_state.id) {
-          specificTotalCount++;
-          if (task.user_id == userId) specificUserCount++;
-        }
-      });
+    // console.log(taskState);
+
+    tasks.forEach((task) => {
+      if (task.state_id == taskState.id && task.department_id == departmentId) {
+        specificTotalCount++;
+        if (task.user_id == userId) specificUserCount++;
+      }
     });
 
-    // tasks.forEach((projectId_task) => {
-    //   projectId_task.forEach((task) => {
-    //     if ((task_state.id = task.state_id)) {
-    //       console.log(task_state.id);
-    //       specificTotalCount++;
-    //     }
-    //   });
-    // });
-
+    //if there is no task with that do not show
     if (specificTotalCount != 0)
-      //if there is no task with that do not show, değiştir aç.
       output += `
-                  <div class="task"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${task_state.state}</span></div>`;
+                    <div class="task"> <div class="numbers"><span class="total">${specificTotalCount}</span>/<span class="member">${specificUserCount}</span></div><span class="state">${taskState.state}</span></div>`;
   });
 
   output += `
@@ -1031,18 +1040,10 @@ function getUsers() {
 }
 
 function getTasks() {
-  tasks = [];
-
   removeFromArray(loadedTables, "task");
 
   $.get(url, { opt: "getTasks" }).then(function (data) {
-    let temp = data;
-
-    temp.forEach((element) => {
-      if (tasks[element.project_id] == undefined)
-        tasks[element.project_id] = [element];
-      else tasks[element.project_id].push(element);
-    });
+    tasks = data;
 
     loadedTables.push("task");
   });
