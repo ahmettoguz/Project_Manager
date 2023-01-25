@@ -1070,23 +1070,13 @@ function getDepartments() {
 function displayCompanyInformation() {
   changeHeaderLocation("Company Informations");
 
-  let departmentCount = departments.length;
-  let projectCount = projects.length;
-  let taskCount = tasks.length;
-  let memberCount = users.length;
-
-  console.log(departmentCount);
-  console.log(projectCount);
-  console.log(taskCount);
-  console.log(memberCount);
-
   let output = "";
 
   output += `
     <div id="companyInformationsContainer">
       <div class="top">
         <div class="left">
-          <div class="icon"></div>
+          <div class="icon" onclick="performChangePage()"></div>
         </div>
         <div class="middle">
           <div class="companyBox">
@@ -1103,7 +1093,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">${departmentCount}</span>
+            <span class="number">0</span>
             <span>Departments</span>
           </div>
         </div>
@@ -1111,7 +1101,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">${projectCount}</span>
+            <span class="number">0</span>
             <span>Projects</span>
           </div>
         </div>
@@ -1119,7 +1109,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">${taskCount}</span>
+            <span class="number">0</span>
             <span>Tasks</span>
           </div>
         </div>
@@ -1127,7 +1117,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">${memberCount}</span>
+            <span class="number">0</span>
             <span>Members</span>
           </div>
         </div>
@@ -1136,6 +1126,110 @@ function displayCompanyInformation() {
     </div>
   `;
   $("#main .pageBody").html(output);
+
+  //when page is loaded bring numbers (animation) V1
+  // setTimeout(() => {
+  //   $(
+  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(1) .text span:nth-of-type(1)"
+  //   ).html(departmentCount);
+  //   $(
+  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(2) .text span:nth-of-type(1)"
+  //   ).html(projectCount);
+  //   $(
+  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(3) .text span:nth-of-type(1)"
+  //   ).html(taskCount);
+  //   $(
+  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(4) .text span:nth-of-type(1)"
+  //   ).html(memberCount);
+  // }, 1000);
+  //when page is loaded bring numbers (animation) V2,
+  for (let i = 1; i < 5; i++) {
+    $(
+      `#companyInformationsContainer .bottom .infoBox:nth-of-type(${i}) .text span:nth-of-type(1)`
+    ).html(0);
+  }
+
+  setTimeout(() => {
+    increaseNumbersInDepartmentPage();
+  }, 400);
+}
+function increaseNumbersInDepartmentPage() {
+  console.log("çalıştı");
+  let departmentCount = departments.length;
+  let projectCount = projects.length;
+  let taskCount = tasks.length;
+  let memberCount = users.length;
+
+  let currentDepartmentCount = null;
+  let currentProjectCount = null;
+  let currentTaskCount = null;
+  let currentMemberCount = null;
+
+  let intervalTimer = 150;
+  if (
+    departmentCount > 20 ||
+    projectCount > 20 ||
+    taskCount > 20 ||
+    memberCount > 20
+  )
+    intervalTimer = 50;
+  else if (
+    departmentCount > 100 ||
+    projectCount > 100 ||
+    taskCount > 100 ||
+    memberCount > 100
+  )
+    intervalTimer = 10;
+
+  let interval = setInterval(() => {
+    currentDepartmentCount = $(
+      "#companyInformationsContainer .bottom .infoBox:nth-of-type(1) .text span:nth-of-type(1)"
+    ).html();
+    currentProjectCount = $(
+      "#companyInformationsContainer .bottom .infoBox:nth-of-type(2) .text span:nth-of-type(1)"
+    ).html();
+    currentTaskCount = $(
+      "#companyInformationsContainer .bottom .infoBox:nth-of-type(3) .text span:nth-of-type(1)"
+    ).html();
+    currentMemberCount = $(
+      "#companyInformationsContainer .bottom .infoBox:nth-of-type(4) .text span:nth-of-type(1)"
+    ).html();
+
+    //change
+    if (currentDepartmentCount < departmentCount) {
+      currentDepartmentCount++;
+      $(
+        "#companyInformationsContainer .bottom .infoBox:nth-of-type(1) .text span:nth-of-type(1)"
+      ).html(currentDepartmentCount);
+    }
+    if (currentProjectCount < projectCount) {
+      currentProjectCount++;
+      $(
+        "#companyInformationsContainer .bottom .infoBox:nth-of-type(2) .text span:nth-of-type(1)"
+      ).html(currentProjectCount);
+    }
+    if (currentTaskCount < taskCount) {
+      currentTaskCount++;
+      $(
+        "#companyInformationsContainer .bottom .infoBox:nth-of-type(3) .text span:nth-of-type(1)"
+      ).html(currentTaskCount);
+    }
+    if (currentMemberCount < memberCount) {
+      currentMemberCount++;
+      $(
+        "#companyInformationsContainer .bottom .infoBox:nth-of-type(4) .text span:nth-of-type(1)"
+      ).html(currentMemberCount);
+    }
+
+    if (
+      currentDepartmentCount == departmentCount &&
+      currentProjectCount == projectCount &&
+      currentTaskCount == taskCount &&
+      currentMemberCount == memberCount
+    ) {
+      clearInterval(interval);
+    }
+  }, intervalTimer);
 }
 
 function prepare_DisplayCompanyInformation() {

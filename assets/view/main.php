@@ -1334,7 +1334,7 @@
     <div id="main">
         <header>
             <div id="headerLeft" class="headerElement">
-                <div class="companyContainer">
+                <div class="companyContainer" onclick="prepare_DisplayCompanyInformation()">
                     <div id="companyIcon" onclick="prepare_DisplayCompanyInformation()"></div>
                     <div id="companyName" onclick="prepare_DisplayCompanyInformation()">Company Name</div>
                 </div>
