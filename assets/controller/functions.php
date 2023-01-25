@@ -34,6 +34,22 @@ function performLoginOperation($username, $password, $remember)
     }
 }
 
+function getDepartment()
+{
+    global $db;
+
+    try {
+        $sql = "select * from department";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        die("Query Error : " . $ex->getMessage());
+    }
+
+    return $rows;
+}
+
 function getProjectStates()
 {
     global $db;
@@ -49,6 +65,7 @@ function getProjectStates()
 
     return $rows;
 }
+
 
 function getProjects()
 {

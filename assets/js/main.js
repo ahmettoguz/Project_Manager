@@ -8,6 +8,7 @@ let projectMembers = null;
 let users = [];
 let loadedTables = [];
 let tasks = [];
+let departments = null;
 let taskStates = null;
 let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
@@ -17,7 +18,8 @@ $(function () {
   // constructPageBody();
 
   performChangePage();
-  displayCompanyInformation();
+
+  prepare_DisplayCompanyInformation();
 });
 
 function changeBodyPage(pageNumber) {
@@ -1056,8 +1058,29 @@ function getTaskStates() {
   });
 }
 
+function getDepartments() {
+  removeFromArray(loadedTables, "department");
+
+  $.get(url, { opt: "getDepartment" }, function (data) {
+    departments = data;
+  }).then(function () {
+    loadedTables.push("department");
+  });
+}
+
 function displayCompanyInformation() {
   changeHeaderLocation("Company Informations");
+
+  let departmentCount = departments.length;
+  let projectCount = projects.length;
+  let taskCount = tasks.lenght;
+  let memberCount = users.length;
+
+  // count tasks
+  // console.log(departmentCount);
+  // console.log(projectCount);
+  // console.log(taskCount);
+  // console.log(memberCount);
 
   let output = "";
 
@@ -1115,4 +1138,24 @@ function displayCompanyInformation() {
     </div>
   `;
   $("#main .pageBody").html(output);
+}
+
+function prepare_DisplayCompanyInformation() {
+  getDepartments();
+  getProjects();
+  getTasks();
+  getUsers();
+
+  let interval = setInterval(() => {
+    // console.log(loadedTables);
+    if (
+      loadedTables.includes("department") &&
+      loadedTables.includes("project") &&
+      loadedTables.includes("task") &&
+      loadedTables.includes("user")
+    ) {
+      clearInterval(interval);
+      displayCompanyInformation();
+    }
+  }, 100);
 }

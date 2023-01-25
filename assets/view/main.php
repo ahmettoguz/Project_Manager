@@ -1335,8 +1335,8 @@
         <header>
             <div id="headerLeft" class="headerElement">
                 <div class="companyContainer">
-                    <div id="companyIcon" onclick="displayCompanyInformation()"></div>
-                    <div id="companyName" onclick="displayCompanyInformation()">Company Name</div>
+                    <div id="companyIcon" onclick="prepare_DisplayCompanyInformation()"></div>
+                    <div id="companyName" onclick="prepare_DisplayCompanyInformation()">Company Name</div>
                 </div>
             </div>
             <div id="headerMiddle" class="headerElement"></div>
