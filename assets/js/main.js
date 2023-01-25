@@ -1068,11 +1068,9 @@ function displayCompanyInformation() {
           <div class="icon"></div>
         </div>
         <div class="middle">
-          <div class="banner">
-            <div class="companyBox">
-              <div class="companyName">Company Name</div>
-              <div class="companyIcon"></div>
-            </div>
+          <div class="companyBox">
+            <div class="companyName">Company Name</div>
+            <div class="companyIcon"></div>
           </div>
         </div>
         <div class="right">
@@ -1080,9 +1078,39 @@ function displayCompanyInformation() {
         </div>
       </div>
       <div class="bottom">
-        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
-        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
-        <div class="infoBox"><div class="icon"></div><div class="text"></div></div>
+
+        <div class="infoBox">
+          <div class="icon"></div>
+          <div class="text">
+            <span class="number">12312</span>
+            <span>Departments</span>
+          </div>
+        </div>
+
+        <div class="infoBox">
+          <div class="icon"></div>
+          <div class="text">
+            <span class="number">12312</span>
+            <span>Projects</span>
+          </div>
+        </div>
+
+        <div class="infoBox">
+          <div class="icon"></div>
+          <div class="text">
+            <span class="number">12312</span>
+            <span>Tasks</span>
+          </div>
+        </div>
+
+        <div class="infoBox">
+          <div class="icon"></div>
+          <div class="text">
+            <span class="number">12312</span>
+            <span>Members</span>
+          </div>
+        </div>
+        
       </div>
     </div>
   `;
