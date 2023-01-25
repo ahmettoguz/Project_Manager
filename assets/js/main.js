@@ -17,11 +17,9 @@ let isMessageShow = false;
 $(function () {
   // constructPageBody();
 
-  performChangePage();
+  // performChangePage();
 
-  performChangePage(0);
-
-  // prepare_DisplayCompanyInformation();
+  prepare_DisplayCompanyInformation();
 });
 
 function changeBodyPage(pageNumber) {
@@ -1074,14 +1072,13 @@ function displayCompanyInformation() {
 
   let departmentCount = departments.length;
   let projectCount = projects.length;
-  let taskCount = tasks.lenght;
+  let taskCount = tasks.length;
   let memberCount = users.length;
 
-  // count tasks
-  // console.log(departmentCount);
-  // console.log(projectCount);
-  // console.log(taskCount);
-  // console.log(memberCount);
+  console.log(departmentCount);
+  console.log(projectCount);
+  console.log(taskCount);
+  console.log(memberCount);
 
   let output = "";
 
@@ -1106,7 +1103,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">12312</span>
+            <span class="number">${departmentCount}</span>
             <span>Departments</span>
           </div>
         </div>
@@ -1114,7 +1111,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">12312</span>
+            <span class="number">${projectCount}</span>
             <span>Projects</span>
           </div>
         </div>
@@ -1122,7 +1119,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">12312</span>
+            <span class="number">${taskCount}</span>
             <span>Tasks</span>
           </div>
         </div>
@@ -1130,7 +1127,7 @@ function displayCompanyInformation() {
         <div class="infoBox">
           <div class="icon"></div>
           <div class="text">
-            <span class="number">12312</span>
+            <span class="number">${memberCount}</span>
             <span>Members</span>
           </div>
         </div>
