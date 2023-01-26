@@ -34,6 +34,22 @@ function performLoginOperation($username, $password, $remember)
     }
 }
 
+function getCompany()
+{
+    global $db;
+
+    try {
+        $sql = "select * from company";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        die("Query Error : " . $ex->getMessage());
+    }
+
+    return $row;
+}
+
 function getDepartment()
 {
     global $db;

@@ -10,11 +10,15 @@ let loadedTables = [];
 let tasks = null;
 let departments = null;
 let taskStates = null;
+let company = null;
 let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
 let isMessageShow = false;
 
 $(function () {
+  getCompany();
+  assignCompanyInHeader();
+
   // constructPageBody();
 
   // performChangePage();
@@ -991,6 +995,16 @@ function displayDashboardContentReady() {
   $("#main .body").html(output);
 }
 
+function getCompany() {
+  removeFromArray(loadedTables, "company");
+
+  $.get(url, { opt: "getCompany" }, function (data) {
+    company = data;
+  }).then(function () {
+    loadedTables.push("company");
+  });
+}
+
 function getProjectStates() {
   removeFromArray(loadedTables, "project_state");
 
@@ -1080,8 +1094,8 @@ function displayCompanyInformation() {
         </div>
         <div class="middle">
           <div class="companyBox">
-            <div class="companyName">Company Name</div>
-            <div class="companyIcon"></div>
+            <div class="companyName">${company.name}</div>
+            <div class="companyIcon" style="background-image : url(../images/company/${company.icon})"></div>
           </div>
         </div>
         <div class="right">
@@ -1139,7 +1153,7 @@ function displayCompanyInformation() {
   }, 400);
 
   // sil
-  // displayCompanyEditPage();
+  displayCompanyEditPage();
 }
 
 function increaseNumbersInDepartmentPage() {
@@ -1221,6 +1235,7 @@ function increaseNumbersInDepartmentPage() {
 }
 
 function prepare_DisplayCompanyInformation() {
+  getCompany();
   getDepartments();
   getProjects();
   getTasks();
@@ -1229,6 +1244,7 @@ function prepare_DisplayCompanyInformation() {
   let interval = setInterval(() => {
     // console.log(loadedTables);
     if (
+      loadedTables.includes("company") &&
       loadedTables.includes("department") &&
       loadedTables.includes("project") &&
       loadedTables.includes("task") &&
@@ -1264,12 +1280,6 @@ function displayCompanyEditPage() {
             <input type="file" id="editCompanyIcon" />
           </div>
         </div>
-        <div class="right">
-          <div class="imageContainer">
-            <span class="header">Upload</br>Background Image</span>
-            <input type="file" id="editCompanyBackground" />
-          </div>
-        </div>
       </div>
 
       <div class="bottom">
@@ -1289,4 +1299,22 @@ function companyInformation_setDefault() {
 }
 function companyInformation_save() {
   alertt("saved", "green");
+}
+
+function assignCompanyInHeader() {
+  let interval = setInterval(() => {
+    if (loadedTables.includes("company")) {
+      clearInterval(interval);
+
+      // main body of the function
+      $("#companyName").html(company.name);
+      $("#companyName").html(company.name);
+
+      $("#companyIcon").css(
+        "background-image",
+        `url(../images/company/${company.icon})`
+      );
+      // main body of the function
+    }
+  }, 10);
 }

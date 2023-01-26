@@ -31,4 +31,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(getTaskStates());
     elseif ($_GET["opt"] == "getDepartment")
         echo json_encode(getDepartment());
+    elseif ($_GET["opt"] == "getCompany")
+        echo json_encode(getCompany());
 }

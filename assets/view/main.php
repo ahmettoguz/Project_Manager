@@ -131,7 +131,6 @@
         margin: 0 15px;
         width: 50px;
         height: 100%;
-        background-image: url(../images/company/icon.png);
         background-size: 40px auto;
         background-position: center;
         background-repeat: no-repeat;
