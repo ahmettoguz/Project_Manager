@@ -312,15 +312,19 @@
 #companyInformationsContainer .bottom .container .middle {
   height: 57%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+  width: 100%;
   /* border: 1px solid darkblue; */
 }
-
-#companyInformationsContainer .bottom .container .middle .left {
-  width: 40%;
+#companyInformationsContainer .bottom .container .middle > span {
+  font-size: 20px;
+  width: 35.5%;
+  text-align: center;
 }
 
-#companyInformationsContainer .bottom .container .middle div .imageContainer {
+#companyInformationsContainer .bottom .container .middle .imageContainer {
+  margin-left: 8px;
+  width: 52%;
   overflow: hidden;
   height: 100%;
   border: 5px dashed darkgray;
@@ -331,7 +335,6 @@
   .bottom
   .container
   .middle
-  > div
   .imageContainer
   input {
   position: relative;
@@ -341,6 +344,7 @@
   position: relative;
   top: -100%;
   opacity: 0;
+  /* border: 1px solid black; */
   /* background-color: green; */
 }
 
@@ -348,7 +352,6 @@
   .bottom
   .container
   .middle
-  > div
   .imageContainer
   span {
   height: 100%;

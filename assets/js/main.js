@@ -1270,15 +1270,14 @@ function displayCompanyEditPage() {
     <div class="container">
 
       <div class="top">
-        <span class="header">Company Name</span> <input type="text" id="editCompanyName" />
+        <span class="header">Company name</span> <input type="text" id="editCompanyName" />
       </div>
 
       <div class="middle">
-        <div class="left">
-          <div class="imageContainer">
-            <span class="header">Upload</br>Company Icon</span>
-            <input type="file" id="editCompanyIcon" />
-          </div>
+        <span class="header">Company icon</span>
+        <div class="imageContainer">
+          <span class="header">Upload</br>Company Icon</span>
+          <input type="file" id="editCompanyIcon" />
         </div>
       </div>
 
