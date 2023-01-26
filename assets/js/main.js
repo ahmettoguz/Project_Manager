@@ -16,7 +16,6 @@ let addProjectSelectedMembers = [];
 let isMessageShow = false;
 
 $(function () {
-  getCompany();
   assignCompanyInHeader();
 
   // constructPageBody();
@@ -584,16 +583,16 @@ function addProjectToDatabase() {
     hasPhoto = "false";
   } else hasPhoto = "true";
 
-  console.log("project Added");
-  console.log("projectName: ", projectName);
-  console.log("description: ", description);
-  console.log("addProjectStartDate: ", addProjectStartDate);
-  console.log("addProjectEndDate: ", addProjectEndDate);
-  console.log("addProjectFileUpload: ", addProjectFileUpload);
-  console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
-  console.log("progress:", progress);
-  console.log("state:", state);
-  console.log("members", addProjectSelectedMembers);
+  // console.log("project Added");
+  // console.log("projectName: ", projectName);
+  // console.log("description: ", description);
+  // console.log("addProjectStartDate: ", addProjectStartDate);
+  // console.log("addProjectEndDate: ", addProjectEndDate);
+  // console.log("addProjectFileUpload: ", addProjectFileUpload);
+  // console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
+  // console.log("progress:", progress);
+  // console.log("state:", state);
+  // console.log("members", addProjectSelectedMembers);
 
   // check inputs for errors
   if (projectName.trim() == "") errors.push("empty name");
@@ -1151,9 +1150,6 @@ function displayCompanyInformation() {
   setTimeout(() => {
     increaseNumbersInDepartmentPage();
   }, 400);
-
-  // sil
-  displayCompanyEditPage();
 }
 
 function increaseNumbersInDepartmentPage() {
@@ -1270,14 +1266,14 @@ function displayCompanyEditPage() {
     <div class="container">
 
       <div class="top">
-        <span class="header">Company name</span> <input type="text" id="editCompanyName" />
+        <span class="header">Company name</span> <input type="text" id="editCompanyName" maxlength="75" />
       </div>
 
       <div class="middle">
         <span class="header">Company icon</span>
         <div class="imageContainer">
           <span class="header">Upload</br>Company Icon</span>
-          <input type="file" id="editCompanyIcon" />
+          <input type="file" id="editCompanyIcon" onchange="editCompanyFileUpload(event)"/>
         </div>
       </div>
 
@@ -1293,21 +1289,16 @@ function displayCompanyEditPage() {
   $("#companyInformationsContainer .bottom").html(output);
 }
 
-function companyInformation_setDefault() {
-  alertt("setdefault", "green");
-}
-function companyInformation_save() {
-  alertt("saved", "green");
-}
-
 function assignCompanyInHeader() {
+  getCompany();
   let interval = setInterval(() => {
     if (loadedTables.includes("company")) {
       clearInterval(interval);
 
       // main body of the function
       $("#companyName").html(company.name);
-      $("#companyName").html(company.name);
+
+      $("#companyIcon").css("background-image", `none`);
 
       $("#companyIcon").css(
         "background-image",
@@ -1316,4 +1307,130 @@ function assignCompanyInHeader() {
       // main body of the function
     }
   }, 10);
+}
+
+function companyInformation_setDefault() {
+  $("#editCompanyName").val("Computer Technologies Company");
+
+  $(
+    "#companyInformationsContainer .bottom .container .middle .imageContainer"
+  ).css({
+    "background-image": "url(../images/company/default_icon.png)",
+    border: "5px dashed rgb(71,121,171)",
+  });
+
+  $(
+    "#companyInformationsContainer .bottom .container .middle .imageContainer span"
+  ).html("");
+}
+
+function companyInformation_save() {
+  let error = [];
+
+  let companyName = $("#editCompanyName").val().trim(" ");
+
+  // check errors
+  if (companyName == "") error.push("empty name");
+  if (
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer"
+    ).css("background-image") == "none"
+  )
+    error.push("empty image");
+
+  // if has error
+  if (error.length != 0) {
+    if (error.includes("empty image")) {
+      alertt("No company image!", "red");
+
+      $(
+        "#companyInformationsContainer .bottom .container .middle .imageContainer"
+      ).removeClass("invalidInput");
+      setTimeout(() => {
+        $(
+          "#companyInformationsContainer .bottom .container .middle .imageContainer"
+        ).addClass("invalidInput");
+      }, 1);
+    }
+
+    if (error.includes("empty name")) {
+      alertt("Enter company name!", "red");
+
+      $("#editCompanyName").removeClass("invalidInput");
+      setTimeout(() => {
+        $("#editCompanyName").addClass("invalidInput");
+      }, 1);
+    }
+  } else {
+    let file = $("#editCompanyIcon")[0].files[0];
+    var ajaxData = new FormData();
+    ajaxData.append("opt", "updateCompanyInformation");
+    ajaxData.append("companyName", companyName);
+    ajaxData.append("companyIcon", file);
+
+    $.ajax({
+      url: url,
+      type: "POST",
+      contentType: false,
+      processData: false,
+      cache: false,
+      dataType: "json",
+      enctype: "multipart/form-data",
+      data: ajaxData,
+      success: function (data) {
+        console.log(data);
+        if (data == "true") {
+          // update display
+          $(
+            "#companyInformationsContainer .top .middle .companyBox .companyName"
+          ).html(companyName);
+          $(
+            "#companyInformationsContainer .top .middle .companyBox .companyIcon"
+          ).css("background-image", "none");
+          $("#companyName").html(companyName);
+
+          // return dashboard
+          assignCompanyInHeader();
+          prepare_DisplayCompanyInformation();
+          alertt("Company informations successfully updated.", "green");
+        } else if (data == "false") {
+          alertt("Company informations NOT updated!", "red");
+        }
+      },
+    });
+  }
+}
+
+function editCompanyFileUpload(event) {
+  let fileObject = $(
+    "#companyInformationsContainer .bottom .container .middle .imageContainer input"
+  );
+  let fileName = fileObject.val();
+  fileName = fileName.substring(
+    fileName.indexOf(`fakepath`) + 9,
+    fileName.length
+  );
+
+  let fileExtension = fileName.split(".")[1];
+
+  if (fileExtension == "png" || fileExtension == "jpg") {
+    fileObject = URL.createObjectURL(event.target.files[0]);
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer"
+    ).css("background-image", `url(${fileObject})`);
+
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer"
+    ).css("border", "5px dashed rgb(71,121,171)");
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer span"
+    ).html("");
+  } else {
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer span"
+    ).html("Extension should be </br> png or jpg.");
+    $(
+      "#companyInformationsContainer .bottom .container .middle .imageContainer"
+    ).css("background-image", `none`);
+  }
 }

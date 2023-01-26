@@ -10,6 +10,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(addProject_MemberToDatabase($_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"], $_POST["hasPhoto"]));
     if ($_POST["opt"] == "uploadPhotoToDatabase")
         echo json_encode(addProject_PhotoToDatabase($_FILES["addProjectFileUpload"]["tmp_name"], $_POST["targetFileName"], $_POST["destinationLocationFile"]));
+    if ($_POST["opt"] == "updateCompanyInformation") {
+        echo json_encode(updateCompanyInformation($_POST["companyName"], isset($_FILES["companyIcon"]["tmp_name"]) ? $_FILES["companyIcon"]["tmp_name"] : null));
+        // echo json_encode(updateCompanyInformation($_POST["companyName"], $_FILES["companyIcon"]["tmp_name"]));
+    }
 
 
     // *************************

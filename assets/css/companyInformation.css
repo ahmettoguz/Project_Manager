@@ -74,7 +74,7 @@
 }
 
 #companyInformationsContainer .top .right .icon {
-  background-image: url(../images/main/company/edit_2.png);
+  background-image: url(../images/main/company/edit.png);
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -96,7 +96,7 @@
   width: 100%;
   height: 100%;
   display: block;
-  background-image: url(../images/company/background_image.png);
+  background-image: url(../images/main/company/background_image.png);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -133,8 +133,12 @@
 }
 
 #companyInformationsContainer .top .middle .companyBox .companyName {
+  user-select: none;
+  min-width: 200px;
+  text-align: center;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   font-family: "Inter", sans-serif;
   font-style: italic;
   font-size: 35px;
@@ -163,10 +167,11 @@
 
 #companyInformationsContainer .top .middle .companyBox .companyIcon {
   height: 60%;
-  margin: 5% 0;
+  margin: 10px 0;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  transition: 1s;
 }
 /* *************************************** */
 #companyInformationsContainer .bottom {
@@ -227,6 +232,7 @@
     28px 28px 28px 0 rgba(34, 33, 81, 0.25); */
 }
 #companyInformationsContainer .bottom .infoBox .text {
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -329,14 +335,12 @@
   height: 100%;
   border: 5px dashed darkgray;
   box-shadow: 0px 0px 20px rgb(255, 223, 223) inset;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
-#companyInformationsContainer
-  .bottom
-  .container
-  .middle
-  .imageContainer
-  input {
+#companyInformationsContainer .bottom .container .middle .imageContainer input {
   position: relative;
 
   height: 100%;
@@ -348,12 +352,7 @@
   /* background-color: green; */
 }
 
-#companyInformationsContainer
-  .bottom
-  .container
-  .middle
-  .imageContainer
-  span {
+#companyInformationsContainer .bottom .container .middle .imageContainer span {
   height: 100%;
   width: 100%;
   user-select: none;

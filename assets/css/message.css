@@ -13,7 +13,7 @@
   text-shadow: 1px 1px 1px black;
   box-shadow: 2px 2px 2px black;
   text-align: center;
-  /* padding: 0 10px; */
+  padding:  0 30px;
 
   width: 400px;
   left: calc(100% - 420px);

@@ -275,3 +275,53 @@ function  addProject_PhotoToDatabase($tempLocation, $fileName, $targetLocation)
 
     return "false";
 }
+
+function updateCompanyInformation($companyName, $companyIcon)
+{
+    $preventCache = date("i_s");
+
+    global $db;
+
+    // remove old photo
+    try {
+        $sql = "select icon from company";
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $oldIcon = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $ex) {
+        die("<p>Update Error : " . $ex->getMessage());
+    }
+
+    if ($oldIcon["icon"] != "default_icon.png")
+        unlink("../images/company/{$oldIcon["icon"]}");
+
+    if ($companyIcon == null) {
+        try {
+            $sql = "update company set name = :name, icon = :icon where id = 1";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":name", $companyName, PDO::PARAM_STR);
+            $stmt->bindValue(":icon", "default_icon.png", PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("<p>Update Error : " . $ex->getMessage());
+        }
+        return "true";
+    } else {
+        try {
+            $sql = "update company set name = :name, icon = :icon where id = 1";
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(":name", $companyName, PDO::PARAM_STR);
+            $stmt->bindValue(":icon", "icon_{$preventCache}.png", PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("<p>Update Error : " . $ex->getMessage());
+        }
+
+        if (move_uploaded_file($companyIcon, "../images/company/icon_{$preventCache}.png")) {
+            return "true";
+        }
+    }
+
+
+    return "false";
+}
