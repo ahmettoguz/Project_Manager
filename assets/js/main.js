@@ -1085,7 +1085,7 @@ function displayCompanyInformation() {
           </div>
         </div>
         <div class="right">
-          <div class="icon"></div>
+          <div class="icon" onclick="displayCompanyEditPage()"></div>
         </div>
       </div>
       <div class="bottom">
@@ -1127,21 +1127,6 @@ function displayCompanyInformation() {
   `;
   $("#main .pageBody").html(output);
 
-  //when page is loaded bring numbers (animation) V1
-  // setTimeout(() => {
-  //   $(
-  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(1) .text span:nth-of-type(1)"
-  //   ).html(departmentCount);
-  //   $(
-  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(2) .text span:nth-of-type(1)"
-  //   ).html(projectCount);
-  //   $(
-  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(3) .text span:nth-of-type(1)"
-  //   ).html(taskCount);
-  //   $(
-  //     "#companyInformationsContainer .bottom .infoBox:nth-of-type(4) .text span:nth-of-type(1)"
-  //   ).html(memberCount);
-  // }, 1000);
   //when page is loaded bring numbers (animation) V2,
   for (let i = 1; i < 5; i++) {
     $(
@@ -1152,9 +1137,12 @@ function displayCompanyInformation() {
   setTimeout(() => {
     increaseNumbersInDepartmentPage();
   }, 400);
+
+  // sil
+  // displayCompanyEditPage();
 }
+
 function increaseNumbersInDepartmentPage() {
-  console.log("çalıştı");
   let departmentCount = departments.length;
   let projectCount = projects.length;
   let taskCount = tasks.length;
@@ -1250,4 +1238,55 @@ function prepare_DisplayCompanyInformation() {
       displayCompanyInformation();
     }
   }, 100);
+}
+
+function displayCompanyEditPage() {
+  // remove edit icon
+  $("#companyInformationsContainer .top .right .icon").css(
+    "background-image",
+    "none"
+  );
+
+  // prepare content
+  let output = "";
+
+  output += `
+    <div class="container">
+
+      <div class="top">
+        <span class="header">Company Name</span> <input type="text" id="editCompanyName" />
+      </div>
+
+      <div class="middle">
+        <div class="left">
+          <div class="imageContainer">
+            <span class="header">Upload</br>Company Icon</span>
+            <input type="file" id="editCompanyIcon" />
+          </div>
+        </div>
+        <div class="right">
+          <div class="imageContainer">
+            <span class="header">Upload</br>Background Image</span>
+            <input type="file" id="editCompanyBackground" />
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom">
+        <div class="default"onclick="companyInformation_setDefault()"><span class="text">Default</span></div>
+        <div class="save"   onclick="companyInformation_save()"><span class="text">Save</span></div>
+        <div class="cancel" onclick="prepare_DisplayCompanyInformation()"><span class="text">Cancel</span></div>
+      </div>
+
+    </div>
+  `;
+
+  $("#companyInformationsContainer .bottom").html(output);
+}
+
+function companyInformation_setDefault() {
+  alertt("setdefault", "green");
+}
+function companyInformation_save() {
+  alertt("saved", "green");
 }

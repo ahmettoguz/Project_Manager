@@ -253,6 +253,7 @@
         overflow: hidden;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         border-radius: 3px;
+        z-index: 1;
 
         transition: max-height 500ms ease-in-out;
     }
