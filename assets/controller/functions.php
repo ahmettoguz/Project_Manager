@@ -9,7 +9,7 @@ function performLoginOperation($username, $password, $remember)
     $password = sha1($password . "project_manager");
 
     try {
-        $sql = "select user.id,name,surname,username,mail,photo,user_type_id,type as user_type
+        $sql = "select user.id,name,surname,username, photo,user_type_id,type as user_type
          from user inner join user_type ON user.user_type_id = user_type.id
          where username = :username and password = :password";
         $stmt = $db->prepare($sql);

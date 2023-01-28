@@ -20,9 +20,9 @@ $(function () {
 
   // constructPageBody();
 
-  // performChangePage();
+  performChangePage();
 
-  prepare_DisplayCompanyInformation();
+  // prepare_DisplayCompanyInformation();
 });
 
 function changeBodyPage(pageNumber) {
