@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 29, 2023 at 09:13 AM
+-- Generation Time: Jan 29, 2023 at 07:06 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project`
@@ -94,7 +94,8 @@ INSERT INTO `project` (`id`, `name`, `description`, `photo`, `start_date`, `end_
 (2, 'Educational Computer Programming', 'Aim is to give basic computer programming education.', 'project_0.png', '2023-01-12 15:39:18', NULL, 30, 1, 2),
 (3, 'Frontend Web Game', 'Best game ever!', 'project_0.png', '2023-01-12 16:57:33', '2023-01-10 06:44:16', 100, 1, 4),
 (5, 'Internship Program', 'Aim is to develop internships to work later on their internsip.', 'project_default.png', '2023-01-25 12:22:13', '2023-01-31 12:21:18', 0, 2, 1),
-(6, 'Data Analysis Of The Pages', 'Trace script will follow the actions of the users and report of that actions will be displayed.', 'project_default.png', '2023-01-27 21:00:00', '2023-01-30 21:00:00', 0, 1, 2);
+(6, 'Data Analysis Of The Pages', 'Trace script will follow the actions of the users and report of that actions will be displayed.', 'project_default.png', '2023-01-27 21:00:00', '2023-01-30 21:00:00', 0, 1, 2),
+(7, 'Database Management', 'Database of the applications will be revised.', 'projectId_7', '2023-01-28 21:00:00', '2023-02-01 21:00:00', 20, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   KEY `department_id` (`department_id`),
   KEY `project_id` (`project_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_member`
@@ -122,7 +123,11 @@ INSERT INTO `project_member` (`id`, `department_id`, `project_id`, `user_id`) VA
 (1, 1, 1, 1),
 (2, 1, 1, 2),
 (3, 1, 2, 1),
-(4, 1, 2, 3);
+(4, 1, 2, 3),
+(5, 1, 7, 1),
+(6, 1, 7, 2),
+(7, 1, 7, 4),
+(8, 1, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -135,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `project_state` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `state` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_state`
@@ -171,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   KEY `user_id` (`user_id`),
   KEY `project_id` (`project_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `task`
@@ -180,7 +185,9 @@ CREATE TABLE IF NOT EXISTS `task` (
 INSERT INTO `task` (`id`, `department_id`, `project_id`, `user_id`, `name`, `start_date`, `end_date`, `description`, `comment`, `state_id`) VALUES
 (1, 1, 2, 1, 'Prepare hardware', '2023-01-11 20:41:11', '2023-01-26 06:56:23', 'Hardware components of the network should be prepared!', 'Need extra time. -Ahmet', 2),
 (2, 1, 2, 1, 'Agreement with company', '2023-01-11 20:42:32', '2023-01-19 20:41:29', 'Metting time should be revised.', 'Hurry up!', 1),
-(3, 1, 2, 4, 'Test ', '2023-01-23 13:10:00', NULL, 'test of the program', 'no error', 3);
+(3, 1, 2, 4, 'Test ', '2023-01-23 13:10:00', NULL, 'test of the program', 'no error', 3),
+(4, 1, 7, 1, 'Construct Table', '2023-01-29 12:30:19', '2023-01-31 12:28:31', 'Create tables.', 'No comment now.', 1),
+(5, 1, 7, 4, 'Fix nulls.', '2023-01-29 12:30:19', '2023-01-31 12:28:31', 'Fix null values in the table.', 'Wait creation of the tables.', 3);
 
 -- --------------------------------------------------------
 
@@ -231,7 +238,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `photo`, `department_id`, `user_type_id`) VALUES
-(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'ahmet.jpg', 1, 1),
+(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'ahmet.png', 1, 1),
 (2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_0.png', 1, 2),
 (3, 'boss', 'boss', 'boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_1.png', 1, 1),
 (4, 'Tarık', 'Tarık', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_2.png', 1, 2);

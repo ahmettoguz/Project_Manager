@@ -177,7 +177,7 @@ function getSpecificProject($id)
 
     try {
         $sql = "select project.id as id, name, description, photo, start_date, end_date,
-        TIMEDIFF(end_date, current_timestamp())  as due, progress, department_id, state_id
+        TIMEDIFF(end_date, current_timestamp())  as due, progress, department_id, state_id, state
         from project 
         inner join project_state 
         ON project.state_id = project_state.id

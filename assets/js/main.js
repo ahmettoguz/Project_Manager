@@ -19,6 +19,7 @@ $(function () {
   assignCompanyInHeader();
 
   performChangePage(0);
+  displayProjectInformation(7, "Data Analysis Of The Pages");
 
   // prepare_DisplayCompanyInformation();
 });
@@ -1421,44 +1422,75 @@ function editCompanyFileUpload(event) {
 }
 
 function displayProjectInformation(project_id) {
+  // sil dinamik yap değiş
+  let departmentId = 1;
+
   // get specific project
   $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
     data
   ) {
     let project_and_user = data;
-    console.log(project_and_user);
+    let project = data[0];
+    let members = data[1];
 
+    console.log(project);
     let output = "";
 
     output += `
-    <section id="ProjectDetails">
+    <section id="projectDetails">
       <div class="left">
-        <div class="projectPhotoContainer"></div>
-
-        <div class="stateContainer">
-          <div class="header">State</div>
-          <div class="state">
-            <div class="icon">-icon-</div>
-            <div class="value">-Waiting-</div>
-          </div>
+        <div class="projectPhotoContainer">
+          <div class="projectPhoto" style="background-image:url(../images/project/${project.photo})"></div>
         </div>
 
         <div class="memberContainer">
           <div class="header">Members</div>
-          <div class="iconContainer">
-            <div class="icon">-A-</div>
-            <div class="icon">-B-</div>
+          <div class="iconContainer">`;
+
+    for (let i = 0; i < members.length; i++) {
+      console.log(users);
+      if (
+        members[i].department_id == departmentId &&
+        members[i].project_id == project.id
+      )
+        output += `
+                  <div class="icon" style="background-image:url(../images/users/${
+                    users[members[i].user_id].photo
+                  })"></div>`;
+    }
+
+    output += `
+          </div>
+        </div>
+
+        <div class="stateContainer">
+          <div class="header">State</div>
+          <div class="state">
+            <div class="icon" style="background-image:url(../images/main/project/${project.state_id}.png)"></div>
+            <div class="value">${project.state}</div>
           </div>
         </div>
 
         <div class="progressContainer">
           <div class="header">Progress</div>
           <div class="progressBarContainer">
+          <div class="value">18%</div>
             <div class="bar">
               <div class="progress"></div>
             </div>
           </div>
         </div>
+
+        <div class="taskContainer">
+          <div class="header">Tasks</div>
+          <div class="container">
+            <div class="icon"></div>
+            <div class="value">
+              2 completed, 5 total.
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <div class="middle">
