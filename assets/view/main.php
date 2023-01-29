@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/message.css">
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/companyInformation.css">
+    <link rel="stylesheet" href="../css/projectDetails.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

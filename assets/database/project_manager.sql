@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 23, 2023 at 07:09 PM
+-- Generation Time: Jan 29, 2023 at 09:13 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -24,6 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `company`
+--
+
+DROP TABLE IF EXISTS `company`;
+CREATE TABLE IF NOT EXISTS `company` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(75) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `icon` varchar(85) COLLATE utf8mb4_turkish_ci NOT NULL DEFAULT 'default_icon.png',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+
+--
+-- Dumping data for table `company`
+--
+
+INSERT INTO `company` (`id`, `name`, `icon`) VALUES
+(1, 'Devoloper Ahmet', 'icon_59_53.png');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `department`
 --
 
@@ -32,14 +53,15 @@ CREATE TABLE IF NOT EXISTS `department` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `department`
 --
 
 INSERT INTO `department` (`id`, `name`) VALUES
-(1, 'IT');
+(1, 'IT'),
+(2, 'HR');
 
 -- --------------------------------------------------------
 
@@ -61,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project`
@@ -71,7 +93,8 @@ INSERT INTO `project` (`id`, `name`, `description`, `photo`, `start_date`, `end_
 (1, 'Network Project', 'Network construction of Ankara.', 'project_1.png', '2023-01-01 08:40:10', '2023-01-26 09:02:03', 67, 1, 1),
 (2, 'Educational Computer Programming', 'Aim is to give basic computer programming education.', 'project_0.png', '2023-01-12 15:39:18', NULL, 30, 1, 2),
 (3, 'Frontend Web Game', 'Best game ever!', 'project_0.png', '2023-01-12 16:57:33', '2023-01-10 06:44:16', 100, 1, 4),
-(4, 'this project name is too long to show how to see', 'dummy project', 'project_0.png', '2023-01-17 06:21:30', '2023-01-25 06:20:26', 10, 1, 1);
+(5, 'Internship Program', 'Aim is to develop internships to work later on their internsip.', 'project_default.png', '2023-01-25 12:22:13', '2023-01-31 12:21:18', 0, 2, 1),
+(6, 'Data Analysis Of The Pages', 'Trace script will follow the actions of the users and report of that actions will be displayed.', 'project_default.png', '2023-01-27 21:00:00', '2023-01-30 21:00:00', 0, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -89,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   KEY `department_id` (`department_id`),
   KEY `project_id` (`project_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_member`
@@ -123,8 +146,7 @@ INSERT INTO `project_state` (`id`, `state`) VALUES
 (2, 'Waiting'),
 (3, 'In maintenance'),
 (4, 'Completed'),
-(5, 'Terminated'),
-(6, 'verified');
+(5, 'Terminated');
 
 -- --------------------------------------------------------
 
@@ -158,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `task` (
 INSERT INTO `task` (`id`, `department_id`, `project_id`, `user_id`, `name`, `start_date`, `end_date`, `description`, `comment`, `state_id`) VALUES
 (1, 1, 2, 1, 'Prepare hardware', '2023-01-11 20:41:11', '2023-01-26 06:56:23', 'Hardware components of the network should be prepared!', 'Need extra time. -Ahmet', 2),
 (2, 1, 2, 1, 'Agreement with company', '2023-01-11 20:42:32', '2023-01-19 20:41:29', 'Metting time should be revised.', 'Hurry up!', 1),
-(3, 1, 2, 4, 'Test ', '2023-01-23 13:10:00', NULL, 'test of the program', 'no error', 1);
+(3, 1, 2, 4, 'Test ', '2023-01-23 13:10:00', NULL, 'test of the program', 'no error', 3);
 
 -- --------------------------------------------------------
 
@@ -196,9 +218,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `surname` varchar(25) COLLATE utf8mb4_turkish_ci NOT NULL,
   `username` varchar(25) COLLATE utf8mb4_turkish_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
-  `mail` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   `photo` varchar(100) COLLATE utf8mb4_turkish_ci DEFAULT 'user_0.png',
-  `phone` varchar(15) COLLATE utf8mb4_turkish_ci NOT NULL,
   `department_id` int(11) NOT NULL,
   `user_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -210,11 +230,11 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `mail`, `photo`, `phone`, `department_id`, `user_type_id`) VALUES
-(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'ahmet@hotmail.com', 'ahmet.jpg', '05052082324', 1, 1),
-(2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'tuna@hotmail.com', 'userPhoto_0.png', '05052082324', 1, 2),
-(3, 'boss', 'boss', 'boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'boss@hotmail.com', 'userPhoto_1.png', '05052082324', 1, 1),
-(4, 'Tarık', 'Tarık', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'tarık@hotmail.com', 'userPhoto_2.png', '05052082324', 1, 2);
+INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `photo`, `department_id`, `user_type_id`) VALUES
+(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'ahmet.jpg', 1, 1),
+(2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_0.png', 1, 2),
+(3, 'boss', 'boss', 'boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_1.png', 1, 1),
+(4, 'Tarık', 'Tarık', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_2.png', 1, 2);
 
 -- --------------------------------------------------------
 

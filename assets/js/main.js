@@ -18,9 +18,7 @@ let isMessageShow = false;
 $(function () {
   assignCompanyInHeader();
 
-  // constructPageBody();
-
-  performChangePage();
+  performChangePage(0);
 
   // prepare_DisplayCompanyInformation();
 });
@@ -57,6 +55,7 @@ function changeBodyContent(pageNumber) {
 
     // change content to projects
     if (pageName == "Projects") {
+      constructPageBody();
       //get required data
       getProjects();
       getProjectMembers();
@@ -155,20 +154,6 @@ function sortByName(a, b) {
     return 1;
   }
   return 0;
-}
-
-function displayProjectInformation(project_id) {
-  // get specific project
-  $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
-    data
-  ) {
-    let project_and_user = data;
-    // console.log(project_and_user);
-
-    // console.log(project_and_user[0].name);
-
-    changeHeaderLocation(0, project_and_user[0].name, project_and_user[0].id);
-  });
 }
 
 function displayProjectsIn_SectionMain() {
@@ -1433,4 +1418,84 @@ function editCompanyFileUpload(event) {
       "#companyInformationsContainer .bottom .container .middle .imageContainer"
     ).css("background-image", `none`);
   }
+}
+
+function displayProjectInformation(project_id) {
+  // get specific project
+  $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
+    data
+  ) {
+    let project_and_user = data;
+    console.log(project_and_user);
+
+    let output = "";
+
+    output += `
+    <section id="ProjectDetails">
+      <div class="left">
+        <div class="projectPhotoContainer"></div>
+
+        <div class="stateContainer">
+          <div class="header">State</div>
+          <div class="state">
+            <div class="icon">-icon-</div>
+            <div class="value">-Waiting-</div>
+          </div>
+        </div>
+
+        <div class="memberContainer">
+          <div class="header">Members</div>
+          <div class="iconContainer">
+            <div class="icon">-A-</div>
+            <div class="icon">-B-</div>
+          </div>
+        </div>
+
+        <div class="progressContainer">
+          <div class="header">Progress</div>
+          <div class="progressBarContainer">
+            <div class="bar">
+              <div class="progress"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="middle">
+        <div class="projectNameContainer">-Project Name-</div>
+
+        <div class="descriptionContainer">
+          <div class="header">Description</div>
+          <div class="description">-Description-</div>
+        </div>
+
+        <div class="datesContainer">
+          <div class="dateContainer">
+            <div class="header">Due</div>
+            <div class="date">-1 month 19 days-</div>
+          </div>
+          <div class="dateContainer">
+            <div class="header">Start Date</div>
+            <div class="date">-18 jun 2023-</div>
+          </div>
+          <div class="dateContainer">
+            <div class="header">End Date</div>
+            <div class="date">-20 jun 2023-</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="iconContainer">
+          <div class="icon">-Close-</div>
+          <div class="icon">-Edit-</div>
+        </div>
+      </div>
+    </section>
+    `;
+
+    $("section.pageBody").html(output);
+
+    changeHeaderLocation(0, project_and_user[0].name, project_and_user[0].id);
+  });
 }
