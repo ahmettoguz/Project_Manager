@@ -19,7 +19,7 @@ $(function () {
   assignCompanyInHeader();
 
   performChangePage();
-  // prepare_DisplayCompanyInformation();
+  prepareDisplayUserInformationPage();
 });
 
 function changeBodyPage(pageNumber) {
@@ -432,11 +432,6 @@ function constructPageBody() {
 
   <div class="body"></div>
   `);
-}
-
-function displayUserInformationPage() {
-  changeHeaderLocation("User Informations");
-  $("section.pageBody").html(`asdds`);
 }
 
 function addProject() {
@@ -1016,7 +1011,7 @@ function getProjectMembers() {
 }
 
 function getUsers() {
-  removeFromArray(loadedTables, "getUsers");
+  removeFromArray(loadedTables, "user");
 
   $.get(url, { opt: "getUsers" }).then(function (data) {
     // users = data;
@@ -1614,4 +1609,57 @@ function closeModal() {
 
 function clickOnModal(event) {
   event.stopPropagation();
+}
+
+function prepareDisplayUserInformationPage() {
+  getDepartments();
+  getUsers();
+
+  let interval = setInterval(() => {
+    // console.log(loadedTables);
+    if (
+      loadedTables.includes("project") &&
+      loadedTables.includes("project_state") &&
+      loadedTables.includes("project_member") &&
+      loadedTables.includes("user") &&
+      loadedTables.includes("task") &&
+      loadedTables.includes("department")
+    ) {
+      clearInterval(interval);
+
+      // create required parts
+      displayUserInformationPage();
+    }
+  }, 100);
+}
+
+function displayUserInformationPage() {
+  //  değiştir sil dinamik statik
+  let userId = 1;
+
+  let desc = `${users[userId].name} works as an ${users[userId].type} in ${users[userId].department} Department.`;
+  console.log(users[1]);
+  changeHeaderLocation("User Informations");
+  $("section.pageBody").html(`
+   <div id="userInfoPage">
+      <div class="user">
+        <div class="left">
+          <div class="photoContainer" style="background-image: url(../images/users/${users[userId].photo})"></div>
+        </div>
+        <div class="right">
+          <div class="top">
+            <div class="name">${users[userId].name} ${users[userId].surname}</div>
+            <div class="edit"></div>
+          </div>
+          <div class="bottom">
+            <div class="description">${desc}</br></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="projects">
+      -projects-
+      </div>
+    </div>
+  `);
 }

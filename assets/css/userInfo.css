@@ -1,0 +1,87 @@
+#userInfoPage {
+  width: 80%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+}
+
+#userInfoPage .user {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* border: 1px solid black; */
+  height: 40%;
+  width: 100%;
+}
+#userInfoPage .user .left {
+  height: 100%;
+  width: 30%;
+  /* border: 1px solid black; */
+}
+#userInfoPage .user .left .photoContainer {
+  height: 100%;
+  width: 100%;
+  /* border: 3px solid black; */
+  border-radius: 10px;
+
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  box-shadow: 0 0 10px rgb(125, 122, 122), 0 0 5px 1px inset silver;
+}
+#userInfoPage .user .right {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 65%;
+  /* border: 1px solid black; */
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(125, 122, 122), 0 0 5px 1px inset silver;
+}
+#userInfoPage .user .right .top {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 28%;
+  /* border: 1px solid black; */
+}
+#userInfoPage .user .right .top .name {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 85%;
+  box-shadow: 0 35px 5px -35px black;
+  /* border: 1px solid black; */
+}
+#userInfoPage .user .right .top .edit {
+  background-image: url(../images/main/user/edit.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 11%;
+}
+#userInfoPage .user .right .bottom {
+  height: 60%;
+  width: 97%;
+  display: flex;
+  justify-content: center;
+}
+#userInfoPage .user .right .bottom .description {
+  padding: 20px;
+  height: 100%;
+  width: 100%;
+  /* border: 1px solid black; */
+}
+#userInfoPage .projects {
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgb(125, 122, 122), 0 0 5px 1px inset silver;
+  width: 97%;
+  height: 55%;
+}

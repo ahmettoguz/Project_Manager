@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="../css/companyInformation.css">
     <link rel="stylesheet" href="../css/projectDetails.css">
     <link rel="stylesheet" href="../css/modal.css">
+    <link rel="stylesheet" href="../css/userInfo.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -266,10 +267,10 @@
     }
 
     .liIcon {
-        height: auto;
+        height: 30px;
         width: 30px;
-        padding-right: 20px;
-        padding-left: 10px;
+        margin-right: 20px;
+        margin-left: 10px;
         transition: all 600ms ease-in-out;
     }
 
@@ -1325,7 +1326,7 @@
                 <div class="dropdownContainer">
                     <div class="dropdownHeader"><img src="../images/main/male.png"> Ahmet Oğuz Ergin </div>
                     <ul class="dropdownContent">
-                        <li onclick="displayUserInformationPage()"><img class="liIcon" src="../images/main/updateUser.png"> <span>User Information</span> </li>
+                        <li onclick="prepareDisplayUserInformationPage()"><img class="liIcon" src="../images/main/updateUser.png"> <span>User Information</span> </li>
                         <li><img class="liIcon" src="../images/main/logOut.png"> <span>Logout</span> </li>
                     </ul>
                 </div>
