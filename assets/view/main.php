@@ -630,7 +630,7 @@
     }
 
     section.pageBody .body section.main ul li.projectBoxContainer .left .remainTaskContainer .taskIcon {
-        background-image: url("../images/project/taskBoard_0.png");
+        background-image: url("../images/main/project/task.png");
         background-position: center;
         background-repeat: no-repeat;
         background-size: contain;
@@ -826,7 +826,9 @@
         /* border: 1px solid black; */
     }
 
-    .addProjectContainer .down .left {}
+    .addProjectContainer .down .left {
+        opacity: 1;
+    }
 
     .addProjectContainer .down .left .top {
         height: 14%;
@@ -936,7 +938,9 @@
         width: 50%;
     }
 
-    .addProjectContainer .down .left .bottom .left span {}
+    .addProjectContainer .down .left .bottom .left span {
+        opacity: 1;
+    }
 
     .addProjectContainer .down .left .bottom .right {
         height: 100%;
@@ -1091,7 +1095,9 @@
         padding: 0 4px;
     }
 
-    .addProjectContainer .down>.right>.middle .memberSelectHeader>.memberSelectContent {}
+    .addProjectContainer .down>.right>.middle .memberSelectHeader>.memberSelectContent {
+        opacity: 1;
+    }
 
     .addProjectContainer .down>.right>.middle .memberSelectHeader .selectedMemberContainer:hover~.memberSelectContent,
     .addProjectContainer .down>.right>.middle .memberSelectHeader .memberSelectContent:hover {

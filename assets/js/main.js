@@ -18,8 +18,8 @@ let isMessageShow = false;
 $(function () {
   assignCompanyInHeader();
 
-  performChangePage(0);
-  displayProjectInformation(7, "Data Analysis Of The Pages");
+  performChangePage();
+  // displayProjectInformation(7, "Data Analysis Of The Pages");
 
   // prepare_DisplayCompanyInformation();
 });
@@ -1429,9 +1429,26 @@ function displayProjectInformation(project_id) {
   $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
     data
   ) {
-    let project_and_user = data;
     let project = data[0];
     let members = data[1];
+
+    // calculate tasks
+    let totalTask = 0;
+    let completedTask = 0;
+
+    for (let i = 0; i < tasks.length; i++) {
+      if (
+        tasks[i].department_id == departmentId &&
+        tasks[i].project_id == project.id
+      ) {
+        totalTask++;
+        if (tasks[i].state == "Completed") {
+          completedTask++;
+        }
+      }
+    }
+    // console.log("tot", totalTask);
+    // console.log("complete", completedTask);
 
     let output = "";
 
@@ -1446,16 +1463,24 @@ function displayProjectInformation(project_id) {
           <div class="header">Members</div>
           <div class="iconContainer">`;
 
+    // add members
+    let totalMember = 0;
     for (let i = 0; i < members.length; i++) {
       if (
         members[i].department_id == departmentId &&
         members[i].project_id == project.id
-      )
+      ) {
         output += `
                   <div class="icon" style="background-image:url(../images/users/${
                     users[members[i].user_id].photo
                   })"></div>`;
+        totalMember++;
+      }
     }
+
+    if (totalMember == 0)
+      output += `
+                   <div class="noMember">No Member</div>`;
 
     output += `
           </div>
@@ -1472,9 +1497,9 @@ function displayProjectInformation(project_id) {
         <div class="progressContainer">
           <div class="header">Progress</div>
           <div class="progressBarContainer">
-          <div class="value">18%</div>
+          <div class="value">${project.progress}%</div>
             <div class="bar">
-              <div class="progress"></div>
+              <div class="progress" style="width:${project.progress}%"></div>
             </div>
           </div>
         </div>
@@ -1483,8 +1508,16 @@ function displayProjectInformation(project_id) {
           <div class="header">Tasks</div>
           <div class="container">
             <div class="icon"></div>
-            <div class="value">
-              2 completed, 5 total.
+            <div class="value">`;
+    if (totalTask != 0)
+      output += `
+              ${completedTask} completed, ${totalTask} total.
+              `;
+    else
+      output += `
+              No task.
+              `;
+    output += `
             </div>
           </div>
         </div>
@@ -1506,6 +1539,18 @@ function displayProjectInformation(project_id) {
     let endDate = new Date(project.end_date);
     let due = getDateDifferenceMeaningfull(project.due);
 
+    if (project.end_date != null)
+      endDate =
+        endDate.getDate() +
+        "/" +
+        endDate.getMonth() +
+        1 +
+        "/" +
+        endDate.getFullYear();
+    else endDate = "-";
+
+    if (due != "-") due = due.substring(4);
+
     startDate =
       startDate.getDate() +
       "/" +
@@ -1513,14 +1558,6 @@ function displayProjectInformation(project_id) {
       1 +
       "/" +
       startDate.getFullYear();
-
-    endDate =
-      endDate.getDate() +
-      "/" +
-      endDate.getMonth() +
-      1 +
-      "/" +
-      endDate.getFullYear();
 
     output += `
             <div class="date">${due}</div>
@@ -1545,6 +1582,6 @@ function displayProjectInformation(project_id) {
 
     $("section.pageBody").html(output);
 
-    changeHeaderLocation(0, project_and_user[0].name, project_and_user[0].id);
+    changeHeaderLocation(0, data[0].name, data[0].id);
   });
 }

@@ -57,7 +57,7 @@
   justify-content: space-around;
   flex-direction: column;
 }
-#projectDetails .left .memberContainer .header {
+#projectDetails .left .memberContainer .header {  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -71,13 +71,20 @@
   display: flex;
   flex-wrap: wrap;
 }
+#projectDetails .left .memberContainer .iconContainer .noMember {
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 #projectDetails .left .memberContainer .iconContainer .icon {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: 1%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 10px;
   width: 18%;
 }
 
@@ -213,51 +220,179 @@
 /* ************************************************************************************ */
 #projectDetails .middle {
   width: 60%;
-  border: 1px solid black;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: column;
+  /* border: 1px solid black; */
 }
 #projectDetails .middle div {
   width: 100%;
 }
 
 #projectDetails .middle .projectNameContainer {
+  font-family: "Inter", sans-serif;
+  font-size: 25px;
   height: 15%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
+  font-weight: 600;
+
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    0px 0px 5px inset silver;
 }
 #projectDetails .middle .descriptionContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
   height: 40%;
-  border: 1px solid black;
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    0px 0px 5px inset silver;
 }
 #projectDetails .middle .descriptionContainer .header {
-  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  height: 15%;
+  font-size: 23px;
+  padding-left: 20px;
+  /* border: 1px solid black; */
+  box-shadow: 0px 12px 5px -14px black;
 }
 #projectDetails .middle .descriptionContainer .description {
-  border: 1px solid black;
+  font-size: 18px;
+  padding: 10px 20px;
+  height: 80%;
+  /* border: 1px solid black; */
 }
 #projectDetails .middle .datesContainer {
   height: 25%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 3px solid black;
+
+  overflow: hidden;
+  border-radius: 10px;
+  border: 2px solid lightgray;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    0px 0px 5px inset silver;
 }
 #projectDetails .middle .datesContainer .dateContainer {
-  border: 1px solid black;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 #projectDetails .middle .datesContainer .dateContainer .header {
-  border: 1px solid black;
+  font-size: 23px;
+  height: 30%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0px 12px 5px -14px black;
+}
+#projectDetails .middle .datesContainer .dateContainer .date {
+  font-size: 20px;
+  padding-top: 10px;
+  height: 50%;
+  /* border: 1px solid black; */
 }
 
 #projectDetails .middle .buttonContainer {
   height: 15%;
-  border: 1px solid black;
+  overflow: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid lightgray;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
+    0px 0px 5px inset silver;
 }
+
 #projectDetails .middle .buttonContainer .button {
-  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 60px;
+  width: 150px;
+  max-width: 200px;
+  min-width: 150px;
+  /* width: 50%; */
+  border-radius: 10px;
+
+  position: relative;
+  top: 0;
+  transition: 1s ease;
+  box-shadow: 0px 0px 15px silver;
+  border: 1px solid darkgray;
+}
+
+#projectDetails .middle .buttonContainer .button:active {
+  width: 50%;
+  height: 50%;
+  transform: rotateX(10deg);
+}
+
+#projectDetails .middle .buttonContainer .button:hover {
+  box-shadow: 0px 0px 15px lightseagreen, 0px 0px 5px darkblue;
+  top: -2px;
+}
+#projectDetails .middle .buttonContainer .button::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  border-radius: 10px;
+  width: 90%;
+  height: 90%;
+  transition: 200ms ease;
+}
+
+#projectDetails .middle .buttonContainer .button:hover::after {
+  animation-name: shine;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes shine {
+  0% {
+    border: 10px solid white;
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0px 0px 5px lightseagreen;
+    border: 10px solid white;
+    width: 120%;
+    height: 120%;
+    opacity: 0;
+  }
+}
+
+#projectDetails .middle .buttonContainer .button:active::after {
+  animation-name: shineActive;
+  animation-duration: 500ms;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes shineActive {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    box-shadow: 0px 0px 30px 5px darkblue;
+    width: 120%;
+    height: 120%;
+    opacity: 0;
+  }
 }
