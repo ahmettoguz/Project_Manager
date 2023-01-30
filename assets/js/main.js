@@ -18,11 +18,7 @@ let isMessageShow = false;
 $(function () {
   assignCompanyInHeader();
 
-  performChangePage(0);
-  setTimeout(() => {
-    displayProjectInformation(7, "Data Analysis Of The Pages");
-  }, 500);
-
+  performChangePage();
   // prepare_DisplayCompanyInformation();
 });
 
@@ -1572,7 +1568,7 @@ function displayProjectInformation(project_id) {
         
         <div class="buttonContainer">
         <div class="button" onclick="displayUpdateProject(${project.id})">Update Project</div>
-        <div class="button delete" onclick="displayDeleteProject(${project.id})">Delete Project</div>
+        <div class="button delete" onclick="displayDeleteProject(${project.id}, '${project.name}')">Delete Project</div>
         </div>
 
       </div>
@@ -1589,10 +1585,33 @@ function displayUpdateProject(id) {
   // cannot pass project itself so that I pass project id
   // console.log(id);
 }
-function displayDeleteProject(id) {
+
+function displayDeleteProject(id, name) {
   // cannot pass project itself so that I pass project id
   // console.log(id);
-  // $("#modalContainer").addClass("showModal");
+
+  openModal("! Warning !", `Project "${name}" will be deleted!`);
+}
+
+function openModal(header, content) {
+  // change header and content
+  $("#modalContainer .modal .header .text").html(header);
+  $("#modalContainer .modal .content").html(content);
 
   $("#modalContainer").css("display", "flex");
-  $("#modalContainer").css("opacity", "1");}
+  setTimeout(() => {
+    $("#modalContainer").css("opacity", "1");
+  }, 1);
+}
+
+function closeModal() {
+  console.log("Modal closed!");
+  $("#modalContainer").css("opacity", "0");
+  setTimeout(() => {
+    $("#modalContainer").css("display", "none");
+  }, 500);
+}
+
+function clickOnModal(event) {
+  event.stopPropagation();
+}

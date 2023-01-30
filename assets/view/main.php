@@ -1336,9 +1336,17 @@
         </section>
     </div>
 
-    <div id="modalContainer">
-        <div class="modal">
-            This is modal
+    <div id="modalContainer" onclick="closeModal()">
+        <div class="modal" onclick="clickOnModal(event)">
+            <div class="header">
+                <div class="text">-text-</div>
+                <div class="close" onclick="closeModal()"></div>
+            </div>
+            <div class="content">-content-</div>
+            <div class="buttonContainer">
+                <div class="accept">Accept</div>
+                <div class="reject" onclick="closeModal()">Reject</div>
+            </div>
         </div>
     </div>
 
