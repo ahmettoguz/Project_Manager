@@ -1433,7 +1433,6 @@ function displayProjectInformation(project_id) {
     let project = data[0];
     let members = data[1];
 
-    console.log(project);
     let output = "";
 
     output += `
@@ -1448,7 +1447,6 @@ function displayProjectInformation(project_id) {
           <div class="iconContainer">`;
 
     for (let i = 0; i < members.length; i++) {
-      console.log(users);
       if (
         members[i].department_id == departmentId &&
         members[i].project_id == project.id
@@ -1494,37 +1492,56 @@ function displayProjectInformation(project_id) {
       </div>
 
       <div class="middle">
-        <div class="projectNameContainer">-Project Name-</div>
+        <div class="projectNameContainer">${project.name}</div>
 
         <div class="descriptionContainer">
           <div class="header">Description</div>
-          <div class="description">-Description-</div>
+          <div class="description">${project.description}</div>
         </div>
 
         <div class="datesContainer">
           <div class="dateContainer">
-            <div class="header">Due</div>
-            <div class="date">-1 month 19 days-</div>
+            <div class="header">Due</div>`;
+    let startDate = new Date(project.start_date);
+    let endDate = new Date(project.end_date);
+    let due = getDateDifferenceMeaningfull(project.due);
+
+    startDate =
+      startDate.getDate() +
+      "/" +
+      startDate.getMonth() +
+      1 +
+      "/" +
+      startDate.getFullYear();
+
+    endDate =
+      endDate.getDate() +
+      "/" +
+      endDate.getMonth() +
+      1 +
+      "/" +
+      endDate.getFullYear();
+
+    output += `
+            <div class="date">${due}</div>
           </div>
           <div class="dateContainer">
             <div class="header">Start Date</div>
-            <div class="date">-18 jun 2023-</div>
+            <div class="date">${startDate}</div>
           </div>
           <div class="dateContainer">
             <div class="header">End Date</div>
-            <div class="date">-20 jun 2023-</div>
+            <div class="date">${endDate}</div>
           </div>
         </div>
-      </div>
-
-      <div class="right">
-        <div class="iconContainer">
-          <div class="icon">-Close-</div>
-          <div class="icon">-Edit-</div>
+        
+        <div class="buttonContainer">
+        <div class="button">Update Project</div>
         </div>
+
       </div>
-    </section>
-    `;
+      </section>
+      `;
 
     $("section.pageBody").html(output);
 
