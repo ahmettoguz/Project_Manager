@@ -18,8 +18,10 @@ let isMessageShow = false;
 $(function () {
   assignCompanyInHeader();
 
-  performChangePage();
-  // displayProjectInformation(7, "Data Analysis Of The Pages");
+  performChangePage(0);
+  setTimeout(() => {
+    displayProjectInformation(7, "Data Analysis Of The Pages");
+  }, 500);
 
   // prepare_DisplayCompanyInformation();
 });
@@ -749,10 +751,6 @@ function bindForSubmission() {
 function changeLanguage() {
   alertt("helloooo", "green");
 }
-
-// function displayLayout() {
-//   $(".layoutContainer").removeClass("displayNone");
-// }
 
 function clickMessage() {
   if (isMessageShow) {
@@ -1573,7 +1571,8 @@ function displayProjectInformation(project_id) {
         </div>
         
         <div class="buttonContainer">
-        <div class="button">Update Project</div>
+        <div class="button" onclick="displayUpdateProject(${project.id})">Update Project</div>
+        <div class="button delete" onclick="displayDeleteProject(${project.id})">Delete Project</div>
         </div>
 
       </div>
@@ -1585,3 +1584,15 @@ function displayProjectInformation(project_id) {
     changeHeaderLocation(0, data[0].name, data[0].id);
   });
 }
+
+function displayUpdateProject(id) {
+  // cannot pass project itself so that I pass project id
+  // console.log(id);
+}
+function displayDeleteProject(id) {
+  // cannot pass project itself so that I pass project id
+  // console.log(id);
+  // $("#modalContainer").addClass("showModal");
+
+  $("#modalContainer").css("display", "flex");
+  $("#modalContainer").css("opacity", "1");}

@@ -57,7 +57,7 @@
   justify-content: space-around;
   flex-direction: column;
 }
-#projectDetails .left .memberContainer .header {  
+#projectDetails .left .memberContainer .header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -167,7 +167,7 @@
 }
 #projectDetails .left .progressContainer .progressBarContainer .bar .progress {
   width: 10px;
-  background-color: lightseagreen;
+  background-color: rgb(55, 228, 219);
   height: 100%;
 }
 
@@ -311,7 +311,7 @@
   overflow: hidden;
   border-radius: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   border: 2px solid lightgray;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23),
@@ -319,6 +319,7 @@
 }
 
 #projectDetails .middle .buttonContainer .button {
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -347,6 +348,12 @@
   box-shadow: 0px 0px 15px lightseagreen, 0px 0px 5px darkblue;
   top: -2px;
 }
+
+#projectDetails .middle .buttonContainer .button:nth-of-type(2):hover {
+  box-shadow: 0px 0px 15px pink, 0px 0px 5px red;
+  top: -2px;
+}
+
 #projectDetails .middle .buttonContainer .button::after {
   content: "";
   display: inline-block;

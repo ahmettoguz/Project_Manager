@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="../css/companyInformation.css">
     <link rel="stylesheet" href="../css/projectDetails.css">
+    <link rel="stylesheet" href="../css/modal.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,34 +53,6 @@
         height: 100%;
         padding: 0;
         margin: 0;
-    }
-
-    .layoutContainer {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgb(0, 0, 0, 0.3);
-    }
-
-    .layout {
-        width: 40%;
-        height: 40%;
-        background-color: white;
-        border: 4px outset silver;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: black 0px 13px 27px -5px, black 0px 8px 16px -8px;
-    }
-
-    .displayNone {
-        display: none !important;
     }
 
     #main {
@@ -1361,14 +1334,13 @@
 
         <section class="pageBody">
         </section>
-
     </div>
 
-    <!-- <div class="layoutContainer displayNone">
-        <div class="layout">
-            asdfasdfasdfasdf
+    <div id="modalContainer">
+        <div class="modal">
+            This is modal
         </div>
-    </div> -->
+    </div>
 
     <div onclick="clickMessage()" id="pageMessage">dummy</div>
 </body>
