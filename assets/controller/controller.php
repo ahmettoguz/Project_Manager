@@ -39,4 +39,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(getCompany());
     elseif ($_GET["opt"] == "logOut")
         echo json_encode(logOut());
+    elseif ($_GET["opt"] == "getSession")
+        echo json_encode(getSession());
 }

@@ -14,15 +14,46 @@ let company = null;
 let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
 let isMessageShow = false;
+let session = null;
 
 $(function () {
-  assignCompanyInHeader();
+  // get session to display main pages
+  getSession();
+  let interval = setInterval(() => {
+    if (loadedTables.includes("session")) {
+      clearInterval(interval);
 
-  performChangePage();
-  prepareDisplayUserInformationPage();
+      // main function
+      assignCompanyInHeader();
+
+      performChangePage();
+    }
+  }, 10);
+  // prepareDisplayUserInformationPage();
 
   // YAPILACAKLAR
 
+  //  * yapılan sayfalarda session işlenmedi session'ı işle
+
+  // * userlerı gösterme sayfası eklenicek
+
+  // * boss user ekleyebilecek ama diğerleri ekleyemeyecek
+
+  // * task editleme sayfası eklenicek burada task silinebilecek
+
+  // * task sayfası eklenicek
+
+  // * task ekleme sayfası eklenicek
+
+  // * projelerde tasklara tıklanabilir olmalı
+
+  // * language icon will be removed
+
+  // * update project sayfası
+
+  // * delete project php
+
+  // * main sayfanın yüklenmelerini ayarlayabilirsen, özellikle company background'u
   // YAPILACAKLAR
 });
 
@@ -160,8 +191,7 @@ function sortByName(a, b) {
 }
 
 function displayProjectsIn_SectionMain() {
-  // değiştir sil dinamik yap statik
-  departmentId = 1;
+  let departmentId = session.department_id;
 
   // sort projects, if all,  sort by name   else sort by due
   if (leftProjectTab == 99) {
@@ -862,8 +892,8 @@ function displayDashboardContent() {
 }
 
 function displayDashboardContentReady() {
-  let userId = 1; //değiştir sil dinak olmalı.
-  let departmentId = 1; //değiştir sil dinamik olmalı.
+  let userId = session.id;
+  let departmentId = session.department_id;
 
   let userProjectCount = 0;
   let totalProjectCount = 0;
@@ -979,6 +1009,15 @@ function getCompany() {
     company = data;
   }).then(function () {
     loadedTables.push("company");
+  });
+}
+
+function getSession() {
+  removeFromArray(loadedTables, "session");
+
+  $.get(url, { opt: "getSession" }).then(function (data) {
+    session = data;
+    loadedTables.push("session");
   });
 }
 
@@ -1414,8 +1453,7 @@ function editCompanyFileUpload(event) {
 }
 
 function displayProjectInformation(project_id) {
-  // sil dinamik yap değiş
-  let departmentId = 1;
+  let departmentId = session.department_id;
 
   // get specific project
   $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
@@ -1636,9 +1674,8 @@ function prepareDisplayUserInformationPage() {
 }
 
 function displayUserInformationPage() {
-  //  değiştir sil dinamik statik
-  let userId = 1;
-  let departmentId = 1;
+  let userId = session.id;
+  let departmentId = session.department_id;
 
   console.log("page content changed to User Informations");
 
@@ -1743,6 +1780,8 @@ function openUserEditPage() {
 
 function logOut() {
   $.get(url, { opt: "logOut" }).then(function () {
-    window.location.replace("http://localhost/AhmetOguzErgin/Web/project_manager/");
+    window.location.replace(
+      "http://localhost/AhmetOguzErgin/Web/project_manager/"
+    );
   });
 }
