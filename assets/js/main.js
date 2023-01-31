@@ -296,10 +296,9 @@ function getDateDifferenceMeaningfull(difference) {
   if (difference != null) {
     let day = parseInt(difference.split(":")[0] / 24);
 
-    if (day < 0) {
+    if (difference.split(":")[0] < 0) {
       output = `due is expired`;
     } else if (day == 0) {
-      // output = `due is today`;
       output = `due ${difference.split(":")[0] % 24} hour`;
     } else if (day < 30) {
       output = `due ${day} day ${difference.split(":")[0] % 24} hour`;
@@ -1532,8 +1531,7 @@ function displayProjectInformation(project_id) {
       endDate =
         endDate.getDate() +
         "/" +
-        endDate.getMonth() +
-        1 +
+        (endDate.getMonth() + 1) +
         "/" +
         endDate.getFullYear();
     else endDate = "-";
@@ -1735,6 +1733,6 @@ function displayUserInformationPage() {
   `);
 }
 
-function openUserEditPage(){
+function openUserEditPage() {
   $("section.pageBody").html("");
 }
