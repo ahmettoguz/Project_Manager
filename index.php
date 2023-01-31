@@ -30,6 +30,17 @@
     <title>Login</title>
 </head>
 
+<!-- session operation -->
+<?php
+require_once __DIR__ . "/assets/controller/functions.php";
+
+if (hasValidSession()) {
+    header("Location:http://localhost/AhmetOguzErgin/Web/project_manager/assets/view/main.php");
+    exit;
+}
+?>
+<!-- session operation -->
+
 <body>
     <div id="main">
         <div id="bigIconContainer">

@@ -34,6 +34,14 @@ function performLoginOperation($username, $password, $remember)
     }
 }
 
+function hasValidSession()
+{
+    if (isset($_SESSION["user"])) {
+        return true;
+    }
+    return false;
+}
+
 function getCompany()
 {
     global $db;
