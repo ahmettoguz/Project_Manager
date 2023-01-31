@@ -1716,7 +1716,7 @@ function displayUserInformationPage() {
         <div class="right">
           <div class="top">
             <div class="name">${users[userId].name} ${users[userId].surname}</div>
-            <div class="edit"></div>
+            <div class="edit" onclick="openUserEditPage()"></div>
           </div>
           <div class="bottom">
             <div class="description">${desc}</br></div>
@@ -1733,4 +1733,8 @@ function displayUserInformationPage() {
       
     </div>
   `);
+}
+
+function openUserEditPage(){
+  $("section.pageBody").html("");
 }

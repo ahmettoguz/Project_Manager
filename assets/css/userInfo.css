@@ -69,7 +69,14 @@
   background-size: contain;
   background-repeat: no-repeat;
   width: 11%;
+  transition: 500ms ease;
 }
+
+#userInfoPage .user .right .top .edit:hover {
+  filter: drop-shadow(2px 2px 2px darkgrey);
+  transform: scale(1.1);
+}
+
 #userInfoPage .user .right .bottom {
   height: 60%;
   width: 97%;
@@ -132,8 +139,15 @@
   height: 110px;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0px 5px  black;
+  box-shadow: 0 0px 5px rgb(62, 58, 58);
+  transition: 500ms ease;
 }
+
+#userInfoPage .projects .projectContainer:has(.top .info:hover) {
+  box-shadow: 0 0px 5px black;
+  transform: scale(1.01);
+}
+
 #userInfoPage .projects .projectContainer .top {
   height: 45%;
   width: 100%;
@@ -144,6 +158,7 @@
   /* border: 1px solid black; */
   box-shadow: 0 20px 5px -21px black;
 }
+
 #userInfoPage .projects .projectContainer .top .header {
   height: 100%;
   width: 90%;
@@ -156,6 +171,7 @@
   font-size: 20px;
   font-weight: 500;
 }
+
 #userInfoPage .projects .projectContainer .top .info {
   background-image: url(../images/main/user/infoo.png);
   background-size: contain;
@@ -163,6 +179,11 @@
   background-position: center;
   height: 100%;
   width: 8%;
+  transition: 500ms ease;
+}
+
+#userInfoPage .projects .projectContainer .top .info:hover {
+  transform: rotate(10deg) scale(1.1);
 }
 #userInfoPage .projects .projectContainer .bottom {
   height: 55%;
@@ -209,8 +230,7 @@
 
   animation-name: fillProgress;
   animation-duration: 5s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-iteration-count: 1;
   animation-timing-function: ease;
 }
 
