@@ -1638,6 +1638,8 @@ function displayUserInformationPage() {
   let userId = 1;
   let departmentId = 1;
 
+  console.log("page content changed to User Informations");
+
   // count project and task count of the user
   let userProjectCount = 0;
   let userTaskCount = 0;
@@ -1670,6 +1672,40 @@ function displayUserInformationPage() {
     if (userTaskCount != 0) desc += `Participated in ${userTaskCount} tasks.`;
   }
 
+  // projects
+  let projectOutput = "";
+
+  for (let i = 0; i < projectMembers.length; i++) {
+    if (
+      projectMembers[i].department_id == departmentId &&
+      projectMembers[i].user_id == userId
+    ) {
+      for (let j = 0; j < projects.length; j++) {
+        if (projectMembers[i].project_id == projects[j].id) {
+          projectOutput += `
+                                <div class="projectContainer">
+
+                                  <div class="top">
+                                    <div class="header">${projects[j].name}</div>
+                                    <div class="info" onclick="displayProjectInformation(${projects[j].id}, '${projects[j].name}')" ></div>
+                                  </div>
+
+                                  <div class="bottom">
+                                    <div class="number">${projects[j].progress}%</div>
+                                    <div class="progressBarContainer">
+                                      <div class="bar">
+                                        <div class="progress" style="width:${projects[j].progress}%"></div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                </div>
+                            `;
+        }
+      }
+    }
+  }
+
   changeHeaderLocation("User Informations");
   $("section.pageBody").html(`
    <div id="userInfoPage">
@@ -1688,9 +1724,13 @@ function displayUserInformationPage() {
         </div>
       </div>
 
-      <div class="projects">
-      -projects-
+      <div class="project">
+        <div class="header">Projects</div>
+        <div class="projects">
+          ${projectOutput}
+        </div>
       </div>
+      
     </div>
   `);
 }
