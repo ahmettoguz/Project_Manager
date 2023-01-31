@@ -1636,9 +1636,40 @@ function prepareDisplayUserInformationPage() {
 function displayUserInformationPage() {
   //  değiştir sil dinamik statik
   let userId = 1;
+  let departmentId = 1;
 
-  let desc = `${users[userId].name} works as an ${users[userId].type} in ${users[userId].department} Department.`;
-  console.log(users[1]);
+  // count project and task count of the user
+  let userProjectCount = 0;
+  let userTaskCount = 0;
+
+  for (let i = 0; i < projectMembers.length; i++) {
+    if (
+      projectMembers[i].department_id == departmentId &&
+      projectMembers[i].user_id == userId
+    )
+      userProjectCount++;
+  }
+
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].department_id == departmentId && tasks[i].user_id == userId)
+      userTaskCount++;
+  }
+  // console.log(userProjectCount);
+  // console.log(userTaskCount);
+
+  let desc = `${users[userId].name} works as an ${users[userId].type} in ${users[userId].department} Department.</br> Area of expertise is ${users[userId].expertise}.</br>
+  `;
+
+  // project and task counts
+  if (userProjectCount != 0) {
+    desc += `Participated in total ${userProjectCount} projects`;
+
+    if (userTaskCount != 0) desc += ` and ${userTaskCount} tasks.`;
+    else desc += `.`;
+  } else {
+    if (userTaskCount != 0) desc += `Participated in ${userTaskCount} tasks.`;
+  }
+
   changeHeaderLocation("User Informations");
   $("section.pageBody").html(`
    <div id="userInfoPage">

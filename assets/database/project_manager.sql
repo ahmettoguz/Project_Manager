@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 30, 2023 at 09:10 AM
+-- Generation Time: Jan 31, 2023 at 05:16 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `company` (
 --
 
 INSERT INTO `company` (`id`, `name`, `icon`) VALUES
-(1, 'Devoloper Ahmet', 'icon_59_53.png');
+(1, 'Web Company', 'default_icon.png');
 
 -- --------------------------------------------------------
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   PRIMARY KEY (`id`),
   KEY `state_id` (`state_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project`
@@ -97,7 +97,8 @@ INSERT INTO `project` (`id`, `name`, `description`, `photo`, `start_date`, `end_
 (6, 'Data Analysis Of The Pages', 'Trace script will follow the actions of the users and report of that actions will be displayed.', 'project_default.png', '2023-01-27 21:00:00', '2023-01-30 21:00:00', 0, 1, 2),
 (7, 'Database Management', 'Database of the applications will be revised.', 'projectId_7.png', '2023-01-28 21:00:00', '2023-02-01 21:00:00', 70, 1, 1),
 (8, 'Web Design', 'Aim is to design the front-end pages of the project_manager project', 'projectId_8', '2023-01-29 21:00:00', NULL, 14, 1, 3),
-(9, 'Population Chart', 'This project aims to user js charts and display the rates of population in that charts.', 'projectId_9', '2023-01-29 21:00:00', '2023-04-28 21:00:00', 9, 1, 5);
+(9, 'Population Chart', 'This project aims to user js charts and display the rates of population in that charts.', 'projectId_9', '2023-01-29 21:00:00', '2023-04-28 21:00:00', 9, 1, 5),
+(10, 'R Data Analysis', 'Data analysis of the statistics with R language.', 'projectId_10', '2023-01-29 21:00:00', '2023-02-02 21:00:00', 18, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   KEY `department_id` (`department_id`),
   KEY `project_id` (`project_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_member`
@@ -136,7 +137,10 @@ INSERT INTO `project_member` (`id`, `department_id`, `project_id`, `user_id`) VA
 (12, 1, 9, 5),
 (13, 1, 9, 2),
 (14, 1, 9, 4),
-(15, 1, 9, 3);
+(15, 1, 9, 3),
+(16, 1, 10, 1),
+(17, 1, 10, 3),
+(18, 1, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -234,6 +238,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `surname` varchar(25) COLLATE utf8mb4_turkish_ci NOT NULL,
   `username` varchar(25) COLLATE utf8mb4_turkish_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
+  `expertise` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   `photo` varchar(100) COLLATE utf8mb4_turkish_ci DEFAULT 'user_0.png',
   `department_id` int(11) NOT NULL,
   `user_type_id` int(11) NOT NULL,
@@ -246,13 +251,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `photo`, `department_id`, `user_type_id`) VALUES
-(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'ahmet.png', 1, 1),
-(2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_0.png', 1, 2),
-(3, 'boss', 'boss', 'boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_1.png', 1, 1),
-(4, 'Tarık', 'Ergin', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_2.png', 1, 2),
-(5, 'Zeynep', 'Ergin', 'Zeyno', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_5.png', 1, 2),
-(6, 'Sena', 'Ergin', 'Sena', 'c46583f20929c7b02ca72e0af669eff63b133885', 'userPhoto_6.png', 1, 2);
+INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `expertise`, `photo`, `department_id`, `user_type_id`) VALUES
+(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Web Programming', 'ahmet.png', 1, 2),
+(2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Media', 'userPhoto_0.png', 1, 2),
+(3, 'Boss', 'Ergin', 'Boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Project Management', 'userPhoto_1.png', 1, 1),
+(4, 'Tarık', 'Ergin', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Animations', 'userPhoto_2.png', 1, 2),
+(5, 'Zeynep', 'Ergin', 'Zeyno', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Design', 'userPhoto_5.png', 1, 2),
+(6, 'Sena', 'Ergin', 'Sena', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Analysis', 'userPhoto_6.png', 1, 2);
 
 -- --------------------------------------------------------
 

@@ -125,7 +125,7 @@ function getUsers()
     global $db;
 
     try {
-        $sql = "select user.id as id, user.name, surname, username, user_type.type as type, photo, department.name as department from user
+        $sql = "select user.id as id, user.name, surname, username, user_type.type as type, photo, expertise, department.name as department from user
         inner join user_type ON user.user_type_id = user_type.id
         inner join department ON user.department_id = department.id";
         $stmt = $db->prepare($sql);

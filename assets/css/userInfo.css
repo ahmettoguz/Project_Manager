@@ -52,6 +52,7 @@
   /* border: 1px solid black; */
 }
 #userInfoPage .user .right .top .name {
+  font-weight: 500;
   font-size: 25px;
   display: flex;
   justify-content: center;
@@ -61,6 +62,7 @@
   /* border: 1px solid black; */
 }
 #userInfoPage .user .right .top .edit {
+  filter: drop-shadow(1px 1px 2px darkgrey);
   background-image: url(../images/main/user/edit.png);
   background-position: center;
   background-size: contain;
@@ -74,6 +76,8 @@
   justify-content: center;
 }
 #userInfoPage .user .right .bottom .description {
+  line-height: 150%;
+  font-size: 20px;
   padding: 20px;
   height: 100%;
   width: 100%;
