@@ -37,4 +37,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(getDepartment());
     elseif ($_GET["opt"] == "getCompany")
         echo json_encode(getCompany());
+    elseif ($_GET["opt"] == "logOut")
+        echo json_encode(logOut());
 }

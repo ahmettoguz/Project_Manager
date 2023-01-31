@@ -67,7 +67,7 @@ if (!hasValidSession()) {
                     <div class="dropdownHeader"><img src="../images/main/male.png"> Ahmet Oğuz Ergin </div>
                     <ul class="dropdownContent">
                         <li onclick="prepareDisplayUserInformationPage()"><img class="liIcon" src="../images/main/updateUser.png"> <span>User Information</span> </li>
-                        <li><img class="liIcon" src="../images/main/logOut.png"> <span>Logout</span> </li>
+                        <li onclick="logOut()"><img class="liIcon" src="../images/main/logOut.png"> <span>Logout</span> </li>
                     </ul>
                 </div>
             </div>

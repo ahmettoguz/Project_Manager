@@ -335,3 +335,16 @@ function updateCompanyInformation($companyName, $companyIcon)
 
     return "false";
 }
+
+function logOut()
+{
+    $_SESSION = [];
+
+    // delete cookie
+    setcookie(session_name(), "", 1, "/"); // delete memory cookie 
+
+    // delete session file from tmp
+    session_destroy();
+
+    // header("Location:http://localhost/AhmetOguzErgin/Web/project_manager/");
+}

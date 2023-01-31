@@ -20,6 +20,10 @@ $(function () {
 
   performChangePage();
   prepareDisplayUserInformationPage();
+
+  // YAPILACAKLAR
+
+  // YAPILACAKLAR
 });
 
 function changeBodyPage(pageNumber) {
@@ -1735,4 +1739,10 @@ function displayUserInformationPage() {
 
 function openUserEditPage() {
   $("section.pageBody").html("");
+}
+
+function logOut() {
+  $.get(url, { opt: "logOut" }).then(function () {
+    window.location.replace("http://localhost/AhmetOguzErgin/Web/project_manager/");
+  });
 }
