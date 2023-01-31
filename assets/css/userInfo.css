@@ -30,7 +30,7 @@
   border-radius: 10px;
 
   background-position: center;
-  background-size: 100%;
+  background-size: contain;
   background-repeat: no-repeat;
   box-shadow: 0 0 10px rgb(125, 122, 122), 0 0 5px 1px inset silver;
 }
