@@ -33,9 +33,7 @@ $(function () {
 
   // YAPILACAKLAR
 
-  // * owner user eklenecek. -> owner user eklendi ama project tabına geçince renk vermiyor.
-  // sorun proje ekleme sayfasına gidildiği zaman page construction çalışıyor böylelikle patlıyoruz.
-  // parent div tamamen yenileniyor ve tabı'n rengini değiştirmiyorum.
+  // * owner user eklenecek. -> owner user eklendi
   // (owner: company edit) (boss: user add, delete)
 
   // * userlerı gösterme sayfası eklenicek

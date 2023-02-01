@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 31, 2023 at 07:47 PM
+-- Generation Time: Feb 01, 2023 at 09:35 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -240,12 +240,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   `expertise` varchar(50) COLLATE utf8mb4_turkish_ci NOT NULL,
   `photo` varchar(100) COLLATE utf8mb4_turkish_ci DEFAULT 'user_0.png',
-  `department_id` int(11) NOT NULL,
+  `department_id` int(11) DEFAULT NULL,
   `user_type_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_type_id` (`user_type_id`),
   KEY `department_id` (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `user`
@@ -257,7 +257,8 @@ INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `expertise`
 (3, 'Boss', 'Ergin', 'Boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Project Management', 'userPhoto_1.png', 1, 1),
 (4, 'Tarık', 'Ergin', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Animations', 'userPhoto_2.png', 1, 2),
 (5, 'Zeynep', 'Ergin', 'Zeyno', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Design', 'userPhoto_5.png', 1, 2),
-(6, 'Sena', 'Ergin', 'Sena', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Analysis', 'userPhoto_6.png', 1, 2);
+(6, 'Sena', 'Ergin', 'Sena', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Analysis', 'userPhoto_6.png', 1, 2),
+(7, 'owner', 'owner', 'ergin', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Having Company.', 'userPhoto_3.png', NULL, 3);
 
 -- --------------------------------------------------------
 
@@ -270,7 +271,7 @@ CREATE TABLE IF NOT EXISTS `user_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(25) COLLATE utf8mb4_turkish_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `user_type`
@@ -278,7 +279,8 @@ CREATE TABLE IF NOT EXISTS `user_type` (
 
 INSERT INTO `user_type` (`id`, `type`) VALUES
 (1, 'boss'),
-(2, 'employee');
+(2, 'employee'),
+(3, 'owner');
 
 --
 -- Constraints for dumped tables
