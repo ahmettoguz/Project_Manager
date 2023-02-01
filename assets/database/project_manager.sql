@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 01, 2023 at 10:18 AM
+-- Generation Time: Feb 01, 2023 at 09:15 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -95,8 +95,8 @@ INSERT INTO `project` (`id`, `name`, `description`, `photo`, `start_date`, `end_
 (3, 'Frontend Web Game', 'Best game ever!', 'projectId_3.png', '2023-01-12 16:57:33', '2023-01-10 06:44:16', 100, 1, 4),
 (5, 'Internship Program', 'Aim is to develop internships to work later on their internsip.', 'project_default.png', '2023-01-25 12:22:13', '2023-01-31 12:21:18', 0, 2, 1),
 (6, 'Data Analysis Of The Pages', 'Trace script will follow the actions of the users and report of that actions will be displayed.', 'project_default.png', '2023-01-27 21:00:00', '2023-01-30 21:00:00', 0, 1, 2),
-(7, 'Database Management', 'Database of the applications will be revised.', 'projectId_7.png', '2023-01-28 21:00:00', '2023-02-01 21:00:00', 70, 1, 1),
-(8, 'Web Design', 'Aim is to design the front-end pages of the project_manager project', 'projectId_8', '2023-01-29 21:00:00', NULL, 14, 1, 3),
+(7, 'Database Management', 'Aim is to transfer data from servers.', 'projectId_7.png', '2023-02-01 21:00:00', '2023-03-21 21:00:00', 56, 1, 3),
+(8, 'Web Design', 'Aim is to design the front-end pages of the project_manager project.', 'projectId_8', '2023-02-10 21:00:00', '2023-03-17 21:00:00', 67, 1, 1),
 (9, 'Population Chart', 'This project aims to user js charts and display the rates of population in that charts.', 'projectId_9', '2023-01-29 21:00:00', '2023-04-28 21:00:00', 9, 1, 5),
 (10, 'R Data Analysis', 'Data analysis of the statistics with R language.', 'projectId_10', '2023-01-29 21:00:00', '2023-02-02 21:00:00', 18, 1, 3);
 
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `project_member` (
   KEY `department_id` (`department_id`),
   KEY `project_id` (`project_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_turkish_ci;
 
 --
 -- Dumping data for table `project_member`
@@ -131,7 +131,6 @@ INSERT INTO `project_member` (`id`, `department_id`, `project_id`, `user_id`) VA
 (6, 1, 7, 2),
 (7, 1, 7, 4),
 (8, 1, 7, 3),
-(9, 1, 8, 1),
 (10, 1, 9, 6),
 (11, 1, 9, 1),
 (12, 1, 9, 5),
@@ -140,7 +139,9 @@ INSERT INTO `project_member` (`id`, `department_id`, `project_id`, `user_id`) VA
 (15, 1, 9, 3),
 (16, 1, 10, 1),
 (17, 1, 10, 3),
-(18, 1, 10, 5);
+(18, 1, 10, 5),
+(22, 1, 8, 6),
+(23, 1, 8, 5);
 
 -- --------------------------------------------------------
 
@@ -252,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `expertise`, `photo`, `department_id`, `user_type_id`) VALUES
-(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Web Programming', 'ahmet.png', 1, 2),
+(1, 'Ahmet', 'Ergin', 'Ahmet', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Web Programming', 'Ahmet.png', 1, 2),
 (2, 'Tuna', 'Ergin', 'Tuna', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Media', 'userPhoto_0.png', 1, 2),
 (3, 'Boss', 'Ergin', 'Boss', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Project Management', 'userPhoto_1.png', 1, 1),
 (4, 'Tarık', 'Ergin', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Animations', 'userPhoto_2.png', 1, 2),

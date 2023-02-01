@@ -14,6 +14,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(updateCompanyInformation($_POST["companyName"], isset($_FILES["companyIcon"]["tmp_name"]) ? $_FILES["companyIcon"]["tmp_name"] : null));
         // echo json_encode(updateCompanyInformation($_POST["companyName"], $_FILES["companyIcon"]["tmp_name"]));
     }
+    if ($_POST["opt"] == "updateProject")
+        echo json_encode(updateProject($_POST["projectId"], $_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"], $_POST["hasPhoto"]));
 
 
     // *************************

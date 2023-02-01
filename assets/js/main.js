@@ -28,16 +28,23 @@ $(function () {
       assignUserInHeader();
 
       performChangePage();
-      // prepareDisplayUserInformationPage();
+      setTimeout(() => {
+        performChangePage(0);
+        setTimeout(() => {
+          displayProjectInformation(7, "Database Management");
+          setTimeout(() => {
+            displayUpdateProject(7);
+          }, 100);
+        }, 100);
+      }, 100);
     }
   }, 10);
 
   // YAPILACAKLAR
-  // (owner: company edit) (boss: user add, delete)
 
   // * userlerı gösterme sayfası eklenicek
 
-  // * boss user ekleyebilecek ama diğerleri ekleyemeyecek
+  // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
   // * task editleme sayfası eklenicek burada task silinebilecek
 
@@ -48,8 +55,6 @@ $(function () {
   // * projelerde tasklara tıklanabilir olmalı
 
   // * language icon will be removed
-
-  // * update project sayfası
 
   // * delete project php
 
@@ -478,6 +483,7 @@ function constructPageBody(pageNumber) {
 
 function addProject() {
   changeHeaderLocation("Add Project");
+  addProjectSelectedMembers = [];
 
   let out = `
       <div class="addProjectContainer">
@@ -596,9 +602,10 @@ function addProjectToDatabase() {
   let state = $(
     ".addProjectContainer .down>.right>.bottom .top .stateContainer select"
   ).val();
-  let addProjectFileUpload = $("#addProjectFileUpload")[0].files[0];
 
+  let addProjectFileUpload = $("#addProjectFileUpload")[0].files[0];
   let hasPhoto = null;
+
   if (addProjectFileUpload == undefined) {
     console.log("Project file is not entered.");
     hasPhoto = "false";
@@ -1634,11 +1641,6 @@ function displayProjectInformation(project_id) {
   });
 }
 
-function displayUpdateProject(id) {
-  // cannot pass project itself so that I pass project id
-  // console.log(id);
-}
-
 function displayDeleteProject(id, name) {
   // cannot pass project itself so that I pass project id
   // console.log(id);
@@ -1808,14 +1810,334 @@ function logOut() {
 }
 
 function assignUserInHeader() {
-  console.log(session);
   // $("#headerRight > .dropdownContainer > .dropdownHeader > img").attr(
   //   "src",
   //   `../images/users/${session.photo}`
   // );
   $("#headerRight > .dropdownContainer > .dropdownHeader").html(
-    `<img src="../images/users/${session.photo}"> ${session.name} `
+    `<img src="../images/users/${session.photo}"> ${session.name} ${session.surname}`
   );
+}
 
-  console.log(1);
+function displayUpdateProject(project_id) {
+  // cannot pass project itself so that I pass project id
+  // console.log(id);
+  addProjectSelectedMembers = [];
+
+  // get projectInformation first
+  $.get(url, { opt: "getSpecificProject", id: project_id }).then(function (
+    data
+  ) {
+    let project = data[0];
+    let members = data[1];
+
+    let out = `
+    <div class="body">
+      <div class="addProjectContainer">
+      <form action="" id="addProjectForm" method="post" enctype="multipart/form-data">
+        <div class="up">
+            <h3>Update ${project.name}</h3>
+        </div>
+        <div class="down">
+            <div class="left">
+                <div class="top">
+                    <span>Name</span>
+                    <input type="text" id="addProjectName" maxlength="50" width="10" required/>
+                </div>
+                <div class="middle">
+                    <span>Description</span>
+                    <textarea id="addProjectDescription" cols="30" rows="10" maxlength="500" required></textarea>
+                </div>
+                <div class="bottom">
+                    <div class="left">
+                        <span>Start Date</span>
+                        <input type="date" id="addProjectStartDate">
+                    </div>
+                    <div class="right">
+                        <span>End Date</span>
+                        <input type="date" id="addProjectEndDate">
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="top">
+                    <div class="photoUploadContainer">
+                      <input accept="image/gif, image/jpeg, image/png" type="file" id="addProjectFileUpload" onchange="addProjectImageUploadStyle(event)">
+                        <div class="labelContainer"><label for="addProjectFileUpload">Click / drag file </br> to upload image</label></div>
+                    </div>
+                </div>
+                <div class="middle">  
+                     <div class="memberSelectHeader">
+                        Members
+                        <div class="selectedMemberContainer">`;
+    out += `
+                      </div>
+                      <div class="memberSelectContent">`;
+
+    addProjectSelectedMembers = [];
+    for (let i = 0; i < members.length; i++) {
+      addProjectSelectedMembers.push(parseFloat(members[i].user_id));
+    }
+
+    users.forEach((user, id) => {
+      let checked = "";
+      if (addProjectSelectedMembers.includes(id)) checked = "checked";
+
+      out += `
+                            <div onclick="AddProjectSelectMembers(this,${user.id})" class="memberContainer"><input onclick="addProjectCheckBoxOperation(event,${user.id})" type="checkbox" ${checked}> <img src="../images/users/${user.photo}" alt=""> <div class="memberName">${user.name} ${user.surname}</div></div>
+                            `;
+    });
+    out += `
+                      </div>
+                  </div>
+                </div>
+                <div class="bottom">
+                  <div class="top">
+                      <div class="progressContainer">
+                        <span>Progress: <span class="progressCount">0</span>%</span>
+                        <input type="range" oninput="changeProgress()">
+                      </div>
+
+                      <div class="stateContainer">
+                        <select id="selectProjectStateInput">
+                          <option value="0" disabled selected>Select state</option>
+                        `;
+    for (let i = 0; i < projectStates.length; i++) {
+      out += `
+                          <option value="${projectStates[i].id}">${projectStates[i].state}</option>
+            `;
+    }
+    out += `
+                        </select>
+                      </div>
+                  </div>
+                  <div class="down">
+                    <div class="buttonContainer">
+                      <input onclick="updateProjectInDatabase(${project.id})" type="submit" value="Update">
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </form>
+      </div>
+    </div>
+  `;
+
+    $(".pageBody").html(out);
+    bindForSubmission();
+
+    // set start date today
+    let today = new Date();
+    let day = today.getDate();
+    if (day < 10) day = "0" + day;
+    let month = today.getMonth() + 1;
+    if (month < 10) month = "0" + month;
+    let year = today.getFullYear();
+
+    $("#addProjectStartDate").val(`${year}-${month}-${day}`);
+
+    // set progress to zero
+    $(".progressContainer input[type=range]").val("0");
+
+    // ************************************************************
+
+    // set inputs as current information.
+
+    // project name
+    $("#addProjectName").val(project.name);
+    // project description
+    $("#addProjectDescription").val(project.description);
+    //start date
+    let sDate = new Date(project.start_date);
+    sDate = new Date(
+      sDate.getFullYear() +
+        "-" +
+        (sDate.getMonth() + 1) +
+        "-" +
+        (sDate.getDate() + 1)
+    );
+    sDate = sDate.toISOString().split("T")[0];
+    $("#addProjectStartDate").val(sDate);
+
+    // end date
+    let eDate = new Date(project.end_date);
+    eDate = new Date(
+      eDate.getFullYear() +
+        "-" +
+        (eDate.getMonth() + 1) +
+        "-" +
+        (eDate.getDate() + 1)
+    );
+    eDate = eDate.toISOString().split("T")[0];
+    $("#addProjectEndDate").val(eDate);
+
+    //photo
+    // {
+    $(
+      " .addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer"
+    ).css("background-image", `url(../images/project/${project.photo})`);
+
+    $(" .addProjectContainer .down>.right>.top>.photoUploadContainer").css(
+      "border",
+      "5px dashed #1DE9B6"
+    );
+    $(
+      ".addProjectContainer .down>.right>.top>.photoUploadContainer .labelContainer label"
+    ).html("");
+    // }
+
+    //members
+    displaySelectedMembers();
+
+    //progress
+    $(".pageBody .body .addProjectContainer .progressCount").html(
+      project.progress
+    );
+    $(`input[type="range"]`).val(project.progress);
+
+    //select
+    $("#selectProjectStateInput").val(project.state_id);
+  });
+}
+
+function updateProjectInDatabase(pro_id) {
+  // update project
+
+  // check errors before adding project
+  let errors = [];
+
+  let projectName = $(".addProjectContainer .down .left .top input").val();
+  projectName = projectName.replace(/(^\w{1})|(\s+\w{1})/g, (letter) =>
+    letter.toUpperCase()
+  );
+  let description = $(
+    ".addProjectContainer .down .left .middle textarea"
+  ).val();
+  let addProjectStartDate = $("#addProjectStartDate").val();
+  let addProjectEndDate = $("#addProjectEndDate").val();
+  let progress = $(".progressContainer input[type=range]").val();
+  let state = $(
+    ".addProjectContainer .down>.right>.bottom .top .stateContainer select"
+  ).val();
+
+  // update te kaldım.
+  let addProjectFileUpload = $("#addProjectFileUpload")[0].files[0];
+  let hasPhoto = null;
+  if (addProjectFileUpload == undefined) {
+    console.log("Project file is not entered.");
+    hasPhoto = "false";
+  } else hasPhoto = "true";
+
+  // console.log("project Update Informations");
+  // console.log("projectName: ", projectName);
+  // console.log("description: ", description);
+  // console.log("addProjectStartDate: ", addProjectStartDate);
+  // console.log("addProjectEndDate: ", addProjectEndDate);
+  // console.log("addProjectFileUpload: ", addProjectFileUpload);
+  // console.log("addProjectSelectedMembers:", addProjectSelectedMembers);
+  // console.log("progress:", progress);
+  // console.log("state:", state);
+  // console.log("members", addProjectSelectedMembers);
+
+  // check inputs for errors
+  if (projectName.trim() == "") errors.push("empty name");
+  if (description.trim() == "") errors.push("empty description");
+  if (state == null) errors.push("empty state");
+
+  //create data
+  var ajaxData = new FormData();
+  ajaxData.append("opt", "uploadPhotoToDatabase");
+  ajaxData.append("addProjectFileUpload", addProjectFileUpload);
+  // ajaxData.append("addProjectSelectedMembers",addProjectSelectedMembers );
+
+  // console.log("formdata:", ajaxData);
+
+  // valid input
+  if (errors.length == 0) {
+    $.ajax({
+      url: url,
+      type: "POST",
+      cache: false,
+      data: {
+        opt: "updateProject",
+        projectId: pro_id,
+        projectName: projectName,
+        description: description,
+        addProjectStartDate: addProjectStartDate,
+        addProjectEndDate: addProjectEndDate,
+        addProjectSelectedMembers: JSON.stringify(addProjectSelectedMembers),
+        progress: progress,
+        state: state,
+        hasPhoto: hasPhoto,
+      },
+      success: function (data) {
+        if (data != "false" && hasPhoto == "true") {
+          ajaxData.append("targetFileName", "projectId_" + pro_id + ".png");
+          ajaxData.append("destinationLocationFile", "../images/project/");
+          $.ajax({
+            url: url,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: "json",
+            enctype: "multipart/form-data",
+            data: ajaxData,
+            success: function (data) {
+              // console.log(data);
+              if (data == "true") {
+                // update and display projects
+                getProjects();
+                getProjectMembers();
+                performChangePage(0);
+                alertt("Project Successfully Updated.", "green");
+                // initialize selected members if operation successfull
+                addProjectSelectedMembers = [];
+              }
+            },
+          });
+        } else if (hasPhoto == "false") {
+          // update and display projects
+          getProjects();
+          getProjectMembers();
+          performChangePage(0);
+          alertt("Project Successfully Updated.", "green");
+          // initialize selected members if operation successfull
+          addProjectSelectedMembers = [];
+        }
+      },
+    });
+  } else {
+    $("#addProjectName").removeClass("invalidInput");
+    $("#addProjectDescription").removeClass("invalidInput");
+    $("#selectProjectStateInput").removeClass("invalidInput");
+
+    if (errors.includes("empty name")) {
+      setTimeout(() => {
+        $("#addProjectName").addClass("invalidInput");
+        $("#addProjectName").attr(
+          "placeholder",
+          "Project name cannot leave as blank!"
+        );
+      }, 10);
+    }
+    if (errors.includes("empty description")) {
+      setTimeout(() => {
+        $("#addProjectDescription").addClass("invalidInput");
+        $("#addProjectDescription").attr(
+          "placeholder",
+          "Project description cannot leave as blank!"
+        );
+      }, 1);
+    }
+    if (errors.includes("empty state")) {
+      $("#selectProjectStateInput").css("background-image", "none");
+      setTimeout(() => {
+        $("#selectProjectStateInput").addClass("invalidInput");
+      }, 1);
+    }
+
+    console.log("Update Project Errors: ", errors.join(", "));
+  }
 }

@@ -121,12 +121,12 @@ function getProjectMembers()
         $sql = "select * from project_member";
         $stmt = $db->prepare($sql);
         $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $ex) {
         die("Query Error : " . $ex->getMessage());
     }
 
-    return $row;
+    return $rows;
 }
 
 function getUsers()
@@ -221,8 +221,8 @@ function addProject_MemberToDatabase($projectName, $description, $addProjectStar
     if (($addProjectEndDate) == "")
         $addProjectEndDate = null;
 
-    // change department id dynamic 
-    $departmentId = 1;
+    // değiş. Kontrol et çalışıyor mu diye.
+    $departmentId = $_SESSION["user"]["department_id"];
 
     global $db;
 
@@ -353,4 +353,99 @@ function logOut()
 function getSession()
 {
     return $_SESSION["user"];
+}
+
+
+
+function updateProject($id, $name, $description, $startDate, $endDate, $members, $progress, $state, $hasPhoto)
+{
+    $departmentId = $_SESSION["user"]["department_id"];
+    if (($endDate) == "")
+        $endDate = null;
+
+
+    // echo "id: " . $id . ", name: " . $name . ", description: " . $description . ", sdate: " . $startDate . ", edate" . $endDate . ", member: " . $members . ", progres: " . $progress . ", state: " . $state . ", hasPhtoo: " . $hasPhoto . ", depId", $departmentId;
+
+    global $db;
+
+    try {
+        $sql = "update project set name = :name, description = :description, start_date = :start_date, end_date = :end_date, progress = :progress, state_id = :state_id
+        where id = :id
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+        $stmt->bindValue(":start_date", $startDate, PDO::PARAM_STR);
+        $stmt->bindValue(":end_date", $endDate, PDO::PARAM_STR);
+        $stmt->bindValue(":progress", $progress, PDO::PARAM_INT);
+        $stmt->bindValue(":state_id", $state, PDO::PARAM_INT);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        die("<p>Insert Error : " . $ex->getMessage());
+        return "false";
+    }
+
+    //get current members and create member array
+    $curMembersArray = getProjectMembers();
+    $curMembers = [];
+
+    foreach ($curMembersArray as $key => $value) {
+
+        if ($value["department_id"] == $departmentId && $value["project_id"] == $id)
+            array_push($curMembers, $value["user_id"]);
+    }
+
+    $members = json_decode($members);
+
+    // first try to delete if old members are not in the new ones
+    for ($i = 0; $i < count($curMembers); $i++) {
+        if (!in_array($curMembers[$i], $members)) {
+            try {
+                $sql = "delete from project_member
+                where department_id = :department_id 
+                and project_id = :project_id 
+                and user_id = :user_id";
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
+                $stmt->bindValue(":project_id", $id, PDO::PARAM_INT);
+                $stmt->bindValue(":user_id", $curMembers[$i], PDO::PARAM_INT);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                die("<p>Update Error : " . $ex->getMessage());
+            }
+        }
+    }
+
+    // second try to add new members which are not in old one
+    for ($i = 0; $i < count($members); $i++) {
+        if (!in_array($members[$i], $curMembers)) {
+            try {
+                $sql = "insert into project_member (department_id, project_id, user_id) values (:department_id, :project_id, :user_id)";
+                $stmt = $db->prepare($sql);
+                $stmt->bindValue(":department_id", $departmentId, PDO::PARAM_INT);
+                $stmt->bindValue(":project_id", $id, PDO::PARAM_INT);
+                $stmt->bindValue(":user_id", $members[$i], PDO::PARAM_INT);
+                $stmt->execute();
+            } catch (PDOException $ex) {
+                die("<p>Insert Error : " . $ex->getMessage());
+                return "false";
+            }
+        }
+    }
+
+    if ($hasPhoto == "true") {
+        $photoName = "projectId_" . $id;
+
+        try {
+            $sql = "UPDATE `project` SET `photo` = '$photoName' WHERE `project`.`id` = $id";
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+        } catch (PDOException $ex) {
+            die("<p>Insert Error : " . $ex->getMessage());
+            return "false";
+        }
+    }
+
+    return true;
 }
