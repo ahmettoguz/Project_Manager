@@ -27,13 +27,16 @@ $(function () {
       assignCompanyInHeader();
 
       performChangePage();
+      // prepareDisplayUserInformationPage();
     }
   }, 10);
-  // prepareDisplayUserInformationPage();
 
   // YAPILACAKLAR
 
-  //  * yapılan sayfalarda session işlenmedi session'ı işle
+  // * owner user eklenecek. -> owner user eklendi ama project tabına geçince renk vermiyor.
+  // sorun proje ekleme sayfasına gidildiği zaman page construction çalışıyor böylelikle patlıyoruz.
+  // parent div tamamen yenileniyor ve tabı'n rengini değiştirmiyorum.
+  // (owner: company edit) (boss: user add, delete)
 
   // * userlerı gösterme sayfası eklenicek
 
@@ -54,6 +57,7 @@ $(function () {
   // * delete project php
 
   // * main sayfanın yüklenmelerini ayarlayabilirsen, özellikle company background'u
+
   // YAPILACAKLAR
 });
 
@@ -79,7 +83,7 @@ function changeBodyPageTabColors(pageNumber) {
 
 function changeBodyContent(pageNumber) {
   if (pageNumber == null) {
-    constructPageBody();
+    constructPageBody(pageNumber);
     $("section.pageBody .body").html("");
     displayDashboardContent();
   } else {
@@ -89,7 +93,7 @@ function changeBodyContent(pageNumber) {
 
     // change content to projects
     if (pageName == "Projects") {
-      constructPageBody();
+      constructPageBody(pageNumber);
       //get required data
       getProjects();
       getProjectMembers();
@@ -455,16 +459,24 @@ function performChangePage(pageNumber = null) {
   changeHeaderLocation(pageNumber);
 }
 
-function constructPageBody() {
-  $("section.pageBody").html(`
-  <div class="tabTitle">
-      <div onclick="performChangePage(0)" class="tab">Projects</div>
-      <div onclick="performChangePage(1)" class="tab">Tasks</div>
-      <div onclick="performChangePage(2)" class="tab">Members</div>
-  </div>
+function constructPageBody(pageNumber) {
+  let beginningContent = $("section.pageBody").html().substring(0, 22); //<div class="tabTitle">
 
-  <div class="body"></div>
-  `);
+  let output = `<div class="tabTitle">`;
+  if (beginningContent != '<div class="tabTitle">') {
+    for (let i = 0; i < bodyPages.length; i++) {
+      let selected = "";
+      if (pageNumber == i) selected = "selectedTab";
+
+      output += `
+                      <div onclick="performChangePage(${i})" class="tab ${selected}">${bodyPages[i]}</div>`;
+    }
+    output += `
+                  </div>
+                  <div class="body"></div>`;
+
+    $("section.pageBody").html(output);
+  }
 }
 
 function addProject() {
