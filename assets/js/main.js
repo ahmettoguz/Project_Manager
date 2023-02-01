@@ -25,6 +25,7 @@ $(function () {
 
       // main function
       assignCompanyInHeader();
+      assignUserInHeader();
 
       performChangePage();
       // prepareDisplayUserInformationPage();
@@ -32,8 +33,6 @@ $(function () {
   }, 10);
 
   // YAPILACAKLAR
-
-  // * owner user eklenecek. -> owner user eklendi
   // (owner: company edit) (boss: user add, delete)
 
   // * userlerı gösterme sayfası eklenicek
@@ -903,6 +902,7 @@ function displayDashboardContent() {
 
 function displayDashboardContentReady() {
   let userId = session.id;
+  let departmentName = session.department;
   let departmentId = session.department_id;
 
   let userProjectCount = 0;
@@ -912,7 +912,12 @@ function displayDashboardContentReady() {
   let totalTaskCount = 0;
 
   // count user and total project
-  totalProjectCount = projects.length;
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].department_id == departmentId) {
+      totalProjectCount++;
+    }
+  }
+
   projectMembers.forEach((member) => {
     if (member.user_id == userId) userProjectCount++;
   });
@@ -934,7 +939,7 @@ function displayDashboardContentReady() {
 
   output += `
     <div id="dashBoardContainer">
-      <div class="header">IT Department</div>
+      <div class="header">${departmentName} Department</div>
 
       <div class="content">
         <div class="left">
@@ -1124,8 +1129,11 @@ function displayCompanyInformation() {
             <div class="companyIcon" style="background-image : url(../images/company/${company.icon})"></div>
           </div>
         </div>
-        <div class="right">
-          <div class="icon" onclick="displayCompanyEditPage()"></div>
+        <div class="right">`;
+  if (session.user_type == "owner")
+    output += `
+          <div class="icon" onclick="displayCompanyEditPage()"></div>`;
+  output += `
         </div>
       </div>
       <div class="bottom">
@@ -1721,6 +1729,9 @@ function displayUserInformationPage() {
     if (userTaskCount != 0) desc += `Participated in ${userTaskCount} tasks.`;
   }
 
+  if (session.user_type == "owner")
+    desc = `${users[userId].name} is the owner of "${company.name}".`;
+
   // projects
   let projectOutput = "";
 
@@ -1794,4 +1805,17 @@ function logOut() {
       "http://localhost/AhmetOguzErgin/Web/project_manager/"
     );
   });
+}
+
+function assignUserInHeader() {
+  console.log(session);
+  // $("#headerRight > .dropdownContainer > .dropdownHeader > img").attr(
+  //   "src",
+  //   `../images/users/${session.photo}`
+  // );
+  $("#headerRight > .dropdownContainer > .dropdownHeader").html(
+    `<img src="../images/users/${session.photo}"> ${session.name} `
+  );
+
+  console.log(1);
 }

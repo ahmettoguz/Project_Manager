@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 01, 2023 at 09:35 AM
+-- Generation Time: Feb 01, 2023 at 10:18 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -258,7 +258,7 @@ INSERT INTO `user` (`id`, `name`, `surname`, `username`, `password`, `expertise`
 (4, 'Tarık', 'Ergin', 'Tarık', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Animations', 'userPhoto_2.png', 1, 2),
 (5, 'Zeynep', 'Ergin', 'Zeyno', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Design', 'userPhoto_5.png', 1, 2),
 (6, 'Sena', 'Ergin', 'Sena', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Analysis', 'userPhoto_6.png', 1, 2),
-(7, 'owner', 'owner', 'ergin', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Having Company.', 'userPhoto_3.png', NULL, 3);
+(7, 'Owner', 'Ergin', 'Owner', 'c46583f20929c7b02ca72e0af669eff63b133885', 'Having Company.', 'userPhoto_3.png', 1, 3);
 
 -- --------------------------------------------------------
 
