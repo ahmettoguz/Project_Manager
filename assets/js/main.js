@@ -28,12 +28,12 @@ $(function () {
       assignUserInHeader();
 
       performChangePage();
-      setTimeout(() => {
-        performChangePage(0);
-        setTimeout(() => {
-          displayProjectInformation(7, "Database Management");
-        }, 100);
-      }, 100);
+      // setTimeout(() => {
+      //   performChangePage(0);
+      //   setTimeout(() => {
+      //     displayProjectInformation(7, "Database Management");
+      //   }, 100);
+      // }, 100);
     }
   }, 10);
 
@@ -955,7 +955,10 @@ function displayDashboardContentReady() {
     let specificTotalCount = 0;
     let specificUserCount = 0;
     projects.forEach((project) => {
-      if (project.state_id == project_state.id) {
+      if (
+        project.department_id == departmentId &&
+        project.state_id == project_state.id
+      ) {
         specificTotalCount++;
 
         projectMembers.forEach((project_member) => {
@@ -2170,6 +2173,9 @@ function acceptModalOperation(element) {
   // to see when if is deleted
   // classes = element.attr("class").split(/\s+/);
   // console.log(classes);
+
+  // close modal
+  closeModal();
 }
 
 function getIdClassFromModal(classes) {
@@ -2184,7 +2190,13 @@ function getIdClassFromModal(classes) {
 }
 
 function deleteProjectFromDatabase(id) {
-  alert(id);
-
-  //ajax to delete file.
+  $.get(url, { opt: "deleteProject", id: id }).then(function (data) {
+    if (data == true) {
+      //turn back to projects page by updating
+      alertt("Project deleted.", "yellow");
+      performChangePage(0);
+    } else {
+      alertt("Project cannot deleted.", "red");
+    }
+  });
 }

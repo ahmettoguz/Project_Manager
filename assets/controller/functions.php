@@ -449,3 +449,21 @@ function updateProject($id, $name, $description, $startDate, $endDate, $members,
 
     return true;
 }
+
+function deleteProject($id)
+{
+    // delete project
+    global $db;
+    try {
+        $sql = "delete from project where id = :id";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        // $deletedRowCount = $stmt->rowCount();
+    } catch (PDOException $ex) {
+        return false;
+        die("<p>Update Error : " . $ex->getMessage());
+    }
+
+    return true;
+}

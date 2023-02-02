@@ -43,4 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(logOut());
     elseif ($_GET["opt"] == "getSession")
         echo json_encode(getSession());
+    elseif ($_GET["opt"] == "deleteProject")
+        echo json_encode(deleteProject($_GET["id"]));
 }
