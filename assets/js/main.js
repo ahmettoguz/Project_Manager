@@ -1598,7 +1598,8 @@ function displayProjectInformation(project_id) {
       endDate =
         endDate.getDate() +
         "/" +
-        (endDate.getMonth() + 1) +
+        endDate.getMonth() +
+        1 +
         "/" +
         endDate.getFullYear();
     else endDate = "-";
@@ -1933,25 +1934,26 @@ function displayUpdateProject(project_id) {
     //start date
     let sDate = new Date(project.start_date);
     sDate = new Date(
-      sDate.getFullYear() +
-        "-" +
-        (sDate.getMonth() + 1) +
-        "-" +
-        (sDate.getDate() + 1)
+      sDate.getFullYear() + "-" + (sDate.getMonth() + 1) + "-" + sDate.getDate()
     );
-    sDate = sDate.toISOString().split("T")[0];
+
+    sDate = sDate.toLocaleString("tr");
+    sDate = sDate.split(" ")[0];
+    sDate = sDate.split(".");
+    sDate = sDate[2] + "-" + sDate[1] + "-" + sDate[0];
+
     $("#addProjectStartDate").val(sDate);
 
     // end date
     let eDate = new Date(project.end_date);
     eDate = new Date(
-      eDate.getFullYear() +
-        "-" +
-        (eDate.getMonth() + 1) +
-        "-" +
-        (eDate.getDate() + 1)
+      eDate.getFullYear() + "-" + (eDate.getMonth() + 1) + "-" + eDate.getDate()
     );
-    eDate = eDate.toISOString().split("T")[0];
+
+    eDate = eDate.toLocaleString("tr");
+    eDate = eDate.split(" ")[0];
+    eDate = eDate.split(".");
+    eDate = eDate[2] + "-" + eDate[1] + "-" + eDate[0];
     $("#addProjectEndDate").val(eDate);
 
     //photo
