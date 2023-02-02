@@ -1945,16 +1945,22 @@ function displayUpdateProject(project_id) {
     $("#addProjectStartDate").val(sDate);
 
     // end date
-    let eDate = new Date(project.end_date);
-    eDate = new Date(
-      eDate.getFullYear() + "-" + (eDate.getMonth() + 1) + "-" + eDate.getDate()
-    );
+    if (project.end_date != null) {
+      let eDate = new Date(project.end_date);
+      eDate = new Date(
+        eDate.getFullYear() +
+          "-" +
+          (eDate.getMonth() + 1) +
+          "-" +
+          eDate.getDate()
+      );
 
-    eDate = eDate.toLocaleString("tr");
-    eDate = eDate.split(" ")[0];
-    eDate = eDate.split(".");
-    eDate = eDate[2] + "-" + eDate[1] + "-" + eDate[0];
-    $("#addProjectEndDate").val(eDate);
+      eDate = eDate.toLocaleString("tr");
+      eDate = eDate.split(" ")[0];
+      eDate = eDate.split(".");
+      eDate = eDate[2] + "-" + eDate[1] + "-" + eDate[0];
+      $("#addProjectEndDate").val(eDate);
+    }
 
     //photo
     // {
