@@ -32,9 +32,6 @@ $(function () {
         performChangePage(0);
         setTimeout(() => {
           displayProjectInformation(7, "Database Management");
-          setTimeout(() => {
-            displayUpdateProject(7);
-          }, 100);
         }, 100);
       }, 100);
     }
@@ -1641,24 +1638,6 @@ function displayProjectInformation(project_id) {
   });
 }
 
-function displayDeleteProject(id, name) {
-  // cannot pass project itself so that I pass project id
-  // console.log(id);
-
-  openModal("! Warning !", `Project "${name}" will be deleted!`);
-}
-
-function openModal(header, content) {
-  // change header and content
-  $("#modalContainer .modal .header .text").html(header);
-  $("#modalContainer .modal .content").html(content);
-
-  $("#modalContainer").css("display", "flex");
-  setTimeout(() => {
-    $("#modalContainer").css("opacity", "1");
-  }, 1);
-}
-
 function closeModal() {
   console.log("Modal closed!");
   $("#modalContainer").css("opacity", "0");
@@ -2140,4 +2119,72 @@ function updateProjectInDatabase(pro_id) {
 
     console.log("Update Project Errors: ", errors.join(", "));
   }
+}
+
+function displayDeleteProject(id, name) {
+  // cannot pass project itself so that I pass project id
+  // console.log(id);
+
+  openModal(
+    "! Warning !",
+    `Project "${name}" will be deleted!`,
+    "deleteProject",
+    id
+  );
+}
+
+function openModal(header, content, operation, specificData = null) {
+  // change header and content
+  $("#modalContainer .modal .header .text").html(header);
+  $("#modalContainer .modal .content").html(content);
+  $("#modalContainer .modal .buttonContainer .accept").addClass(operation);
+  $("#modalContainer .modal .buttonContainer .accept").addClass(
+    `id-` + specificData
+  );
+
+  $("#modalContainer").css("display", "flex");
+  setTimeout(() => {
+    $("#modalContainer").css("opacity", "1");
+  }, 1);
+}
+
+function acceptModalOperation(element) {
+  element = $(element);
+  let classes = element.attr("class").split(/\s+/);
+  // console.log(classes);
+
+  if (classes.includes("deleteProject")) {
+    element.removeClass("deleteProject");
+
+    // get id
+    let index = getIdClassFromModal(classes);
+    let idClass = classes[index];
+    let id = classes[index].split("-")[1];
+
+    deleteProjectFromDatabase(id);
+
+    element.removeClass(idClass);
+    element.removeClass("deleteProject");
+  }
+
+  // to see when if is deleted
+  // classes = element.attr("class").split(/\s+/);
+  // console.log(classes);
+}
+
+function getIdClassFromModal(classes) {
+  // console.log(classes);
+
+  for (let i = 0; i < classes.length; i++) {
+    if (classes[i].indexOf("id") == 0) {
+      return i;
+    }
+  }
+  return false;
+}
+
+function deleteProjectFromDatabase(id) {
+  alert(id);
+
+  //ajax to delete file.
 }

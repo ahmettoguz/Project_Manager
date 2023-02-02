@@ -85,7 +85,7 @@ if (!hasValidSession()) {
             </div>
             <div class="content">-content-</div>
             <div class="buttonContainer">
-                <div class="accept">Accept</div>
+                <div class="accept" onclick="acceptModalOperation(this)" >Accept</div>
                 <div class="reject" onclick="closeModal()">Reject</div>
             </div>
         </div>
