@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 01, 2023 at 09:15 PM
+-- Generation Time: Feb 02, 2023 at 08:37 AM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_manager`
 --
+CREATE DATABASE IF NOT EXISTS `project_manager` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_turkish_ci;
+USE `project_manager`;
 
 -- --------------------------------------------------------
 
