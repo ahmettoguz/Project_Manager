@@ -28,12 +28,9 @@ $(function () {
       assignUserInHeader();
 
       performChangePage();
-      // setTimeout(() => {
-      //   performChangePage(0);
-      //   setTimeout(() => {
-      //     displayProjectInformation(7, "Database Management");
-      //   }, 100);
-      // }, 100);
+      setTimeout(() => {
+        performChangePage(2);
+      }, 100);
     }
   }, 10);
 
@@ -114,6 +111,20 @@ function changeBodyContent(pageNumber) {
           createProjectBase();
           displayProjectStates();
           displayProjectsIn_SectionMain();
+        }
+      }, 100);
+    } else if (pageName == "Members") {
+      constructPageBody(pageNumber);
+      //get required data
+      getUsers();
+
+      let interval = setInterval(() => {
+        // console.log(loadedTables);
+        if (loadedTables.includes("user")) {
+          clearInterval(interval);
+
+          // create required parts
+          displayUsersInMain();
         }
       }, 100);
     }
@@ -939,7 +950,7 @@ function displayDashboardContentReady() {
     }
   });
 
-  output = "";
+  let output = "";
 
   output += `
     <div id="dashBoardContainer">
@@ -2207,4 +2218,72 @@ function deleteProjectFromDatabase(id) {
       alertt("Project cannot deleted.", "red");
     }
   });
+}
+
+function displayUsersInMain() {
+  alertt(1, "green");
+  let output = `
+  <div id="membersInMain">
+      <header>10 Member of the IT Department.</header>
+      <div class="membersContainer">
+      
+       
+
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
+        
+
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
+        
+
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
+        
+
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
+        
+    
+      </div>
+  </div>
+  `;
+
+  $("#main .pageBody .body").html(output);
 }

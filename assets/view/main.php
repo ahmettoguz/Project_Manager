@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../css/modal.css">
     <link rel="stylesheet" href="../css/userInfo.css">
     <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/members.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
