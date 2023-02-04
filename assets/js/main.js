@@ -2279,6 +2279,28 @@ function displayUsersInMain() {
           </div>
         </div>
 
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
+        <div class="memberContainer">
+          <div class="top">
+            <img src="../images/users/Ahmet.png" />
+          </div>
+          <div class="bottom">
+            <div class="name">Ahmet Oguz Ergin</div>
+            <div class="expertise">Web development</div>
+            <div class="title">Employee</div>
+          </div>
+        </div>
+
         
     
       </div>
