@@ -2225,84 +2225,24 @@ function displayUsersInMain() {
   let output = `
   <div id="membersInMain">
       <header>10 Member of the IT Department.</header>
-      <div class="membersContainer">
-      
-       
+      <div class="membersContainer">`;
 
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
+  for (const key in users) {
+    console.log(users[key]);
+    output += `
+          <div class="memberContainer">
+            <div class="top">
+              <img src="../images/users/${users[key].photo}" />
+            </div>
+            <div class="bottom">
+              <div class="name">${users[key].name} ${users[key].surname}</div>
+              <div class="expertise">${users[key].expertise}</div>
+              <div class="title">${users[key].type}</div>
+            </div>
+          </div>`;
+  }
 
-        
-
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
-
-        
-
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
-
-        
-
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
-
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
-
-        <div class="memberContainer">
-          <div class="top">
-            <img src="../images/users/Ahmet.png" />
-          </div>
-          <div class="bottom">
-            <div class="name">Ahmet Oguz Ergin</div>
-            <div class="expertise">Web development</div>
-            <div class="title">Employee</div>
-          </div>
-        </div>
-
-        
-    
+  output += `
       </div>
   </div>
   `;
