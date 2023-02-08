@@ -40,8 +40,8 @@ $(function () {
   // YAPILACAKLAR
   // boss ve owner kullanıcının department'ını değiştirebilecek
 
-  // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.  
-  
+  // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
+
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
   // * task editleme sayfası eklenicek burada task silinebilecek
@@ -2249,5 +2249,59 @@ function displayUsersInMain() {
 }
 
 function openUserEditPage() {
-  $("section.pageBody").html("");
+  let output = "";
+
+  output += `
+                            <div id="userEditPageContainer">
+                              <div class="top">
+                                <div class="iconContainer">
+                                  <input type="file" />
+                                  <div class="icon"></div>
+                                </div>
+                              </div>
+                              <div class="bottom">
+                                <div class="top">
+                                  <div class="nameInputContainer input-field">
+                                    <span class="label">Name</span>
+                                    <input type="text" maxlength="35" />
+                                  </div>
+                                  <div class="surnameInputContainer input-field">
+                                    <span class="label">Surname</span>
+                                    <input type="text"  maxlength="25" />
+                                  </div>
+                                  <div class="usernameInputContainer input-field">
+                                    <span class="label">Username</span>
+                                    <input type="text"  maxlength="25" />
+                                  </div>
+                                </div>
+                                <div class="bottom">
+                                  <div class="expertiseContainer input-field">
+                                    <span class="label">Expertise</span>
+                                    <input type="text" />
+                                  </div>
+                                  <div class="passwordDropdown">
+                                    <div class="passwordHeader"></div>
+                                    <div class="passwords">
+                                      <div class="passwordContainer">
+                                        <div class="passwordContainer1 input-field">
+                                          <span class="label">Password</span>
+                                          <input type="password" maxlength="50" />
+                                        </div>
+                                        <div class="passwordContainer2 input-field">
+                                          <span class="label">Password Again</span>
+                                          <input type="password" maxlength="50" />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="buttons">
+                                  <div class="cancel">Cancel</div>
+                                  <div class="update">Update</div>
+                                </div>
+                              </div>
+                            </div>
+  `;
+
+  $("section.pageBody").html(output);
 }

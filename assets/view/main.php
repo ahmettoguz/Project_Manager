@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="../css/userInfo.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/members.css">
+    <link rel="stylesheet" href="../css/userEdit.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +87,7 @@ if (!hasValidSession()) {
             </div>
             <div class="content">-content-</div>
             <div class="buttonContainer">
-                <div class="accept" onclick="acceptModalOperation(this)" >Accept</div>
+                <div class="accept" onclick="acceptModalOperation(this)">Accept</div>
                 <div class="reject" onclick="closeModal()">Reject</div>
             </div>
         </div>

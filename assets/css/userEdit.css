@@ -1,0 +1,204 @@
+/* GENERAL CLASSES */
+#userEditPageContainer * {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+.input-field {
+  background-color: lightyellow;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  height: 30px;
+}
+.input-field .label {
+  height: 44%;
+  position: absolute;
+  top: -33%;
+  left: 5px;
+  background-color: white;
+  border-radius: 5px;
+  padding: 8px 3px;
+  color: rgb(101, 88, 88);
+  border: 1px solid darkgray;
+  border-bottom: none;
+  box-shadow: 0 2px 1px -3px transparent;
+
+  transition: 1s;
+}
+.input-field input {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  outline: none;
+  border-radius: 5px;
+  transition: 1s;
+  box-shadow: 1px 1px 1px transparent, 0 0 5px inset transparent;
+}
+
+.input-field input:focus {
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px rgb(125, 254, 224), 0 0 5px inset orange;
+}
+
+.input-field:has(input:focus) .label {
+  color: black;
+  box-shadow: 0 2px 1px -3px rgb(125, 254, 224);
+  border: 1px solid rgb(140, 136, 136);
+  border-bottom: 0;
+}
+
+/* SPECIAL ELEMENTS */
+
+#userEditPageContainer {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+
+  /* min-width: 1000px; */
+  min-height: 500px;
+  border-radius: 5px;
+  width: 50%;
+  height: 60%;
+  flex-direction: column;
+  background-image: radial-gradient(at 40% 30%, white 20%, rgb(240, 248, 250));
+
+  box-shadow: 17px 17px 15px -15px rgb(166, 217, 222),
+    -17px -17px 15px -15px rgb(194, 228, 240);
+}
+
+#userEditPageContainer > .top {
+  width: 97%;
+  height: 45%;
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .top > .iconContainer {
+  width: 300px;
+  height: 90%;
+  display: block;
+  border-radius: 5px;
+}
+
+#userEditPageContainer > .top > .iconContainer input {
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.422);
+  position: relative;
+  z-index: 1;
+  opacity: 0;
+}
+
+#userEditPageContainer > .top > .iconContainer > .icon {
+  z-index: 0;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: -100%;
+  border: 4px dashed rgb(154, 150, 150);
+  background-color: lightyellow;
+  box-shadow: 0 0 10px darkgray inset;
+}
+
+#userEditPageContainer > .bottom {
+  border-radius: 2px;
+  width: 97%;
+  height: 53%;
+  box-shadow: 0 0 2px lightblue, 0 0 2px inset lightblue;
+  flex-direction: column;
+  padding: 10px;
+}
+#userEditPageContainer > .bottom > .top {
+  width: 100%;
+  height: 33%;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .top > div,
+#userEditPageContainer > .bottom > .bottom > div
+{
+  width: 30%;
+  height: 50%;
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .bottom {
+  width: 100%;
+  height: 50%;
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .bottom > .expertiseContainer {
+  /* border: 1px solid black; */
+}
+#userEditPageContainer > .bottom > .bottom > .expertiseContainer .label {
+  /* border: 1px solid black; */
+}
+#userEditPageContainer > .bottom > .bottom > .expertiseContainer input {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .bottom > .passwordDropdown {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown
+  > .passwordHeader {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwords {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown
+  > .passwords
+  > .passwordContainer1 {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown
+  > .passwords
+  > div
+  > span {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown
+  > .passwords
+  > div
+  > .label {
+  /* border: 1px solid black; */
+}
+
+#userEditPageContainer > .bottom > .buttons {
+  width: 100%;
+  border: 1px solid black;
+  height: 33%;
+}
+
+#userEditPageContainer > .bottom > .cancel {
+}
+
+#userEditPageContainer > .bottom > .update {
+}
