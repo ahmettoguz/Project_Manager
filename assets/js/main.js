@@ -35,7 +35,6 @@ $(function () {
   }, 10);
 
   // YAPILACAKLAR
-
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
   // * task editleme sayfası eklenicek burada task silinebilecek
@@ -47,8 +46,6 @@ $(function () {
   // * projelerde tasklara tıklanabilir olmalı
 
   // * language icon will be removed
-
-  // * delete project php
 
   // * main sayfanın yüklenmelerini ayarlayabilirsen, özellikle company background'u
 
