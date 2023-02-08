@@ -30,11 +30,13 @@
   /* border: 1px solid black; */
   box-shadow: 0px 0px 5px silver;
   overflow: auto;
+  perspective: 700px;
+  perspective-origin: center;
 }
 #membersInMain .membersContainer .memberContainer {
   width: 200px;
   height: 200px;
-  margin: 10px;
+  margin: 8px;
   border-radius: 5px;
   border: 1px solid silver;
   box-shadow: 0 0 7px -2px silver;
@@ -42,6 +44,20 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition: 500ms ease;
+}
+#membersInMain .membersContainer .memberContainer:hover {
+  box-shadow: 0 0 10px -2px grey, 0 20px 50px -50px black;
+  transform: translateZ(10px);
+  /* transform: rotateX(10deg) translateZ(100px) rotateZ(10deg); */
+  /* transform: rotateX(10deg) translateZ(50px) rotateZ(90deg); */
+}
+#membersInMain .membersContainer .memberContainer:hover .top img {
+  border: 1px solid darkblue;
+  transition: 1s;
+}
+#membersInMain .membersContainer .memberContainer:hover .bottom {
+  box-shadow: 0 0 10px -2px silver, 0 0 2px -1px black, 0 0 3px -2px grey;
 }
 #membersInMain .membersContainer .memberContainer .top {
   display: flex;
@@ -58,6 +74,7 @@
 
   box-shadow: 0 0 7px -2px silver, 0 0 2px black;
   border-radius: 7px;
+  border: 1px solid transparent;
 }
 #membersInMain .membersContainer .memberContainer .bottom {
   height: 40%;
@@ -74,17 +91,19 @@
   height: 32%;
   width: 100%;
 
+  user-select: none;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 #membersInMain .membersContainer .memberContainer .bottom .name {
-  font-weight: 500;
   border: 1px solid transparent;
+  font-size: 17px;
 }
 #membersInMain .membersContainer .memberContainer .bottom .expertise {
   border: 1px solid transparent;
+  color: #4f4e58;
 }
 #membersInMain .membersContainer .memberContainer .bottom .title {
-  border: 1px solid transparent;
+  color: #4f4e58;
 }
