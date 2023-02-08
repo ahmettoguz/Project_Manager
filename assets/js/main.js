@@ -30,11 +30,18 @@ $(function () {
       performChangePage();
       setTimeout(() => {
         performChangePage(2);
+        setTimeout(() => {
+          openUserEditPage();
+        }, 50);
       }, 100);
     }
   }, 10);
 
   // YAPILACAKLAR
+  // boss ve owner kullanıcının department'ını değiştirebilecek
+
+  // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.  
+  
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
   // * task editleme sayfası eklenicek burada task silinebilecek
@@ -1786,10 +1793,6 @@ function displayUserInformationPage() {
   `);
 }
 
-function openUserEditPage() {
-  $("section.pageBody").html("");
-}
-
 function logOut() {
   $.get(url, { opt: "logOut" }).then(function () {
     window.location.replace(
@@ -2243,4 +2246,8 @@ function displayUsersInMain() {
   `;
 
   $("#main .pageBody .body").html(output);
+}
+
+function openUserEditPage() {
+  $("section.pageBody").html("");
 }
