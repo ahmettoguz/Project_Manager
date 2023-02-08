@@ -36,8 +36,6 @@ $(function () {
 
   // YAPILACAKLAR
 
-  // * userlerı gösterme sayfası eklenicek
-
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
   // * task editleme sayfası eklenicek burada task silinebilecek
