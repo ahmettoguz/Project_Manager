@@ -2219,7 +2219,6 @@ function deleteProjectFromDatabase(id) {
 }
 
 function displayUsersInMain() {
-  alertt(1, "green");
   let output = `
   <div id="membersInMain">
       <header>10 Member of the IT Department.</header>
@@ -2256,7 +2255,7 @@ function openUserEditPage() {
                             <div id="userEditPageContainer">
                               <div class="top">
                                 <div class="iconContainer">
-                                  <input type="file" />
+                                  <input type="file" oninput="updateUserInputPhoto(event)" />
                                   <div class="icon" style='background-image: url(../images/users/${session.photo})'></div>
                                 </div>
                               </div>
@@ -2295,8 +2294,8 @@ function openUserEditPage() {
                                   </div>
                                 </div>
                                 <div class="buttons">
-                                  <div class="cancel">Cancel</div>
-                                  <div class="update">Update</div>
+                                  <div class="cancel" onclick="prepareDisplayUserInformationPage()">Cancel</div>
+                                  <div class="update" onclick="updateUserInformations()">Update</div>
                                 </div>
                               </div>
                             </div>
@@ -2345,4 +2344,42 @@ function updateUserPageDropdownEvent() {
     //     500
     //   );
   }
+}
+
+function updateUserInputPhoto(event) {
+  let fileObject = $("#userEditPageContainer > .top > .iconContainer input");
+  let fileName = fileObject.val();
+  fileName = fileName.substring(
+    fileName.indexOf(`fakepath`) + 9,
+    fileName.length
+  );
+
+  let fileExtension = fileName.split(".")[1];
+
+  if (fileExtension == "png" || fileExtension == "jpg") {
+    fileObject = URL.createObjectURL(event.target.files[0]);
+
+    $("#userEditPageContainer > .top > .iconContainer > .icon").css(
+      "background-image",
+      `url(${fileObject})`
+    );
+
+    $("#userEditPageContainer > .top > .iconContainer > .icon").css(
+      "border",
+      "5px dashed lightseagreen"
+    );
+    $("#userEditPageContainer > .top > .iconContainer > .icon").html("");
+  } else {
+    $("#userEditPageContainer > .top > .iconContainer > .icon").html(
+      "Extension should be </br> png or jpg."
+    );
+    $("#userEditPageContainer > .top > .iconContainer > .icon").css(
+      "background-image",
+      `none`
+    );
+  }
+}
+
+function updateUserInformations() {
+  alert(1);
 }

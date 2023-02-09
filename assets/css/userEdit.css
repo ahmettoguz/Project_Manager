@@ -103,19 +103,22 @@
   height: 100%;
   position: relative;
   top: -100%;
-  border: 4px dashed rgb(154, 150, 150);
+  text-align: center;
+  border: 5px dashed rgb(154, 150, 150);
   background-color: lightyellow;
   box-shadow: 0 0 10px darkgray inset;
 
+  padding: 5px;
   background-position: center;
   background-size: contain;
+  background-origin: content-box;
   background-repeat: no-repeat;
 
   transition: 500ms ease;
 }
 
 #userEditPageContainer > .top > .iconContainer:has(input:hover) > .icon {
-  border: 4px dashed lightseagreen;
+  border: 5px dashed lightseagreen;
   background-color: lightyellow;
   box-shadow: 0 5px 20px silver inset;
 }
