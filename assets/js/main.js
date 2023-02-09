@@ -2280,17 +2280,15 @@ function openUserEditPage() {
                                     <input type="text" />
                                   </div>
                                   <div class="passwordDropdown">
-                                    <div class="passwordHeader"></div>
+                                    <div class="passwordHeader">Change Password</div>
                                     <div class="passwords">
-                                      <div class="passwordContainer">
-                                        <div class="passwordContainer1 input-field">
-                                          <span class="label">Password</span>
-                                          <input type="password" maxlength="50" />
-                                        </div>
-                                        <div class="passwordContainer2 input-field">
-                                          <span class="label">Password Again</span>
-                                          <input type="password" maxlength="50" />
-                                        </div>
+                                      <div class="passwordContainer1 input-field">
+                                        <span class="label">Password</span>
+                                        <input type="password" maxlength="50" />
+                                      </div>
+                                      <div class="passwordContainer2 input-field">
+                                        <span class="label">Password Again</span>
+                                        <input type="password" maxlength="50" />
                                       </div>
                                     </div>
                                   </div>

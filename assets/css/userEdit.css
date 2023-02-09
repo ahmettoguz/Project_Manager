@@ -10,10 +10,10 @@
 .input-field {
   background-color: lightyellow;
   width: 100%;
-  height: 100%;
   position: relative;
   height: 30px;
 }
+
 .input-field .label {
   height: 44%;
   position: absolute;
@@ -29,6 +29,7 @@
 
   transition: 1s;
 }
+
 .input-field input {
   width: 100%;
   height: 100%;
@@ -89,7 +90,6 @@
   background-color: transparent;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.422);
   position: relative;
   z-index: 1;
   opacity: 0;
@@ -105,6 +105,14 @@
   border: 4px dashed rgb(154, 150, 150);
   background-color: lightyellow;
   box-shadow: 0 0 10px darkgray inset;
+
+  transition: 500ms ease;
+}
+
+#userEditPageContainer > .top > .iconContainer:has(input:hover) > .icon {
+  border: 4px dashed lightseagreen;
+  background-color: lightyellow;
+  box-shadow: 0 5px 20px silver inset;
 }
 
 #userEditPageContainer > .bottom {
@@ -115,6 +123,7 @@
   flex-direction: column;
   padding: 10px;
 }
+
 #userEditPageContainer > .bottom > .top {
   width: 100%;
   height: 33%;
@@ -122,9 +131,7 @@
   /* border: 1px solid black; */
 }
 
-#userEditPageContainer > .bottom > .top > div,
-#userEditPageContainer > .bottom > .bottom > div
-{
+#userEditPageContainer > .bottom > .top > div {
   width: 30%;
   height: 50%;
   /* border: 1px solid black; */
@@ -132,22 +139,25 @@
 
 #userEditPageContainer > .bottom > .bottom {
   width: 100%;
+  height: 33%;
+  justify-content: space-around;
+}
+
+#userEditPageContainer > .bottom > .bottom > div {
   height: 50%;
-  /* border: 1px solid black; */
+  width: 35%;
 }
 
 #userEditPageContainer > .bottom > .bottom > .expertiseContainer {
-  /* border: 1px solid black; */
-}
-#userEditPageContainer > .bottom > .bottom > .expertiseContainer .label {
-  /* border: 1px solid black; */
-}
-#userEditPageContainer > .bottom > .bottom > .expertiseContainer input {
-  /* border: 1px solid black; */
+  width: 30%;
+  /* border: 5px solid black !important; */
 }
 
 #userEditPageContainer > .bottom > .bottom > .passwordDropdown {
-  /* border: 1px solid black; */
+  width: 63.3%;
+  position: relative;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
 #userEditPageContainer
@@ -155,11 +165,45 @@
   > .bottom
   > .passwordDropdown
   > .passwordHeader {
-  /* border: 1px solid black; */
+  position: relative;
+  user-select: none;
+
+  /* display: none;
+  opacity: 0; */
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown
+  > .passwordHeader::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -2.5px;
+  border-radius: 5px;
+  width: 0;
+  height: 3px;
+  left: 0;
+  background-image: linear-gradient(90deg, black, lightseagreen);
+  transition: 500ms ease;
+}
+
+#userEditPageContainer
+  > .bottom
+  > .bottom
+  > .passwordDropdown:hover
+  > .passwordHeader::after {
+  width: 100%;
 }
 
 #userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwords {
-  /* border: 1px solid black; */
+  display: none;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: space-between;
 }
 
 #userEditPageContainer
@@ -167,38 +211,58 @@
   > .bottom
   > .passwordDropdown
   > .passwords
-  > .passwordContainer1 {
-  /* border: 1px solid black; */
-}
-
-#userEditPageContainer
-  > .bottom
-  > .bottom
-  > .passwordDropdown
-  > .passwords
-  > div
-  > span {
-  /* border: 1px solid black; */
-}
-
-#userEditPageContainer
-  > .bottom
-  > .bottom
-  > .passwordDropdown
-  > .passwords
-  > div
-  > .label {
-  /* border: 1px solid black; */
+  > div {
+  width: 48%;
+  height: 100%;
 }
 
 #userEditPageContainer > .bottom > .buttons {
   width: 100%;
-  border: 1px solid black;
   height: 33%;
+  /* border: 1px solid black; */
 }
 
-#userEditPageContainer > .bottom > .cancel {
+#userEditPageContainer > .bottom > .buttons > div {
+  position: relative;
+  width: 20%;
+  height: 50%;
+  margin: 0 3%;
+  border: 1px solid black;
+  border-radius: 3px;
+  user-select: none;
+  cursor: pointer;
 }
 
-#userEditPageContainer > .bottom > .update {
+#userEditPageContainer > .bottom > .buttons > div:hover {
+  border: none;
+}
+
+#userEditPageContainer > .bottom > .buttons > div::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  border-radius: 3px;
+  width: 0;
+  top: 0;
+  left: 0;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+}
+
+#userEditPageContainer > .bottom > .buttons > div:hover::before {
+  border: 2px solid black;
+  width: 100%;
+  transition: 500ms ease;
+  box-shadow: 0 0 2px grey, 0 0 4px silver, 0 0 8px lightgreen,
+    0 0 10px inset orangered;
+}
+
+#userEditPageContainer > .bottom > .buttons > .update:hover::before {
+  border: 2px solid black;
+  width: 100%;
+  transition: 500ms ease;
+  box-shadow: 0 0 2px grey, 0 0 4px silver, 0 0 8px lightgreen,
+    0 0 10px inset seagreen;
 }
