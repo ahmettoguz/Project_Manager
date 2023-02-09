@@ -2279,7 +2279,7 @@ function openUserEditPage() {
                                     <span class="label">Expertise</span>
                                     <input type="text" />
                                   </div>
-                                  <div class="passwordDropdown">
+                                  <div class="passwordDropdown" onclick="updateUserPageDropdownEvent()">
                                     <div class="passwordHeader">Change Password</div>
                                     <div class="passwords">
                                       <div class="passwordContainer1 input-field">
@@ -2302,4 +2302,46 @@ function openUserEditPage() {
   `;
 
   $("section.pageBody").html(output);
+}
+
+function updateUserPageDropdownEvent() {
+  // check if already show password containers
+  if (
+    $(
+      "#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwordHeader"
+    ).css("opacity") == 1
+  ) {
+    $(
+      "#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwordHeader"
+    ).animate({ opacity: 0 }, 500, "swing", function () {
+      $(
+        "#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwordHeader"
+      ).css("display", "none");
+
+      $(
+        "#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwords"
+      ).css("display", "flex");
+
+      $(
+        "#userEditPageContainer > .bottom > .bottom > .passwordDropdown > .passwords"
+      ).animate({ opacity: 1 }, 500, "swing");
+    });
+
+    $("#userEditPageContainer > .bottom > .bottom > .passwordDropdown").animate(
+      {
+        borderColor: "rgb(0,0,0,0)",
+      },
+      500
+    );
+
+    // $("#userEditPageContainer > .bottom > .bottom > .passwordDropdown")
+    //   .css("border", "0px solid #f37736")
+    //   .animate(
+    //     {
+    //       borderWidth: "4px",
+    //       borderColor: "#f37736",
+    //     },
+    //     500
+    //   );
+  }
 }
