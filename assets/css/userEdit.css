@@ -107,6 +107,10 @@
   background-color: lightyellow;
   box-shadow: 0 0 10px darkgray inset;
 
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
   transition: 500ms ease;
 }
 

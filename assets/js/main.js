@@ -2226,7 +2226,6 @@ function displayUsersInMain() {
       <div class="membersContainer">`;
 
   for (const key in users) {
-    console.log(users[key]);
     output += `
           <div class="memberContainer">
             <div class="top">
@@ -2251,33 +2250,35 @@ function displayUsersInMain() {
 function openUserEditPage() {
   let output = "";
 
+  console.log(session);
+
   output += `
                             <div id="userEditPageContainer">
                               <div class="top">
                                 <div class="iconContainer">
                                   <input type="file" />
-                                  <div class="icon"></div>
+                                  <div class="icon" style='background-image: url(../images/users/${session.photo})'></div>
                                 </div>
                               </div>
                               <div class="bottom">
                                 <div class="top">
                                   <div class="nameInputContainer input-field">
                                     <span class="label">Name</span>
-                                    <input type="text" maxlength="35" />
+                                    <input type="text" maxlength="35"  value="${session.name}" />
                                   </div>
                                   <div class="surnameInputContainer input-field">
                                     <span class="label">Surname</span>
-                                    <input type="text"  maxlength="25" />
+                                    <input type="text"  maxlength="25" value="${session.surname}" />
                                   </div>
                                   <div class="usernameInputContainer input-field">
                                     <span class="label">Username</span>
-                                    <input type="text"  maxlength="25" />
+                                    <input type="text"  maxlength="25" value="${session.username}" />
                                   </div>
                                 </div>
                                 <div class="bottom">
                                   <div class="expertiseContainer input-field">
                                     <span class="label">Expertise</span>
-                                    <input type="text" />
+                                    <input type="text" value="${session.expertise}"/>
                                   </div>
                                   <div class="passwordDropdown" onclick="updateUserPageDropdownEvent()">
                                     <div class="passwordHeader">Change Password</div>
