@@ -2249,8 +2249,6 @@ function displayUsersInMain() {
 function openUserEditPage() {
   let output = "";
 
-  console.log(session);
-
   output += `
                             <div id="userEditPageContainer">
                               <div class="top">
@@ -2381,5 +2379,21 @@ function updateUserInputPhoto(event) {
 }
 
 function updateUserInformations() {
-  alert(1);
+  let photo = $("#userEditPageContainer > .top > .iconContainer input").val();
+  let name = $("#userEditPageContainer .nameInputContainer input").val();
+  let surname = $("#userEditPageContainer .surnameInputContainer input").val();
+  let username = $(
+    "#userEditPageContainer .usernameInputContainer input"
+  ).val();
+  let expertise = $("#userEditPageContainer .expertiseContainer input").val();
+  let password1 = $("#userEditPageContainer .passwordContainer1 input").val();
+  let password2 = $("#userEditPageContainer .passwordContainer2 input").val();
+
+  console.log("photo:", photo);
+  console.log("name:", name);
+  console.log("surname:", surname);
+  console.log("username:", username);
+  console.log("expertise:", expertise);
+  console.log("password1:", password1);
+  console.log("password2:", password2);
 }
