@@ -2390,19 +2390,33 @@ function checkUserToUpdate() {
   let password2 = $("#userEditPageContainer .passwordContainer2 input").val();
   let errors = [];
 
-  console.log("photo:", photo);
-  console.log("name:", name);
-  console.log("surname:", surname);
-  console.log("username:", username);
-  console.log("expertise:", expertise);
-  console.log("password1:", password1);
-  console.log("password2:", password2);
+  // console.log("photo:", photo);
+  // console.log("name:", name);
+  // console.log("surname:", surname);
+  // console.log("username:", username);
+  // console.log("expertise:", expertise);
+  // console.log("password1:", password1);
+  // console.log("password2:", password2);
 
   // check errors
   if (name == "") errors.push("no name");
   if (surname == "") errors.push("no surname");
   if (username == "") errors.push("no username");
   if (expertise == "") errors.push("no expertise");
+  if (password1.length != 0 || password2.length != 0) {
+    if (password1 != password2) errors.push("passwords not match");
+    else {
+      if (password1.length < 5) errors.push("passwords require 5 char");
+      if (
+        password1.toLowerCase() == name.toLowerCase() ||
+        password1.toLowerCase() == surname.toLowerCase() ||
+        password1.toLowerCase() == username.toLowerCase() ||
+        password1.toLowerCase() == expertise.toLowerCase()
+      ) {
+        errors.push("passwords include other information");
+      }
+    }
+  }
 
   if (errors.length == 0) {
     // check new surname it should be unique if not owned by that user.
@@ -2422,13 +2436,27 @@ function checkUserToUpdate() {
             }, 10);
           } else {
             // username checked and user will be updated.
-            updateUserInformation();
+            updateUserInformation(
+              photo,
+              name,
+              surname,
+              username,
+              expertise,
+              password1
+            );
           }
         }
       );
     else {
       // username do not need check and user will be updated.
-      updateUserInformation();
+      updateUserInformation(
+        photo,
+        name,
+        surname,
+        username,
+        expertise,
+        password1
+      );
     }
   } else {
     alertt("Invalid input!", "yellow");
@@ -2442,6 +2470,12 @@ function checkUserToUpdate() {
       "invalidInput"
     );
     $("#userEditPageContainer .expertiseContainer input").removeClass(
+      "invalidInput"
+    );
+    $("#userEditPageContainer  div.passwordContainer1 input").removeClass(
+      "invalidInput"
+    );
+    $("#userEditPageContainer  div.passwordContainer2 input").removeClass(
       "invalidInput"
     );
 
@@ -2469,7 +2503,63 @@ function checkUserToUpdate() {
           .attr("placeholder", "Project name cannot leave as blank!")
           .addClass("invalidInput");
       }, 10);
+    if (errors.includes("passwords not match")) {
+      setTimeout(() => {
+        alertt("Passwords not match!", "yellow");
+
+        $("#userEditPageContainer  div.passwordContainer1 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+        $("#userEditPageContainer  div.passwordContainer2 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+      }, 10);
+    }
+    if (errors.includes("passwords require 5 char")) {
+      setTimeout(() => {
+        alertt("Password should be at least 5 character!", "yellow");
+
+        $("#userEditPageContainer  div.passwordContainer1 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+        $("#userEditPageContainer  div.passwordContainer2 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+      }, 10);
+    }
+    if (errors.includes("passwords include other information")) {
+      setTimeout(() => {
+        alertt("Password shouln't include other information!", "yellow");
+
+        $("#userEditPageContainer  div.passwordContainer1 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+        $("#userEditPageContainer  div.passwordContainer2 input")
+          .val("")
+          .attr("placeholder", "Error!")
+          .addClass("invalidInput");
+      }, 10);
+    }
   }
 }
 
-function updateUserInformation() {}
+function updateUserInformation(
+  photo,
+  name,
+  surname,
+  username,
+  expertise,
+  password
+) {
+  // console.log("photo:", photo);
+  // console.log("name:", name);
+  // console.log("surname:", surname);
+  // console.log("username:", username);
+  // console.log("expertise:", expertise);
+  // console.log("password:", password);
+}
