@@ -2562,4 +2562,33 @@ function updateUserInformation(
   // console.log("username:", username);
   // console.log("expertise:", expertise);
   // console.log("password:", password);
+
+  let file = $("#userEditPageContainer > div.top > div > input[type=file]")[0]
+    .files[0];
+  if (file == undefined) file = "no file";
+
+  let ajaxData = new FormData();
+
+  ajaxData.append("file", file);
+  ajaxData.append("opt", "updateUserInformations");
+  ajaxData.append("name", name);
+  ajaxData.append("surname", surname);
+  ajaxData.append("username", username);
+  ajaxData.append("expertise", expertise);
+  ajaxData.append("password", password);
+  // console.log(ajaxData);
+
+  $.ajax({
+    url: url,
+    type: "POST",
+    contentType: false,
+    processData: false,
+    cache: false,
+    dataType: "json",
+    enctype: "multipart/form-data",
+    data: ajaxData,
+    success: function (data) {
+      console.log(data);
+    },
+  });
 }

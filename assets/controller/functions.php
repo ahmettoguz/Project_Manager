@@ -487,3 +487,17 @@ function checkNewUsername($username)
     else
         return true;
 }
+
+function updateUserInformations($name, $surname, $username, $expertise, $password, $file)
+{
+    if ($file == "no file") {
+        // file will be uploaded without file
+
+
+    } else {
+        // file will be uploaded with file
+    }
+
+
+    // return [$name, $surname, $username, $expertise, $password, $file];
+}

@@ -17,6 +17,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["opt"] == "updateProject")
         echo json_encode(updateProject($_POST["projectId"], $_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"], $_POST["hasPhoto"]));
 
+    // **************
+    if ($_POST["opt"] == "updateUserInformations") {
+        if (isset($_FILES["file"])) {
+            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], $_FILES["file"]["tmp_name"]));
+        } else {
+            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], "no file"));
+        }
+    }
 
     // *************************
     // *************************
