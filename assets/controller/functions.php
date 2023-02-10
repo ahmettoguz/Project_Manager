@@ -467,3 +467,23 @@ function deleteProject($id)
 
     return true;
 }
+
+function checkNewUsername($username)
+{
+    global $db;
+
+    try {
+        $sql = "select * from user where username = :username";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":username", $username, PDO::PARAM_STR);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (Exception $ex) {
+        die("Query Error : " . $ex->getMessage());
+    }
+
+    if ($row)
+        return false;
+    else
+        return true;
+}

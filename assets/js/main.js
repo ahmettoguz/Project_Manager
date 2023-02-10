@@ -2293,7 +2293,7 @@ function openUserEditPage() {
                                 </div>
                                 <div class="buttons">
                                   <div class="cancel" onclick="prepareDisplayUserInformationPage()">Cancel</div>
-                                  <div class="update" onclick="updateUserInformations()">Update</div>
+                                  <div class="update" onclick="checkUserToUpdate()">Update</div>
                                 </div>
                               </div>
                             </div>
@@ -2378,7 +2378,7 @@ function updateUserInputPhoto(event) {
   }
 }
 
-function updateUserInformations() {
+function checkUserToUpdate() {
   let photo = $("#userEditPageContainer > .top > .iconContainer input").val();
   let name = $("#userEditPageContainer .nameInputContainer input").val();
   let surname = $("#userEditPageContainer .surnameInputContainer input").val();
@@ -2388,6 +2388,7 @@ function updateUserInformations() {
   let expertise = $("#userEditPageContainer .expertiseContainer input").val();
   let password1 = $("#userEditPageContainer .passwordContainer1 input").val();
   let password2 = $("#userEditPageContainer .passwordContainer2 input").val();
+  let errors = [];
 
   console.log("photo:", photo);
   console.log("name:", name);
@@ -2396,4 +2397,79 @@ function updateUserInformations() {
   console.log("expertise:", expertise);
   console.log("password1:", password1);
   console.log("password2:", password2);
+
+  // check errors
+  if (name == "") errors.push("no name");
+  if (surname == "") errors.push("no surname");
+  if (username == "") errors.push("no username");
+  if (expertise == "") errors.push("no expertise");
+
+  if (errors.length == 0) {
+    // check new surname it should be unique if not owned by that user.
+    if (session.username.toLowerCase() != username.toLowerCase())
+      $.get(url, { opt: "checkNewUsername", username: username }).then(
+        function (data) {
+          if (data == false) {
+            errors.push("username exist already");
+            alertt("Username already exist.", "yellow");
+            $(
+              "#userEditPageContainer .usernameInputContainer input"
+            ).removeClass("invalidInput");
+            setTimeout(() => {
+              $("#userEditPageContainer .usernameInputContainer input")
+                .html("")
+                .addClass("invalidInput");
+            }, 10);
+          } else {
+            // username checked and user will be updated.
+            updateUserInformation();
+          }
+        }
+      );
+    else {
+      // username do not need check and user will be updated.
+      updateUserInformation();
+    }
+  } else {
+    alertt("Invalid input!", "yellow");
+    $("#userEditPageContainer .nameInputContainer input").removeClass(
+      "invalidInput"
+    );
+    $("#userEditPageContainer .surnameInputContainer input").removeClass(
+      "invalidInput"
+    );
+    $("#userEditPageContainer .usernameInputContainer input").removeClass(
+      "invalidInput"
+    );
+    $("#userEditPageContainer .expertiseContainer input").removeClass(
+      "invalidInput"
+    );
+
+    if (errors.includes("no name"))
+      setTimeout(() => {
+        $("#userEditPageContainer .nameInputContainer input")
+          .attr("placeholder", "Project name cannot leave as blank!")
+          .addClass("invalidInput");
+      }, 10);
+    if (errors.includes("no surname"))
+      setTimeout(() => {
+        $("#userEditPageContainer .surnameInputContainer input")
+          .attr("placeholder", "Project name cannot leave as blank!")
+          .addClass("invalidInput");
+      }, 10);
+    if (errors.includes("no username"))
+      setTimeout(() => {
+        $("#userEditPageContainer .usernameInputContainer input")
+          .attr("placeholder", "Project name cannot leave as blank!")
+          .addClass("invalidInput");
+      }, 10);
+    if (errors.includes("no expertise"))
+      setTimeout(() => {
+        $("#userEditPageContainer .expertiseContainer input")
+          .attr("placeholder", "Project name cannot leave as blank!")
+          .addClass("invalidInput");
+      }, 10);
+  }
 }
+
+function updateUserInformation() {}
