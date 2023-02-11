@@ -488,16 +488,51 @@ function checkNewUsername($username)
         return true;
 }
 
-function updateUserInformations($name, $surname, $username, $expertise, $password, $file)
+function updateUserInformations($name, $surname, $username, $expertise, $password, $file, $id)
 {
-    if ($file == "no file") {
-        // file will be uploaded without file
+    global $db;
 
+    // prepare sql statement
+    $sql = "UPDATE `user` SET ";
 
-    } else {
-        // file will be uploaded with file
+    $sql .= " `name` = '$name', `surname` = '$surname', `username` = '$username', `expertise` = '$expertise' ";
+
+    // update password if exist
+    if ($password != "")
+        $sql .= ", `password` = '$password' ";
+
+    // file upload
+    if ($file != "no file") {
+        $sql .= ", `photo` = 'user_$id.png' ";
+
+        // place file
+        move_uploaded_file($file, "../images/users/user_$id.png");
     }
 
+    $sql .= "WHERE `user`.`id` = $id";
 
-    // return [$name, $surname, $username, $expertise, $password, $file];
+
+    try {
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        die("<p>Insert Error : " . $ex->getMessage());
+        return "false";
+    }
+
+    // form session file
+    // $_SESSION["user"]["department"] = "IT";
+    // $_SESSION["user"]["department_id"] = "1";
+    // $_SESSION["user"]["id"] = "4";
+    // $_SESSION["user"]["user_type"] = "employee";
+    // $_SESSION["user"]["user_type_id"] =  "2";
+
+    $_SESSION["user"]["name"] = $name;
+    $_SESSION["user"]["surname"] = $surname;
+    $_SESSION["user"]["username"] = $username;
+    $_SESSION["user"]["expertise"] = $expertise;
+    if ($file != "no file")
+        $_SESSION["user"]["photo"] = "user_$id.png";
+
+    return true;
 }

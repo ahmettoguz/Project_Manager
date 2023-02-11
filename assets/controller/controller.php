@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // **************
     if ($_POST["opt"] == "updateUserInformations") {
         if (isset($_FILES["file"])) {
-            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], $_FILES["file"]["tmp_name"]));
+            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], $_FILES["file"]["tmp_name"], $_POST["id"]));
         } else {
-            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], "no file"));
+            echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], "no file", $_POST["id"]));
         }
     }
 

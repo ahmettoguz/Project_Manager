@@ -2576,6 +2576,7 @@ function updateUserInformation(
   ajaxData.append("username", username);
   ajaxData.append("expertise", expertise);
   ajaxData.append("password", password);
+  ajaxData.append("id", session.id);
   // console.log(ajaxData);
 
   $.ajax({
@@ -2588,7 +2589,23 @@ function updateUserInformation(
     enctype: "multipart/form-data",
     data: ajaxData,
     success: function (data) {
-      console.log(data);
+      if (data == true) {
+        // update session
+        getSession();
+        let interval = setInterval(() => {
+          if (loadedTables.includes("session")) {
+            clearInterval(interval);
+
+            // if user name is changed change it also from header part
+            assignUserInHeader();
+
+            // display message
+            alertt("User informations successfully updated.", "green");
+          }
+        }, 10);
+
+        alertt("User informations successfully updated.", "green");
+      }
     },
   });
 }
