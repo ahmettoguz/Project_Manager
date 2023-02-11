@@ -799,7 +799,7 @@ function bindForSubmission() {
 }
 
 function changeLanguage() {
-  alertt("helloooo", "green");
+  // alertt("helloooo", "green");
 }
 
 function clickMessage() {
@@ -2603,8 +2603,6 @@ function updateUserInformation(
             alertt("User informations successfully updated.", "green");
           }
         }, 10);
-
-        alertt("User informations successfully updated.", "green");
       }
     },
   });

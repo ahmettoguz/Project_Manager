@@ -490,6 +490,7 @@ function checkNewUsername($username)
 
 function updateUserInformations($name, $surname, $username, $expertise, $password, $file, $id)
 {
+    $randomNumber = null;
     global $db;
 
     // prepare sql statement
@@ -503,10 +504,13 @@ function updateUserInformations($name, $surname, $username, $expertise, $passwor
 
     // file upload
     if ($file != "no file") {
-        $sql .= ", `photo` = 'user_$id.png' ";
+        // remove old photo
+        unlink("../images/users/{$_SESSION["user"]["photo"]}");
+        $randomNumber = rand(0, 1000);
+        $sql .= ", `photo` =  'user_{$id}_{$randomNumber}.png'";
 
         // place file
-        move_uploaded_file($file, "../images/users/user_$id.png");
+        move_uploaded_file($file, "../images/users/user_{$id}_{$randomNumber}.png");
     }
 
     $sql .= "WHERE `user`.`id` = $id";
@@ -532,7 +536,7 @@ function updateUserInformations($name, $surname, $username, $expertise, $passwor
     $_SESSION["user"]["username"] = $username;
     $_SESSION["user"]["expertise"] = $expertise;
     if ($file != "no file")
-        $_SESSION["user"]["photo"] = "user_$id.png";
+        $_SESSION["user"]["photo"] = "user_{$id}_{$randomNumber}.png";
 
     return true;
 }
