@@ -28,12 +28,12 @@ $(function () {
       assignUserInHeader();
 
       performChangePage();
-      setTimeout(() => {
-        performChangePage(2);
-        setTimeout(() => {
-          openUserEditPage();
-        }, 50);
-      }, 100);
+      // setTimeout(() => {
+      //   performChangePage(2);
+      //   setTimeout(() => {
+      //     openUserEditPage();
+      //   }, 50);
+      // }, 100);
     }
   }, 10);
 
@@ -2598,6 +2598,9 @@ function updateUserInformation(
 
             // if user name is changed change it also from header part
             assignUserInHeader();
+
+            // return to user display page
+            prepareDisplayUserInformationPage();
 
             // display message
             alertt("User informations successfully updated.", "green");
