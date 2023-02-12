@@ -15,6 +15,7 @@ let leftProjectTab = 99; //all
 let addProjectSelectedMembers = [];
 let isMessageShow = false;
 let session = null;
+let selectedTaskCategory = 99; //all
 
 $(function () {
   // get session to display main pages
@@ -2628,9 +2629,13 @@ function displayMyTasks() {
   let output = `
                   <div id="myTaskFrame">
                     <div class="categoryContainer">`;
+  output += `
+                      <div onclick="changeTaskCategory(this,99)" class="category">All</div>`;
   for (let i = 0; i < taskStates.length; i++) {
     output += `
-                      <div class="category">${taskStates[i].state}</div>`;
+                      <div onclick="changeTaskCategory(this,${
+                        i + 1
+                      })" class="category">${taskStates[i].state}</div>`;
   }
   output += `
                     </div>
@@ -2670,4 +2675,42 @@ function displayMyTasks() {
   // output += ``;
 
   $("#main .pageBody .body").html(output);
+
+  // change category to last state
+  changeTaskCategory(null, selectedTaskCategory);
+}
+
+function changeTaskCategory(element, num = null) {
+  selectedTaskCategory = num;
+
+  if (num == 99) console.log("Category is changed to: all");
+  else console.log("Category is changed to:", taskStates[num - 1].state);
+
+  // remove all colors from tabs
+  $("#myTaskFrame .categoryContainer .category").removeClass(
+    "categorySelected"
+  );
+  $("#myTaskFrame .categoryContainer .category").removeClass(
+    "categorySelected99"
+  );
+  for (let i = 1; i <= taskStates.length; i++)
+    $("#myTaskFrame .categoryContainer .category").removeClass(
+      "categorySelected" + i
+    );
+
+  if (element != null) {
+    // add class to selected one
+    $(element).addClass("categorySelected");
+    $(element).addClass("categorySelected" + num);
+  } else {
+    let categories = $("#myTaskFrame .categoryContainer .category");
+
+    if (num == 99) {
+      $(categories[0]).addClass("categorySelected");
+      $(categories[0]).addClass("categorySelected" + num);
+    } else {
+      $(categories[num]).addClass("categorySelected");
+      $(categories[num]).addClass("categorySelected" + num);
+    }
+  }
 }

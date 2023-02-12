@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  user-select: none;
 }
 
 #myTaskFrame {
@@ -20,17 +21,56 @@
 }
 
 #myTaskFrame .categoryContainer {
-    border-radius: 5px;
-    width: 100%;
-    height: 55px;
-    box-shadow: 0 35px 6px -35px black;
-    border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  height: 55px;
+  box-shadow: 0px 15px 10px -20px #111;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 #myTaskFrame .categoryContainer .category {
-  border: 1px solid black;
-  height: 90%;
-  padding: 0 5px;
+  font-family: "Manrope", sans-serif;
+  color: rgb(47, 79, 79, 0.7);
+  font-weight: 600;
+  background-color: rgb(228, 232, 235, 0.7);
+  font-size: 20.8px;
+  border-radius: 4px;
+  height: 85%;
+  padding: 0 80px;
+  margin: 0 3px;
+  /* margin-top: 10px; */
+  /* border: 1px solid black; */
+  transition: 1s all;
+}
+
+#myTaskFrame .categoryContainer .categorySelected1 {
+  background-image: linear-gradient(var(--inProgress1), var(--inProgress2));
+}
+
+#myTaskFrame .categoryContainer .categorySelected2 {
+  background-image: linear-gradient(var(--waiting2), var(--waiting3));
+}
+
+#myTaskFrame .categoryContainer .categorySelected3 {
+  background-image: linear-gradient(var(--completed3), var(--completed1));
+}
+
+#myTaskFrame .categoryContainer .categorySelected4 {
+  background-image: linear-gradient(var(--terminated2), var(--terminated3));
+}
+
+#myTaskFrame .categoryContainer .categorySelected99 {
+  background-image: radial-gradient(
+    at 15% 20%,
+    var(--completed1),
+    var(--inProgress4)
+  );
+}
+
+#myTaskFrame .categoryContainer .categorySelected {
+  color: white;
+  box-shadow: 0px 10px 7px -10px #087fff;
 }
 
 #myTaskFrame .taskContainer {
