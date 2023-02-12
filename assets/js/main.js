@@ -42,13 +42,9 @@ $(function () {
   // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
-
-
   // * task sayfası eklenicek
   // * task ekleme sayfası eklenicek
   // * task editleme sayfası eklenicek burada task silinebilecek
-
-
 
   // * projelerde tasklara tıklanabilir olmalı
 
@@ -127,6 +123,23 @@ function changeBodyContent(pageNumber) {
 
           // create required parts
           displayUsersInMain();
+        }
+      }, 100);
+    } else if (pageName == "Tasks") {
+      constructPageBody(pageNumber);
+      //get required data
+      getTasks();
+      getTaskStates();
+
+      let interval = setInterval(() => {
+        if (
+          loadedTables.includes("task") &&
+          loadedTables.includes("task_state")
+        ) {
+          clearInterval(interval);
+
+          // create required parts
+          displayMyTasks();
         }
       }, 100);
     }
@@ -2609,4 +2622,27 @@ function updateUserInformation(
       }
     },
   });
+}
+
+function displayMyTasks() {
+  let output = `
+                  <div id="myTaskFrame">
+                    <div class="categoryContainer">
+                      <div class="category">All</div>
+                      <div class="category">Completed</div>
+                      <div class="category">Terminated</div>
+                      <div class="category">Verified</div>
+                    </div>
+                    <div class="taskContainer">
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                    </div>
+                  </div>
+              `;
+
+  // output += ``;
+
+  $("#main .pageBody .body").html(output);
 }
