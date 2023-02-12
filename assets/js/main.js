@@ -2628,10 +2628,10 @@ function displayMyTasks() {
   let output = `
                   <div id="myTaskFrame">
                     <div class="categoryContainer">`;
-for (let i = 0; i < taskStates.length; i++) {
-  output += `
+  for (let i = 0; i < taskStates.length; i++) {
+    output += `
                       <div class="category">${taskStates[i].state}</div>`;
-}  
+  }
   output += `
                     </div>
                     <div class="taskContainer">
