@@ -27,7 +27,7 @@ $(function () {
       assignCompanyInHeader();
       assignUserInHeader();
 
-      performChangePage();
+      performChangePage(1);
       // setTimeout(() => {
       //   performChangePage(2);
       //   setTimeout(() => {
@@ -2627,13 +2627,38 @@ function updateUserInformation(
 function displayMyTasks() {
   let output = `
                   <div id="myTaskFrame">
-                    <div class="categoryContainer">
-                      <div class="category">All</div>
-                      <div class="category">Completed</div>
-                      <div class="category">Terminated</div>
-                      <div class="category">Verified</div>
+                    <div class="categoryContainer">`;
+for (let i = 0; i < taskStates.length; i++) {
+  output += `
+                      <div class="category">${taskStates[i].state}</div>`;
+}  
+  output += `
                     </div>
                     <div class="taskContainer">
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
+                      <div class="task">
+                        <div class="name">Prepare hardware</div>
+                        <div class="due">19 day for due</div>
+                      </div>
                       <div class="task">
                         <div class="name">Prepare hardware</div>
                         <div class="due">19 day for due</div>

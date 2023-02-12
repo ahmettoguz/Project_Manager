@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/members.css">
     <link rel="stylesheet" href="../css/userEdit.css">
+    <link rel="stylesheet" href="../css/tasks.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
