@@ -39,16 +39,16 @@ $(function () {
 
   // YAPILACAKLAR
   // boss ve owner kullanıcının department'ını değiştirebilecek
-
   // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
-
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
-  // * task editleme sayfası eklenicek burada task silinebilecek
+
 
   // * task sayfası eklenicek
-
   // * task ekleme sayfası eklenicek
+  // * task editleme sayfası eklenicek burada task silinebilecek
+
+
 
   // * projelerde tasklara tıklanabilir olmalı
 

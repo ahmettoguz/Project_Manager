@@ -499,8 +499,10 @@ function updateUserInformations($name, $surname, $username, $expertise, $passwor
     $sql .= " `name` = '$name', `surname` = '$surname', `username` = '$username', `expertise` = '$expertise' ";
 
     // update password if exist
-    if ($password != "")
+    if ($password != "") {
+        $password = sha1($password . "project_manager");
         $sql .= ", `password` = '$password' ";
+    }
 
     // file upload
     if ($file != "no file") {
