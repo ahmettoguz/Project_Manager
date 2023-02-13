@@ -2642,22 +2642,10 @@ function displayMyTasks() {
   }
   output += `
                     </div>
-                    <div class="taskContainer">`;
-  for (let i = 0; i < tasks.length; i++) {
-    output += `
-                      <div class="task">
-                        <div class="name">${tasks[i].name}</div>
-                        <div class="due">${getDateDifferenceMeaningfull(
-                          tasks[i].due
-                        )}</div>
-                      </div>`;
-  }
-  output += `
+                    <div class="taskContainer">
                     </div>
                   </div>
               `;
-
-  // output += ``;
 
   $("#main .pageBody .body").html(output);
 
@@ -2677,7 +2665,24 @@ function changeTaskCategory(element, num = null) {
 }
 
 function changeTaskAccToCategory(num) {
-  // $("#myTaskFrame > div.taskContainer").html(1);
+  let output = "";
+  for (let i = 0; i < tasks.length; i++) {
+    if (
+      session.department_id == tasks[i].department_id &&
+      session.id == tasks[i].user_id &&
+      (num == 99 || num == tasks[i].state_id)
+    ) {
+      output += `
+                      <div class="task">
+                        <div class="name">${tasks[i].name}</div>
+                        <div class="due">${getDateDifferenceMeaningfull(
+                          tasks[i].due
+                        )}</div>
+                      </div>`;
+    }
+  }
+
+  $("#myTaskFrame > div.taskContainer").html(output);
 }
 
 function changeCategoryColor(element, num) {

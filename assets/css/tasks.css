@@ -29,7 +29,7 @@
   box-shadow: 0px 15px 10px -20px #111;
   align-items: flex-start;
   align-content: flex-start;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 #myTaskFrame .categoryContainer .category {
@@ -140,7 +140,7 @@
   /* border: 1px solid black; */
   transition: 200ms ease;
   cursor: pointer;
-  filter: drop-shadow(1.5px 1.5px 0 black );
+  filter: drop-shadow(1.5px 1.5px 0 black);
 }
 
 #myTaskFrame .taskContainer .task .due {
