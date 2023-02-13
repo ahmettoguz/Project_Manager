@@ -152,7 +152,7 @@ function getTasks()
     global $db;
 
     try {
-        $sql = "select task.id as task_id, department_id, project_id, user_id, name, start_date, end_date, description, comment, state_id, task_state.state
+        $sql = "select task.id as task_id, department_id, project_id, user_id, name, start_date, end_date, description, comment, state_id, task_state.state, TIMEDIFF(end_date, current_timestamp())  as due
         from task inner join task_state ON  state_id = task_state.id";
         $stmt = $db->prepare($sql);
         $stmt->execute();

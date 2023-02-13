@@ -12,12 +12,14 @@
   /* width: 100%; */
   /* height: 100%; */
   width: 1400px;
-  height: 540px;
+  /* height: 540px; */
+  height: 102%;
   border-radius: 5px;
   flex-direction: column;
   justify-content: space-around;
   /* border: 1px solid black; */
   /* box-shadow: 0 0 8px #8c78ba; */
+  overflow: hidden;
 }
 
 #myTaskFrame .categoryContainer {
@@ -27,6 +29,7 @@
   box-shadow: 0px 15px 10px -20px #111;
   align-items: flex-start;
   align-content: flex-start;
+  overflow:hidden;
 }
 
 #myTaskFrame .categoryContainer .category {
@@ -74,26 +77,73 @@
 }
 
 #myTaskFrame .taskContainer {
-  border: 2px solid black;
   border-radius: 5px;
   width: 100%;
-  height: 440px;
+  height: 470px;
   flex-wrap: wrap;
   align-content: flex-start;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  overflow: auto;
+  /* border: 2px solid black; */
 }
 
 #myTaskFrame .taskContainer .task {
-  border: 1px solid black;
-  margin-top: 10px;
-  width: 33%;
-  height: 100px;
+  margin-top: 18px;
+  background-image: radial-gradient(at 20% 0%, white 40%, rgb(230, 238, 240));
+  /* width: 33%;
+  height: 100px; */
+  width: 430px;
+  height: 130px;
+  flex-direction: column;
+  border-radius: 5px;
+  font-family: "Manrope", sans-serif;
+  box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+  transition: 200ms;
+  /* border: 1px solid black; */
 }
 
+#myTaskFrame .taskContainer .task:hover {
+  box-shadow: rgb(0 0 0 / 37%) 0px 3px 6px, rgb(0 0 0 / 40%) 0px 3px 6px;
+}
+
+#myTaskFrame .taskContainer .task div {
+  width: 98%;
+}
 #myTaskFrame .taskContainer .task .name {
-  border: 1px solid black;
+  text-align: center;
+  display: flex;
+  height: 65%;
+  position: relative;
+  padding-right: 50px;
+  padding-left: 50px;
+  /* border: 1px solid black; */
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#myTaskFrame .taskContainer .task .name::after {
+  display: block;
+  content: "";
+  box-sizing: border-box;
+  width: 7%;
+  height: 37%;
+  position: absolute;
+  left: 93%;
+  top: 0;
+  background-image: url(../images/main/task/info.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 1.5px;
+  border-radius: 50%;
+  background-origin: content-box;
+  /* border: 1px solid black; */
+  transition: 200ms ease;
+  cursor: pointer;
+  filter: drop-shadow(1.5px 1.5px 0 black );
 }
 
 #myTaskFrame .taskContainer .task .due {
-  border: 1px solid black;
+  height: 30%;
+  /* border: 1px solid black; */
 }

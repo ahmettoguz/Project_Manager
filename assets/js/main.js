@@ -2626,6 +2626,9 @@ function updateUserInformation(
 }
 
 function displayMyTasks() {
+  // sort tasks
+  tasks.sort(sortByDue);
+
   let output = `
                   <div id="myTaskFrame">
                     <div class="categoryContainer">`;
@@ -2639,35 +2642,17 @@ function displayMyTasks() {
   }
   output += `
                     </div>
-                    <div class="taskContainer">
+                    <div class="taskContainer">`;
+  for (let i = 0; i < tasks.length; i++) {
+    output += `
                       <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
-                      <div class="task">
-                        <div class="name">Prepare hardware</div>
-                        <div class="due">19 day for due</div>
-                      </div>
+                        <div class="name">${tasks[i].name}</div>
+                        <div class="due">${getDateDifferenceMeaningfull(
+                          tasks[i].due
+                        )}</div>
+                      </div>`;
+  }
+  output += `
                     </div>
                   </div>
               `;
@@ -2686,6 +2671,16 @@ function changeTaskCategory(element, num = null) {
   if (num == 99) console.log("Category is changed to: all");
   else console.log("Category is changed to:", taskStates[num - 1].state);
 
+  changeTaskAccToCategory(num);
+
+  changeCategoryColor(element, num);
+}
+
+function changeTaskAccToCategory(num) {
+  // $("#myTaskFrame > div.taskContainer").html(1);
+}
+
+function changeCategoryColor(element, num) {
   // remove all colors from tabs
   $("#myTaskFrame .categoryContainer .category").removeClass(
     "categorySelected"
@@ -2713,4 +2708,25 @@ function changeTaskCategory(element, num = null) {
       $(categories[num]).addClass("categorySelected" + num);
     }
   }
+}
+
+function sortByDue(a, b) {
+  if (a.due < b.due) {
+    return 1;
+  }
+
+  if (a.due > b.due) {
+    return -1;
+  }
+
+  if (
+    a.due == null &&
+    getDateDifferenceMeaningfull(b.due) == "due is expired"
+  ) {
+    return -1;
+  }
+
+  if (a.due == b.due) return 0;
+
+  return 0;
 }
