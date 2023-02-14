@@ -198,7 +198,7 @@
 }
 #addTask > .inputs > .right > .dateContainer > .bottom > div {
   margin-right: 20px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 /* *********************** */
