@@ -2775,12 +2775,12 @@ function openAddTaskPage() {
 
                           <div class="descriptionContainer">
                             <div class="label">Explain this task.</div>
-                            <textarea class="description" cols="30" rows="10"></textarea>
+                            <textarea class="description" cols="30" rows="5" maxlength="150"></textarea>
                           </div>
 
                           <div class="commentContainer">
                             <div class="label">Do you have any comments for this task?</div>
-                            <textarea class="comment" cols="30" rows="10"></textarea>
+                            <textarea class="comment" cols="30" rows="5" maxlength="150"></textarea>
                           </div>
 
                         </div>
@@ -2789,6 +2789,8 @@ function openAddTaskPage() {
                             <div class="label">Which project you would like to add this task?</div>
                             <select class="project">`;
 
+  output += `
+                                <option value="-1" selected disabled>---</option>`;
   for (let i = 0; i < projects.length; i++) {
     if (projects[i].department_id == session.department_id)
       output += `
@@ -2802,6 +2804,8 @@ function openAddTaskPage() {
                           <div class="asigneeContainer">
                             <div class="label">To whom you would like to assign this task?</div>
                             <select class="assignee">`;
+  output += `
+                                <option value="-1" selected disabled>---</option>`;
   for (const id in users) {
     output += `
                                 <option value="${id}">${users[id].name} ${users[id].surname}</option>`;
@@ -2814,6 +2818,8 @@ function openAddTaskPage() {
                             <div class="label">Indicate the status of this task</div>
                             <select class="status">`;
 
+  output += `
+                                <option value="-1" selected disabled>---</option>`;
   for (let i = 0; i < taskStates.length; i++) {
     output += `
                                 <option value="${taskStates[i].id}">${taskStates[i].state}</option>`;
@@ -2824,11 +2830,13 @@ function openAddTaskPage() {
 
                           <div class="dateContainer">
                             <div class="label">Specify the start and end date of task.</div>
-                            <div class="left">
-                              <input type="date" class="startDate" />
-                            </div>
-                            <div class="right">
-                              <input type="date" class="endDate" />
+                            <div class="bottom">
+                              <div class="left">
+                                <input type="date" class="startDate" />
+                              </div>
+                              <div class="right">
+                                <input type="date" class="endDate" />
+                              </div>
                             </div>
                           </div>
 

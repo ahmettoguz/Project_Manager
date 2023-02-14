@@ -2,15 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-sizing: border-box;
-  overflow: hidden;
-  font-family: "Outfit", sans-serif;
+  /* overflow: hidden; */
   user-select: none;
+}
+
+#addTask div,
+#addTask input[type="text"],
+#addTask textarea,
+#addTask select {
+  box-sizing: border-box;
+  font-family: "Outfit", sans-serif;
+  font-size: 20px;
 }
 
 #addTask {
   margin: 10px auto;
-  width: 1000px;
+  width: 900px;
   height: 520px;
   border-radius: 5px;
 
@@ -23,7 +30,7 @@
 #addTask > .header {
   width: 100%;
   height: 10%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 #addTask > .header > .text {
@@ -36,7 +43,7 @@
 #addTask > .inputs {
   height: 80%;
   width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
 
 /* left and right part */
@@ -44,122 +51,153 @@
   height: 100%;
   width: 100%;
   flex-direction: column;
-  border: 1px solid black;
+  justify-content: space-around;
+  /* border: 1px solid black; */
 }
 
-#addTask > .inputs > .left {
-  border: 1px solid black;
+/* #addTask > .inputs > .left {
+   border: 1px solid black; 
+} */
+
+#addTask > .inputs > .left > div {
+  height: 30%;
+  width: 90%;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+#addTask > .inputs > .left > div > input {
+  border: outset 2px silver;
+  outline-width: 0px;
+  transition: 200ms ease;
+}
+
+#addTask > .inputs > .left > div > input:hover,
+#addTask > .inputs > .left > div > input:focus,
+#addTask > .inputs > .left > div > textarea:hover,
+#addTask > .inputs > .left > div > textarea:focus,
+#addTask > .inputs > .right > .projectContainer > select:focus,
+#addTask > .inputs > .right > .asigneeContainer > select:focus,
+#addTask > .inputs > .right > .statusContainer > select:focus,
+#addTask > .inputs > .right > .projectContainer > select:hover,
+#addTask > .inputs > .right > .asigneeContainer > select:hover,
+#addTask > .inputs > .right > .statusContainer > select:hover {
+  box-shadow: 0 0 0 1px rgb(102, 243, 137);
+  border-style: inset;
 }
 
 #addTask > .inputs > .left > .nameContainer {
-  border: 1px solid black;
+  height: 20%;
+  justify-content: space-around;
+  /* border: 1px solid black; */
 }
 
-#addTask > .inputs > .left > .nameContainer > .label {
+/* #addTask > .inputs > .left > .nameContainer > .label {
   border: 1px solid black;
-}
+} */
 
 #addTask > .inputs > .left > .nameContainer > input {
-  border: 1px solid black;
+  width: 100%;
+  padding-left: 5px;
 }
 
-#addTask > .inputs > .left > .descriptionContainer {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .left > .descriptionContainer > .label {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .left > .descriptionContainer > textarea {
-  border: 1px solid black;
-}
-
+#addTask > .inputs > .left > .descriptionContainer,
 #addTask > .inputs > .left > .commentContainer {
-  border: 1px solid black;
+  justify-content: space-between;
+  /* border: 1px solid black; */
 }
 
+/* #addTask > .inputs > .left > .descriptionContainer > .label,
 #addTask > .inputs > .left > .commentContainer > .label {
   border: 1px solid black;
-}
+} */
 
+#addTask > .inputs > .left > .descriptionContainer > textarea,
 #addTask > .inputs > .left > .commentContainer > textarea {
-  border: 1px solid black;
+  width: 100%;
+  height: 70%;
+  border: outset 2px silver;
+  outline-width: 0px;
+  resize: none;
+  transition: 200ms ease;
 }
 
 #addTask > .inputs > .right {
-  border: 1px solid black;
+  position: relative;
+  /* border: 1px solid black; */
 }
+
+#addTask > .inputs > .right::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 2px;
+  height: 80%;
+  background-image: linear-gradient(45deg, silver, lightseagreen, silver);
+}
+
 /* project, assignee, status, date Containers */
 #addTask > .inputs > .right > div {
-  width: 100%;
+  width: 90%;
   height: 25%;
   flex-direction: column;
-  border: 1px solid black;
-}
-#addTask > .inputs > .right select {
-  width: 60%;
+  /* border: 1px solid black; */
 }
 
-#addTask > .inputs > .right > .projectContainer {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .projectContainer > .label {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .projectContainer > select {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .projectContainer > select > option {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .asigneeContainer {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .asigneeContainer > .label {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .asigneeContainer > select {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .asigneeContainer > select > option {
-  border: 1px solid black;
-}
-
+#addTask > .inputs > .right > .projectContainer,
+#addTask > .inputs > .right > .asigneeContainer,
 #addTask > .inputs > .right > .statusContainer {
-  border: 1px solid black;
+  opacity: 1;
+  /* border: 1px solid black; */
 }
+
+#addTask > .inputs > .right > .projectContainer > .label,
+#addTask > .inputs > .right > .asigneeContainer > .label,
 #addTask > .inputs > .right > .statusContainer > .label {
-  border: 1px solid black;
+  justify-content: flex-start;
+  width: 100%;
+  height: 30%;
+  /* border: 1px solid black; */
 }
+
+#addTask > .inputs > .right > .projectContainer > select,
+#addTask > .inputs > .right > .asigneeContainer > select,
+#addTask > .inputs > .right > .statusContainer > select {
+  padding-left: 5px;
+  margin-top: 5px;
+  outline: none;
+  cursor: pointer;
+  font-size: 18px;
+  width: 100%;
+  height: 30%;
+  transition: 200ms ease;
+  border: outset 2px silver;
+  /* border: 1px solid black; */
+}
+
+#addTask > .inputs > .right > .projectContainer > select > option,
+#addTask > .inputs > .right > .asigneeContainer > select > option,
 #addTask > .inputs > .right > .statusContainer > select > option {
   border: 1px solid black;
 }
 
+/* #addTask > .inputs > .right > .dateContainer {
+  border: 1px solid black;
+} */
 #addTask > .inputs > .right > .dateContainer > .label {
-  border: 1px solid black;
+  width: 100%;
+  justify-content: flex-start;
+  /* border: 1px solid black; */
 }
 
-#addTask > .inputs > .right > .dateContainer > .left {
-  border: 1px solid black;
+#addTask > .inputs > .right > .dateContainer > .bottom {
+  width: 100%;
+  margin-top: 10px;
+  justify-content: flex-start;
 }
-
-#addTask > .inputs > .right > .dateContainer > .left > input {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .dateContainer > .right {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .right > .dateContainer > .right > input {
+#addTask > .inputs > .right > .dateContainer > .bottom > div {
+  margin-right: 20px;
   border: 1px solid black;
 }
 
@@ -167,13 +205,33 @@
 #addTask > .buttons {
   height: 10%;
   width: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 }
-#addTask > .buttons > .cancel {
-  border: 1px solid black;
+
+/* cancel and create buttons */
+#addTask > .buttons > div {
+  border-radius: 5px;
+  width: 17%;
+  height: 70%;
+  margin: 0 12px;
+  position: relative;
+  border: 2px solid grey;
+  transition: 300ms ease;
+  cursor: pointer;
 }
-#addTask > .buttons > .create {
-  border: 1px solid black;
+
+#addTask > .buttons > .cancel:hover {
+  box-shadow: 0 0 20px -5px orangered;
+  width: 19%;
+  font-size: 21px;
+}
+#addTask > .buttons > .create:hover {
+  box-shadow: 0 0 20px -5px cyan;
+  width: 20%;
+  font-size: 21px;
+}
+#addTask > .buttons > div:active {
+  transform: scale(0.95);
 }
 /* *********************** */
 /* *********************** */
