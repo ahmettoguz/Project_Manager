@@ -29,12 +29,9 @@ $(function () {
       assignUserInHeader();
 
       performChangePage(1);
-      // setTimeout(() => {
-      //   performChangePage(2);
-      //   setTimeout(() => {
-      //     openUserEditPage();
-      //   }, 50);
-      // }, 100);
+      setTimeout(() => {
+        openAddTaskPage();
+      }, 100);
     }
   }, 10);
 
@@ -133,11 +130,13 @@ function changeBodyContent(pageNumber) {
       //get required data
       getTasks();
       getTaskStates();
+      getUsers();
 
       let interval = setInterval(() => {
         if (
           loadedTables.includes("task") &&
-          loadedTables.includes("task_state")
+          loadedTables.includes("task_state") &&
+          loadedTables.includes("user")
         ) {
           clearInterval(interval);
 

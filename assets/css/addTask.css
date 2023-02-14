@@ -1,0 +1,167 @@
+#addTask div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: "Outfit", sans-serif;
+}
+
+#addTask {
+  margin: 10px auto;
+  width: 1000px;
+  height: 520px;
+  border-radius: 5px;
+
+  box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
+  background-image: linear-gradient(rgb(217, 237, 254), white);
+  /* border: 1px solid black; */
+}
+
+/* *********************** */
+#addTask > .header {
+  width: 100%;
+  height: 10%;
+  border: 1px solid black;
+}
+
+#addTask > .header > .text {
+  font-weight: bold;
+  font-size: 24px;
+  /* border: 1px solid black; */
+}
+
+/* *********************** */
+#addTask > .inputs {
+  height: 80%;
+  width: 100%;
+  border: 1px solid black;
+}
+
+/* left and right part */
+#addTask > .inputs > div {
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .nameContainer {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .nameContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .nameContainer > input {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .descriptionContainer {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .descriptionContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .descriptionContainer > textarea {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .dateContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .dateContainer > .left {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .dateContainer > .left > input {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .dateContainer > .right {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .left > .dateContainer > .right > input {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .projectContainer {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .projectContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .projectContainer > select {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .projectContainer > select > option {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .asigneeContainer {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .asigneeContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .asigneeContainer > select {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .asigneeContainer > select > option {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .statusContainer {
+  border: 1px solid black;
+}
+#addTask > .inputs > .right > .statusContainer > .label {
+  border: 1px solid black;
+}
+#addTask > .inputs > .right > .statusContainer > select > option {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .commentContainer {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .commentContainer > .label {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .commentContainer > textarea {
+  border: 1px solid black;
+}
+/* *********************** */
+#addTask > .buttons {
+  height: 10%;
+  width: 100%;
+  border: 1px solid black;
+}
+#addTask > .buttons > .cancel {
+  border: 1px solid black;
+}
+#addTask > .buttons > .create {
+  border: 1px solid black;
+}
+/* *********************** */
+/* *********************** */
