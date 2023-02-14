@@ -2684,8 +2684,8 @@ function changeTaskAccToCategory(num) {
                       </div>`;
     }
   }
-
-  output += `
+  if (session.user_type == "boss")
+    output += `
                       <div class="task">
                         <div onclick="openAddTaskPage()" class="addTask">
                           <div class="addIcon"></div>
@@ -2748,5 +2748,74 @@ function sortByDue(a, b) {
 }
 
 function openAddTaskPage() {
-  alertt(1);
+  let output = "";
+
+  output += `
+                    <div id="addTask">
+                      <div class="header">
+                        <div class="text">Create New Task</div>
+                      </div>
+
+                      <div class="inputs">
+                        <div class="left">
+                          <div class="nameContainer">
+                            <div class="label">What will be the name of the task?</div>
+                            <input type="text" class="name" />
+                          </div>
+
+                          <div class="descriptionContainer">
+                            <div class="label">Explain this task.</div>
+                            <textarea class="description" cols="30" rows="10"></textarea>
+                          </div>
+
+                          <div class="dateContainer">
+                            <div class="label">Specify the start and end date of task.</div>
+                            <div class="left">
+                              <input type="date" class="startDate" />
+                            </div>
+                            <div class="right">
+                              <input type="date" class="endDate" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="right">
+                          <div class="projectContainer">
+                            <div class="label"></div>
+                            <select class="project">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                            </select>
+                          </div>
+
+                          <div class="asigneeContainer">
+                            <div class="label">To whom you would like to assign this task?</div>
+                            <select class="assignee">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                            </select>
+                          </div>
+
+                          <div class="statusContainer">
+                            <div class="label">Indicate the status of this task</div>
+                            <select class="status">
+                              <option value="0">0</option>
+                              <option value="1">1</option>
+                            </select>
+                          </div>
+
+                          <div class="commentContainer">
+                            <div class="label">Do you have any comments for this task?</div>
+                            <textarea class="comment" cols="30" rows="10"></textarea>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="buttons">
+                        <div class="cancel">Cancel</div>
+                        <div class="create">Create</div>
+                      </div>
+                    </div>
+  `;
+
+  $("#main > section > div.body").html(output);
 }
