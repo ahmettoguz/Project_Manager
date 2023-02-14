@@ -542,3 +542,31 @@ function updateUserInformations($name, $surname, $username, $expertise, $passwor
 
     return true;
 }
+
+function addTask($department_id, $project_id, $user_id, $name, $start_date, $end_date, $description, $comment, $state_id)
+{
+    if ($end_date == "")
+        $end_date = null;
+
+    global $db;
+
+    try {
+        $sql = "insert into task (department_id, project_id, user_id, name, start_date, end_date, description, comment, state_id) values (:department_id, :project_id, :user_id, :name, :start_date, :end_date, :description, :comment, :state_id)";
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(":department_id", $department_id, PDO::PARAM_INT);
+        $stmt->bindValue(":project_id", $project_id, PDO::PARAM_INT);
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_INT);
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->bindValue(":start_date", $start_date, PDO::PARAM_STR);
+        $stmt->bindValue(":end_date", $end_date, PDO::PARAM_STR);
+        $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+        $stmt->bindValue(":comment", $comment, PDO::PARAM_STR);
+        $stmt->bindValue(":state_id", $state_id, PDO::PARAM_INT);
+        $stmt->execute();
+    } catch (PDOException $ex) {
+        die("<p>Insert Error : " . $ex->getMessage());
+        return false;
+    }
+
+    return true;
+}

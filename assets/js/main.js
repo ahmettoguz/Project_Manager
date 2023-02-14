@@ -28,10 +28,11 @@ $(function () {
       assignCompanyInHeader();
       assignUserInHeader();
 
-      performChangePage(1);
-      setTimeout(() => {
-        prepareAddTaskPage();
-      }, 100);
+      performChangePage();
+
+      // setTimeout(() => {
+      //   prepareAddTaskPage();
+      // }, 100);
     }
   }, 10);
 
@@ -40,7 +41,6 @@ $(function () {
   // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
-  // * task ekleme sayfası eklenicek
   // * task editleme sayfası eklenicek burada task silinebilecek
 
   // * projelerde tasklara tıklanabilir olmalı
@@ -2770,7 +2770,7 @@ function openAddTaskPage() {
                         <div class="left">
                           <div class="nameContainer">
                             <div class="label">What will be the name of the task?</div>
-                            <input type="text" class="name" />
+                            <input type="text" class="name" maxlength="50" />
                           </div>
 
                           <div class="descriptionContainer">
@@ -2815,7 +2815,7 @@ function openAddTaskPage() {
                           </div>
 
                           <div class="statusContainer">
-                            <div class="label">Indicate the status of this task</div>
+                            <div class="label">Indicate the state of this task</div>
                             <select class="status">`;
 
   output += `
@@ -2844,11 +2844,135 @@ function openAddTaskPage() {
                       </div>
 
                       <div class="buttons">
-                        <div class="cancel">Cancel</div>
-                        <div class="create">Create</div>
+                        <div onclick="performChangePage(1)" class="cancel">Cancel</div>
+                        <div onclick="takeInput4AddTask()" class="create">Create</div>
                       </div>
                     </div>
   `;
 
   $("#main > section > div.body").html(output);
+
+  // assign start date as today
+  let d = new Date();
+  $(
+    "#addTask > div.inputs > div.right > div.dateContainer > div.bottom > div.left > input"
+  ).val(
+    d.getFullYear() +
+      "-" +
+      ("0" + (d.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + d.getDate()).slice(-2)
+  );
+}
+
+function takeInput4AddTask() {
+  let errors = [];
+  let name = $("#addTask > div.inputs > div.left > div.nameContainer > input");
+  let description = $(
+    "#addTask > div.inputs > div.left > div.descriptionContainer > textarea"
+  );
+  let comment = $(
+    "#addTask > div.inputs > div.left > div.commentContainer > textarea"
+  );
+
+  let project = $(
+    "#addTask > div.inputs > div.right > div.projectContainer > select"
+  );
+  let assignee = $(
+    "#addTask > div.inputs > div.right > div.asigneeContainer > select"
+  );
+  let state = $(
+    "#addTask > div.inputs > div.right > div.statusContainer > select"
+  );
+  let startDate = $(
+    "#addTask > div.inputs > div.right > div.dateContainer > div.bottom > div.left > input"
+  );
+  let endDate = $(
+    "#addTask > div.inputs > div.right > div.dateContainer > div.bottom > div.right > input"
+  );
+
+  console.log("\n----Add Task Inputs----");
+  console.log("name", name.val());
+  console.log("description", description.val());
+  console.log("comment", comment.val());
+  console.log("project", project.val());
+  console.log("assignee", assignee.val());
+  console.log("state", state.val());
+  console.log("startDate", startDate.val());
+  console.log("endDate", endDate.val());
+
+  // check errors
+  if (name.val() == "") errors.push("no name");
+  if (description.val() == "") errors.push("no description");
+  if (project.val() == null) errors.push("no project");
+  if (assignee.val() == null) errors.push("no assignee");
+  if (state.val() == null) errors.push("no state");
+
+  // no error
+  if (errors.length == 0) {
+    $.post(url, {
+      opt: "addTask",
+      department_id: session.department_id,
+      project_id: project.val(),
+      user_id: assignee.val(),
+      name: name.val(),
+      startDate: startDate.val(),
+      endDate: endDate.val(),
+      description: description.val(),
+      comment: comment.val(),
+      state_id: state.val(),
+    }).then(function (data) {
+      if (data == true) {
+        // console.log(data);
+        alertt("Task successfully added.", "green");
+      } else alertt("Task cannot added!", "red");
+      performChangePage(1);
+    });
+  } else {
+    // error animation
+
+    name.removeClass("invalidInput");
+    description.removeClass("invalidInput");
+    project.removeClass("invalidInput");
+    assignee.removeClass("invalidInput");
+    state.removeClass("invalidInput");
+
+    if (errors.includes("no name")) {
+      setTimeout(() => {
+        name.addClass("invalidInput");
+        name.attr("placeholder", "Task name cannot leave as blank!");
+      }, 10);
+
+      alertt("Task name cannot leave as blank!", "yellow");
+    }
+    if (errors.includes("no description")) {
+      setTimeout(() => {
+        description.addClass("invalidInput");
+        description.attr("placeholder", "Description cannot leave as blank!");
+      }, 10);
+
+      alertt("Description cannot leave as blank!", "yellow");
+    }
+    if (errors.includes("no project")) {
+      setTimeout(() => {
+        project.addClass("invalidInput");
+      }, 10);
+
+      alertt("Select project to add task!", "yellow");
+    }
+    if (errors.includes("no assignee")) {
+      setTimeout(() => {
+        assignee.addClass("invalidInput");
+      }, 10);
+
+      alertt("Select one member to assign that task!", "yellow");
+    }
+    if (errors.includes("no state")) {
+      setTimeout(() => {
+        state.addClass("invalidInput");
+      }, 10);
+
+      alertt("Specify state of task!", "yellow");
+    }
+  }
 }

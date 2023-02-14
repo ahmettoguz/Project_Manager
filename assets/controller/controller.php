@@ -17,13 +17,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST["opt"] == "updateProject")
         echo json_encode(updateProject($_POST["projectId"], $_POST["projectName"], $_POST["description"], $_POST["addProjectStartDate"], $_POST["addProjectEndDate"], $_POST["addProjectSelectedMembers"], $_POST["progress"], $_POST["state"], $_POST["hasPhoto"]));
 
-    // **************
     if ($_POST["opt"] == "updateUserInformations") {
         if (isset($_FILES["file"])) {
             echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], $_FILES["file"]["tmp_name"], $_POST["id"]));
         } else {
             echo json_encode(updateUserInformations($_POST["name"], $_POST["surname"], $_POST["username"], $_POST["expertise"], $_POST["password"], "no file", $_POST["id"]));
         }
+    }
+
+    if ($_POST["opt"] == "addTask") {
+        echo json_encode(addTask($_POST["department_id"], $_POST["project_id"], $_POST["user_id"], $_POST["name"], $_POST["startDate"], $_POST["endDate"], $_POST["description"], $_POST["comment"], $_POST["state_id"]));
     }
 
     // *************************

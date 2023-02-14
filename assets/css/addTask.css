@@ -221,12 +221,12 @@
 }
 
 #addTask > .buttons > .cancel:hover {
-  box-shadow: 0 0 20px -5px orangered;
+  box-shadow: 0 0 20px -5px orangered, 0 0 5px orange inset;
   width: 19%;
   font-size: 21px;
 }
 #addTask > .buttons > .create:hover {
-  box-shadow: 0 0 20px -5px cyan;
+  box-shadow: 0 0 20px -5px cyan, 0 0 5px rgb(150, 235, 235) inset;
   width: 20%;
   font-size: 21px;
 }
