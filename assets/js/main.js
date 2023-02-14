@@ -227,6 +227,7 @@ function displayProjectsIn_SectionMain() {
   if (leftProjectTab == 99) {
     projects.sort(sortByName);
   } else {
+    projects.sort(sortByDue);
   }
 
   // get project users as associativer array
