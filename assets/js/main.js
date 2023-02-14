@@ -2767,19 +2767,15 @@ function openAddTaskPage() {
                             <textarea class="description" cols="30" rows="10"></textarea>
                           </div>
 
-                          <div class="dateContainer">
-                            <div class="label">Specify the start and end date of task.</div>
-                            <div class="left">
-                              <input type="date" class="startDate" />
-                            </div>
-                            <div class="right">
-                              <input type="date" class="endDate" />
-                            </div>
+                          <div class="commentContainer">
+                            <div class="label">Do you have any comments for this task?</div>
+                            <textarea class="comment" cols="30" rows="10"></textarea>
                           </div>
+
                         </div>
                         <div class="right">
                           <div class="projectContainer">
-                            <div class="label"></div>
+                            <div class="label">Which project you would like to add this task?</div>
                             <select class="project">
                               <option value="0">0</option>
                               <option value="1">1</option>
@@ -2802,10 +2798,16 @@ function openAddTaskPage() {
                             </select>
                           </div>
 
-                          <div class="commentContainer">
-                            <div class="label">Do you have any comments for this task?</div>
-                            <textarea class="comment" cols="30" rows="10"></textarea>
+                          <div class="dateContainer">
+                            <div class="label">Specify the start and end date of task.</div>
+                            <div class="left">
+                              <input type="date" class="startDate" />
+                            </div>
+                            <div class="right">
+                              <input type="date" class="endDate" />
+                            </div>
                           </div>
+
                         </div>
                       </div>
 

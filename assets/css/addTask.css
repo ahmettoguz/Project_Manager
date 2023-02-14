@@ -5,6 +5,7 @@
   box-sizing: border-box;
   overflow: hidden;
   font-family: "Outfit", sans-serif;
+  user-select: none;
 }
 
 #addTask {
@@ -74,23 +75,15 @@
   border: 1px solid black;
 }
 
-#addTask > .inputs > .left > .dateContainer > .label {
+#addTask > .inputs > .left > .commentContainer {
   border: 1px solid black;
 }
 
-#addTask > .inputs > .left > .dateContainer > .left {
+#addTask > .inputs > .left > .commentContainer > .label {
   border: 1px solid black;
 }
 
-#addTask > .inputs > .left > .dateContainer > .left > input {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .left > .dateContainer > .right {
-  border: 1px solid black;
-}
-
-#addTask > .inputs > .left > .dateContainer > .right > input {
+#addTask > .inputs > .left > .commentContainer > textarea {
   border: 1px solid black;
 }
 
@@ -140,17 +133,26 @@
   border: 1px solid black;
 }
 
-#addTask > .inputs > .right > .commentContainer {
+#addTask > .inputs > .right > .dateContainer > .label {
   border: 1px solid black;
 }
 
-#addTask > .inputs > .right > .commentContainer > .label {
+#addTask > .inputs > .right > .dateContainer > .left {
   border: 1px solid black;
 }
 
-#addTask > .inputs > .right > .commentContainer > textarea {
+#addTask > .inputs > .right > .dateContainer > .left > input {
   border: 1px solid black;
 }
+
+#addTask > .inputs > .right > .dateContainer > .right {
+  border: 1px solid black;
+}
+
+#addTask > .inputs > .right > .dateContainer > .right > input {
+  border: 1px solid black;
+}
+
 /* *********************** */
 #addTask > .buttons {
   height: 10%;
