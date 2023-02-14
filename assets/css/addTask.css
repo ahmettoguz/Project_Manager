@@ -15,7 +15,7 @@
   border-radius: 5px;
 
   box-shadow: rgb(0 0 0 / 24%) 0px 3px 8px;
-  background-image: linear-gradient(rgb(217, 237, 254), white);
+  background-image: linear-gradient(rgb(227, 254, 217), white);
   /* border: 1px solid black; */
 }
 
@@ -89,6 +89,16 @@
 
 #addTask > .inputs > .right {
   border: 1px solid black;
+}
+/* project, assignee, status, date Containers */
+#addTask > .inputs > .right > div {
+  width: 100%;
+  height: 25%;
+  flex-direction: column;
+  border: 1px solid black;
+}
+#addTask > .inputs > .right select {
+  width: 60%;
 }
 
 #addTask > .inputs > .right > .projectContainer {

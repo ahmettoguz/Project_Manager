@@ -30,7 +30,7 @@ $(function () {
 
       performChangePage(1);
       setTimeout(() => {
-        openAddTaskPage();
+        prepareAddTaskPage();
       }, 100);
     }
   }, 10);
@@ -2686,7 +2686,7 @@ function changeTaskAccToCategory(num) {
   if (session.user_type == "boss")
     output += `
                       <div class="task">
-                        <div onclick="openAddTaskPage()" class="addTask">
+                        <div onclick="prepareAddTaskPage()" class="addTask">
                           <div class="addIcon"></div>
                           <div class="addText" >Add Task</div>
                         </div>
@@ -2746,6 +2746,17 @@ function sortByDue(a, b) {
   return 0;
 }
 
+function prepareAddTaskPage() {
+  getProjects();
+
+  let interval = setInterval(() => {
+    if (loadedTables.includes("project")) {
+      clearInterval(interval);
+      openAddTaskPage();
+    }
+  }, 100);
+}
+
 function openAddTaskPage() {
   let output = "";
 
@@ -2776,25 +2787,38 @@ function openAddTaskPage() {
                         <div class="right">
                           <div class="projectContainer">
                             <div class="label">Which project you would like to add this task?</div>
-                            <select class="project">
-                              <option value="0">0</option>
-                              <option value="1">1</option>
+                            <select class="project">`;
+
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].department_id == session.department_id)
+      output += `
+                                <option value="${projects[i].id}">${projects[i].name}</option>`;
+  }
+
+  output += `
                             </select>
                           </div>
 
                           <div class="asigneeContainer">
                             <div class="label">To whom you would like to assign this task?</div>
-                            <select class="assignee">
-                              <option value="0">0</option>
-                              <option value="1">1</option>
+                            <select class="assignee">`;
+  for (const id in users) {
+    output += `
+                                <option value="${id}">${users[id].name} ${users[id].surname}</option>`;
+  }
+  output += `
                             </select>
                           </div>
 
                           <div class="statusContainer">
                             <div class="label">Indicate the status of this task</div>
-                            <select class="status">
-                              <option value="0">0</option>
-                              <option value="1">1</option>
+                            <select class="status">`;
+
+  for (let i = 0; i < taskStates.length; i++) {
+    output += `
+                                <option value="${taskStates[i].id}">${taskStates[i].state}</option>`;
+  }
+  output += `
                             </select>
                           </div>
 
