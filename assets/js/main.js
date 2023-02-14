@@ -43,7 +43,6 @@ $(function () {
   // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
   // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
 
-  // * task sayfası eklenicek
   // * task ekleme sayfası eklenicek
   // * task editleme sayfası eklenicek burada task silinebilecek
 
@@ -54,6 +53,9 @@ $(function () {
   // * main sayfanın yüklenmelerini ayarlayabilirsen, özellikle company background'u
 
   // YAPILACAKLAR
+
+  // features
+  // only boss can assign task.
 });
 
 function changeBodyPage(pageNumber) {
@@ -2683,6 +2685,14 @@ function changeTaskAccToCategory(num) {
     }
   }
 
+  output += `
+                      <div class="task">
+                        <div onclick="openAddTaskPage()" class="addTask">
+                          <div class="addIcon"></div>
+                          <div class="addText" >Add Task</div>
+                        </div>
+                      </div>`;
+
   $("#myTaskFrame > div.taskContainer").html(output);
 }
 
@@ -2735,4 +2745,8 @@ function sortByDue(a, b) {
   if (a.due == b.due) return 0;
 
   return 0;
+}
+
+function openAddTaskPage() {
+  alertt(1);
 }

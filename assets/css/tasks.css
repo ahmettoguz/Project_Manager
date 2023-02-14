@@ -109,6 +109,7 @@
 #myTaskFrame .taskContainer .task div {
   width: 98%;
 }
+
 #myTaskFrame .taskContainer .task .name {
   text-align: center;
   display: flex;
@@ -146,4 +147,40 @@
 #myTaskFrame .taskContainer .task .due {
   height: 30%;
   /* border: 1px solid black; */
+}
+#myTaskFrame .taskContainer .task .addTask {
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
+  /* border: 1px solid black; */
+}
+
+#myTaskFrame .taskContainer .task .addTask .addIcon {
+  background-image: url(../images/main/add.png);
+  height: 40%;
+  width: 12%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0 5px;
+  transition: 100ms ease;
+  /* border: 1px solid black; */
+}
+#myTaskFrame .taskContainer .task .addTask .addText {
+  font-size: 22px;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  width: 25%;
+  /* border: 1px solid black; */
+  transition: 100ms ease;
+}
+
+#myTaskFrame .taskContainer .task .addTask:hover .addIcon {
+  transform: scale(1.1) translateX(-2px);
+}
+
+#myTaskFrame .taskContainer .task .addTask:hover .addText {
+  font-size: 24px;
+  font-weight: 700;
+  transform: translateX(5px);
 }
