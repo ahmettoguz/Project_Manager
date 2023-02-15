@@ -31,14 +31,30 @@ $(function () {
       performChangePage(1);
 
       setTimeout(() => {
-        displayTaskDetails(13);
+        getProjects();
+        getProjectStates();
+        getTaskStates();
+        getUsers();
+
+        let interval = setInterval(() => {
+          if (
+            loadedTables.includes("project") &&
+            loadedTables.includes("project_state") &&
+            loadedTables.includes("task_state") &&
+            loadedTables.includes("user")
+          ) {
+            clearInterval(interval);
+
+            displayTaskDetails(13);
+          }
+        }, 10);
       }, 100);
 
       // setTimeout(() => {
       //   prepareAddTaskPage();
       // }, 100);
     }
-  }, 10);
+  }, 100);
 
   // features
   // only boss can assign task.
@@ -2994,17 +3010,19 @@ function prepareTaskDetails(event, element) {
 function displayTaskDetails(id) {
   let task = findSpecificTask(id);
   let user = users[task.user_id];
-  let project = findSpecificProject();
-  
-  console.log(task);
+  let project = findSpecificProject(task.project_id);
+  let projectState = findSpecificProjectState(project.state_id);
+
+  // console.log(task);
   // console.log(user);
+  // console.log(project);
+  // console.log(projectState);
 
   output = "";
 
   let due = task.due;
   let startDate = task.start_date;
   let endDate = task.end_date;
-
 
   output += `
                         <div id="taskDetail">
@@ -3063,14 +3081,14 @@ function displayTaskDetails(id) {
                               </div>
 
                               <div class="projectNameContainer">
-                                <div class="text"></div>
+                                <div class="text">This task is part of ${project.name} project.</div>
                               </div>
 
                               <div class="stateContainer">
-                                <div class="header"></div>
+                                <div class="header">Project State</div>
                                 <div>
                                   <div class="icon"></div>
-                                  <div class="text"></div>
+                                  <div class="text">${projectState}</div>
                                 </div>
                               </div>
                             </div>
@@ -3085,5 +3103,17 @@ function displayTaskDetails(id) {
 function findSpecificTask(id) {
   for (let i = 0; i < tasks.length; i++) {
     if (tasks[i].task_id == id) return tasks[i];
+  }
+}
+
+function findSpecificProject(id) {
+  for (let i = 0; i < projects.length; i++) {
+    if (projects[i].id == id) return projects[i];
+  }
+}
+
+function findSpecificProjectState(id) {
+  for (let i = 0; i < projectStates.length; i++) {
+    if (projectStates[i].id == id) return projectStates[i].state;
   }
 }
