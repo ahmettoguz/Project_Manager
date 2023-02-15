@@ -28,7 +28,7 @@ $(function () {
       assignCompanyInHeader();
       assignUserInHeader();
 
-      performChangePage();
+      performChangePage(1);
 
       // setTimeout(() => {
       //   prepareAddTaskPage();
@@ -2661,7 +2661,9 @@ function changeTaskAccToCategory(num) {
     ) {
       output += `
                       <div class="task">
-                        <div class="name">${tasks[i].name}</div>
+                        <div onclick="prepareTaskDetails(event,this)" class="name">${
+                          tasks[i].name
+                        }</div>
                         <div class="due">${getDateDifferenceMeaningfull(
                           tasks[i].due
                         )}</div>
@@ -2876,15 +2878,15 @@ function takeInput4AddTask() {
     "#addTask > div.inputs > div.right > div.dateContainer > div.bottom > div.right > input"
   );
 
-  console.log("\n----Add Task Inputs----");
-  console.log("name", name.val());
-  console.log("description", description.val());
-  console.log("comment", comment.val());
-  console.log("project", project.val());
-  console.log("assignee", assignee.val());
-  console.log("state", state.val());
-  console.log("startDate", startDate.val());
-  console.log("endDate", endDate.val());
+  // console.log("\n----Add Task Inputs----");
+  // console.log("name", name.val());
+  // console.log("description", description.val());
+  // console.log("comment", comment.val());
+  // console.log("project", project.val());
+  // console.log("assignee", assignee.val());
+  // console.log("state", state.val());
+  // console.log("startDate", startDate.val());
+  // console.log("endDate", endDate.val());
 
   // check errors
   if (name.val() == "") errors.push("no name");
@@ -2960,4 +2962,38 @@ function takeInput4AddTask() {
       alertt("Specify state of task!", "yellow");
     }
   }
+}
+
+function prepareTaskDetails(event, element) {
+  if (event.offsetY < 30 && event.offsetX > 392) {
+    getProjects();
+    getProjectStates();
+    getTaskStates();
+    getUsers();
+
+    let interval = setInterval(() => {
+      if (
+        loadedTables.includes("project") &&
+        loadedTables.includes("project_state") &&
+        loadedTables.includes("task_state") &&
+        loadedTables.includes("user")
+      ) {
+        clearInterval(interval);
+
+        
+        displayTaskDetails();
+        changeHeaderLocation(1, $(element).html());
+      }
+    }, 10);
+  }
+}
+
+function displayTaskDetails() {
+
+  output = "";
+
+  output += ``;
+
+  $("#main > section > div.body").html(output);
+
 }
