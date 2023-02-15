@@ -5,5 +5,22 @@
   align-items: center;
   font-family: "Inter", sans-serif;
 }
+
 #taskDetail {
+  width: 1000px;
+  height: 520px;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+/* ------ */
+
+#taskDetail > header {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+}
+
+#taskDetail > div {
+  border: 1px solid black;
 }

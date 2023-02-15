@@ -2992,12 +2992,23 @@ function prepareTaskDetails(event, element) {
 }
 
 function displayTaskDetails(id) {
-  console.log(id);
+  let task = findSpecificTask(id);
+  let user = users[task.user_id];
+  let project = findSpecificProject();
+  
+  console.log(task);
+  // console.log(user);
+
   output = "";
+
+  let due = task.due;
+  let startDate = task.start_date;
+  let endDate = task.end_date;
+
 
   output += `
                         <div id="taskDetail">
-                          <header></header>
+                          <header>${task.name}</header>
 
                           <div>
                             <div class="left">
@@ -3007,14 +3018,14 @@ function displayTaskDetails(id) {
 
                               <div class="userContainer">
                                 <div class="icon"></div>
-                                <div class="text"></div>
+                                <div class="text">${user.name} ${user.surname}</div>
                               </div>
 
                               <div class="stateContainer">
-                                <div class="header"></div>
+                                <div class="header">State</div>
                                 <div>
                                   <div class="icon"></div>
-                                  <div class="text"></div>
+                                  <div class="text">${task.state}</div>
                                 </div>
                               </div>
                             </div>
@@ -3022,27 +3033,27 @@ function displayTaskDetails(id) {
                             <div class="middle">
                               <div class="descriptionContainer">
                                 <div class="header"></div>
-                                <div class="description"></div>
+                                <div class="description">${task.description}</div>
                               </div>
 
                               <div class="dateContainer">
                                 <div class="box">
                                   <div class="header">Due</div>
-                                  <div class="text">---</div>
+                                  <div class="text">${due}</div>
                                 </div>
                                 <div class="box">
                                   <div class="header">Start Date</div>
-                                  <div class="text">---</div>
+                                  <div class="text">${startDate}</div>
                                 </div>
                                 <div class="box">
                                   <div class="header">End Date</div>
-                                  <div class="text">---</div>
+                                  <div class="text">${endDate}</div>
                                 </div>
                               </div>
 
                               <div class="commentContainer">
                                 <div class="header"></div>
-                                <div class="comment"></div>
+                                <div class="comment">${task.comment}</div>
                               </div>
                             </div>
 
@@ -3069,4 +3080,10 @@ function displayTaskDetails(id) {
   `;
 
   $("#main > section > div.body").html(output);
+}
+
+function findSpecificTask(id) {
+  for (let i = 0; i < tasks.length; i++) {
+    if (tasks[i].task_id == id) return tasks[i];
+  }
 }
