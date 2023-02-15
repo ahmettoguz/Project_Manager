@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css/userEdit.css">
     <link rel="stylesheet" href="../css/tasks.css">
     <link rel="stylesheet" href="../css/addTask.css">
+    <link rel="stylesheet" href="../css/taskDetail.css">
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

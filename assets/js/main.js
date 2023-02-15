@@ -2980,7 +2980,6 @@ function prepareTaskDetails(event, element) {
       ) {
         clearInterval(interval);
 
-        
         displayTaskDetails();
         changeHeaderLocation(1, $(element).html());
       }
@@ -2989,11 +2988,80 @@ function prepareTaskDetails(event, element) {
 }
 
 function displayTaskDetails() {
-
   output = "";
 
-  output += ``;
+  output += `
+                        <div id="taskDetail">
+                          <header></header>
+
+                          <div>
+                            <div class="left">
+                              <div class="iconContainer">
+                                <div class="icon"></div>
+                              </div>
+
+                              <div class="userContainer">
+                                <div class="icon"></div>
+                                <div class="text"></div>
+                              </div>
+
+                              <div class="stateContainer">
+                                <div class="header"></div>
+                                <div>
+                                  <div class="icon"></div>
+                                  <div class="text"></div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="middle">
+                              <div class="descriptionContainer">
+                                <div class="header"></div>
+                                <div class="description"></div>
+                              </div>
+
+                              <div class="dateContainer">
+                                <div class="box">
+                                  <div class="header">Due</div>
+                                  <div class="text">---</div>
+                                </div>
+                                <div class="box">
+                                  <div class="header">Start Date</div>
+                                  <div class="text">---</div>
+                                </div>
+                                <div class="box">
+                                  <div class="header">End Date</div>
+                                  <div class="text">---</div>
+                                </div>
+                              </div>
+
+                              <div class="commentContainer">
+                                <div class="header"></div>
+                                <div class="comment"></div>
+                              </div>
+                            </div>
+
+                            <div class="right">
+                              <div class="iconContainer">
+                                <div class="icon"></div>
+                              </div>
+
+                              <div class="projectNameContainer">
+                                <div class="text"></div>
+                              </div>
+
+                              <div class="stateContainer">
+                                <div class="header"></div>
+                                <div>
+                                  <div class="icon"></div>
+                                  <div class="text"></div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+  
+  `;
 
   $("#main > section > div.body").html(output);
-
 }
