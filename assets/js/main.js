@@ -30,6 +30,10 @@ $(function () {
 
       performChangePage(1);
 
+      setTimeout(() => {
+        displayTaskDetails(13);
+      }, 100);
+
       // setTimeout(() => {
       //   prepareAddTaskPage();
       // }, 100);
@@ -2660,7 +2664,7 @@ function changeTaskAccToCategory(num) {
       (num == 99 || num == tasks[i].state_id)
     ) {
       output += `
-                      <div class="task">
+                      <div name="id_${tasks[i].task_id}" class="task">
                         <div onclick="prepareTaskDetails(event,this)" class="name">${
                           tasks[i].name
                         }</div>
@@ -2980,14 +2984,15 @@ function prepareTaskDetails(event, element) {
       ) {
         clearInterval(interval);
 
-        displayTaskDetails();
+        displayTaskDetails($(element).parent().attr("name").split("_")[1]);
         changeHeaderLocation(1, $(element).html());
       }
     }, 10);
   }
 }
 
-function displayTaskDetails() {
+function displayTaskDetails(id) {
+  console.log(id);
   output = "";
 
   output += `
