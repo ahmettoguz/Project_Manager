@@ -36,21 +36,6 @@ $(function () {
     }
   }, 10);
 
-  // YAPILACAKLAR
-  // boss ve owner kullanıcının department'ını değiştirebilecek
-  // eğer kullanıcı owner ise kullanıcıların durumunu boss ya da employee olarak değiştirebilir.
-  // * boss user ekleyebilecek ama diğerleri ekleyemeyecek (boss: user add, delete)
-
-  // * task editleme sayfası eklenicek burada task silinebilecek
-
-  // * projelerde tasklara tıklanabilir olmalı
-
-  // * language icon will be removed
-
-  // * main sayfanın yüklenmelerini ayarlayabilirsen, özellikle company background'u
-
-  // YAPILACAKLAR
-
   // features
   // only boss can assign task.
 });
