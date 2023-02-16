@@ -48,13 +48,13 @@ $(function () {
             displayTaskDetails(13);
           }
         }, 10);
-      }, 100);
+      }, 200);
 
       // setTimeout(() => {
       //   prepareAddTaskPage();
       // }, 100);
     }
-  }, 100);
+  }, 10);
 
   // features
   // only boss can assign task.

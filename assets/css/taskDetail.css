@@ -10,7 +10,10 @@
   width: 1000px;
   height: 520px;
   margin: 0 auto;
-  border: 1px solid black;
+  /* border: 1px solid red; */
+  background-image: linear-gradient(white, rgb(255, 220, 251));
+  box-shadow: 0 0 2px grey, 0 4px 8px silver, 0 8px 16px lightgrey;
+  border-radius: 5px;
 }
 
 /* ------ */
@@ -18,9 +21,78 @@
 #taskDetail > header {
   margin: 0;
   padding: 0;
-  border: 1px solid black;
+  min-height: 0;
+  height: 10%;
+  width: 100%;
+  /* border: 1px solid black; */
 }
 
 #taskDetail > div {
+  width: 100%;
+  height: 90%;
+  justify-content: space-around;
+  /* border: 1px solid black; */
+}
+
+#taskDetail > div > div {
+  width: 32%;
+  height: 100%;
+  border: 1px solid black;
+}
+
+#taskDetail > div > .left {
+  /* border: 1px solid black; */
+}
+#taskDetail > div > .left > .iconContainer {
+  /* border: 1px solid black; */
+}
+
+/* #taskDetail > div > .left > .iconContainer > .icon {
+   border: 1px solid black; 
+} */
+
+#taskDetail > div > .left > .userContainer {
+  /* border: 1px solid black; */
+}
+
+/* #taskDetail > div > .left > .userContainer > .icon {
+  border: 1px solid black;
+}
+
+#taskDetail > div > .left > .userContainer > .text{
+  border: 1px solid black;
+} */
+
+#taskDetail > div > .left > .stateContainer {
+  border: 1px solid black;
+}
+
+/* #taskDetail > div > .left  > .stateContainer > .header{
+  border: 1px solid black;
+}
+
+#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2){
+  border: 1px solid black;
+}
+
+#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2) > .icon{
+  border: 1px solid black;
+}
+
+#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2) > .text{
+  border: 1px solid black;
+} */
+
+#taskDetail > div > .left {
+  /* border: 1px solid black; */
+}
+
+/* --------------- */
+#taskDetail > div > .middle {
+  border: 1px solid black;
+}
+
+/* --------------- */
+#taskDetail > div > .right {
   border: 1px solid black;
 }
