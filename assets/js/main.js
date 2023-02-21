@@ -3023,6 +3023,7 @@ function displayTaskDetails(id) {
   let due = task.due;
   let startDate = task.start_date;
   let endDate = task.end_date;
+  let taskIcon = `url(../images/main/task/states/${task.state_id}.png)`;
 
   output += `
                         <div id="taskDetail">
@@ -3035,14 +3036,17 @@ function displayTaskDetails(id) {
                               </div>
 
                               <div class="userContainer">
-                                <div class="icon"></div>
-                                <div class="text">${user.name} ${user.surname}</div>
+                              <div class="icon" style="background-image: url(../images/users/${user.photo})"></div>
+                                <div class="text">
+                                  <div class="label">Assignee</div>
+                                  <div class="name">${user.name} ${user.surname}</div>                                  
+                                </div>
                               </div>
 
                               <div class="stateContainer">
                                 <div class="header">State</div>
                                 <div>
-                                  <div class="icon"></div>
+                                  <div class="icon" style="background-image: ${taskIcon}"></div>
                                   <div class="text">${task.state}</div>
                                 </div>
                               </div>
@@ -3050,8 +3054,8 @@ function displayTaskDetails(id) {
 
                             <div class="middle">
                               <div class="descriptionContainer">
-                                <div class="header"></div>
-                                <div class="description">${task.description}</div>
+                                <div class="header">Description</div>
+                                <div class="description">&emsp;${task.description}</div>
                               </div>
 
                               <div class="dateContainer">

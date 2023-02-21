@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   font-family: "Inter", sans-serif;
+  font-size: 18px;
 }
 
 #taskDetail {
@@ -11,7 +12,7 @@
   height: 520px;
   margin: 0 auto;
   /* border: 1px solid red; */
-  background-image: linear-gradient(white, rgb(255, 220, 251));
+  background-image: linear-gradient(white, rgb(255, 229, 252));
   box-shadow: 0 0 2px grey, 0 4px 8px silver, 0 8px 16px lightgrey;
   border-radius: 5px;
 }
@@ -24,6 +25,7 @@
   min-height: 0;
   height: 10%;
   width: 100%;
+  font-size: 30px;
   /* border: 1px solid black; */
 }
 
@@ -38,58 +40,148 @@
   width: 32%;
   height: 100%;
   border: 1px solid black;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
-#taskDetail > div > .left {
-  /* border: 1px solid black; */
-}
-#taskDetail > div > .left > .iconContainer {
-  /* border: 1px solid black; */
-}
-
-/* #taskDetail > div > .left > .iconContainer > .icon {
-   border: 1px solid black; 
+/* #taskDetail > div > .left {
+  border: 1px solid black;
 } */
+
+/* iconContainer , userContainer, stateContainer */
+#taskDetail > div > .left > div {
+  width: 90%;
+  height: 33%;
+  /* border: 1px solid black; */
+  border-radius: 10px;
+}
+
+#taskDetail > div > .left > .iconContainer {
+  box-shadow: 0 0 10px grey, 0 0 4px inset silver;
+  width: 80%;
+  height: 40%;
+}
+
+#taskDetail > div > .left > .iconContainer > .icon {
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  border-radius: 10px;
+  width: 90%;
+  height: 90%;
+
+  background-image: url(../images/main/task/task.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 #taskDetail > div > .left > .userContainer {
+  height: 20%;
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+}
+
+#taskDetail > div > .left > .userContainer > .icon {
+  width: 30%;
+  height: 80%;
+  box-shadow: 0 0 5px silver, 0 0 2px inset silver;
+  /* border: 1px solid black; */
+  border-radius: 5px;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#taskDetail > div > .left > .userContainer > .text {
+  width: 60%;
+  height: 80%;
+  /* border: 1px solid black; */
+  /* border: 1px solid black; */
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#taskDetail > div > .left > .userContainer > .text > .label {
+  font-size: 24px;
+  height: 45%;
+  width: 100%;
+  box-shadow: 0 8px 8px -8px silver;
+  /* border: 1px solid black; */
+}
+#taskDetail > div > .left > .userContainer > .text > .name {
+  height: 45%;
+  width: 100%;
   /* border: 1px solid black; */
 }
 
-/* #taskDetail > div > .left > .userContainer > .icon {
-  border: 1px solid black;
-}
-
-#taskDetail > div > .left > .userContainer > .text{
-  border: 1px solid black;
-} */
-
 #taskDetail > div > .left > .stateContainer {
-  border: 1px solid black;
+  height: 25%;
+  flex-direction: column;
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
 }
 
-/* #taskDetail > div > .left  > .stateContainer > .header{
-  border: 1px solid black;
+#taskDetail > div > .left > .stateContainer > .header {
+  box-shadow: 0 8px 8px -8px silver;
+  font-size: 24px;
+  width: 90%;
+  height: 25%;
+}
+#taskDetail > div > .left > .stateContainer > div {
+  width: 100%;
+  /* border: 1px solid black; */
+  height: 60%;
+  justify-content: center;
 }
 
-#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2){
-  border: 1px solid black;
+#taskDetail > div > .left > .stateContainer > div > .icon {
+  width: 25%;
+  height: 80%;
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* border: 1px solid black; */
 }
 
-#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2) > .icon{
-  border: 1px solid black;
-}
-
-#taskDetail > div > .left  > .stateContainer > div:nth-of-type(2) > .text{
-  border: 1px solid black;
-} */
-
-#taskDetail > div > .left {
+#taskDetail > div > .left > .stateContainer > div > .text {
+  width: 60%;
+  height: 80%;
+  justify-content: flex-start;
+  padding-left: 15px;
   /* border: 1px solid black; */
 }
 
 /* --------------- */
-#taskDetail > div > .middle {
+/* #taskDetail > div > .middle {
   border: 1px solid black;
+} */
+
+/* descriptionContainer, dateContainer, commentContainer */
+#taskDetail > div > .middle > div {
+  height: 30%;
+  width: 90%;
+  flex-direction: column;
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  /* border: 1px solid black; */
+}
+/* 
+#taskDetail > div > .middle > .descriptionContainer {
+  border: 1px solid black;
+} */
+
+#taskDetail > div > .middle > .descriptionContainer > .header {
+  box-shadow: 0 8px 8px -8px silver;
+  font-size: 20px;
+  width: 100%;
+  height: 25%;
+}
+
+#taskDetail > div > .middle > .descriptionContainer > .description {
+  padding: 10px 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 16px;
+  width: 100%;
+  height: 75%;
 }
 
 /* --------------- */
