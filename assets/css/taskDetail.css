@@ -10,10 +10,10 @@
 #taskDetail {
   width: 1000px;
   height: 520px;
-  margin: 0 auto;
+  margin: 15px auto;
   /* border: 1px solid red; */
   background-image: linear-gradient(white, rgb(255, 229, 252));
-  box-shadow: 0 0 2px grey, 0 4px 8px silver, 0 8px 16px lightgrey;
+  box-shadow: 0 4px 8px silver, 0 8px 16px lightgrey;
   border-radius: 5px;
 }
 
