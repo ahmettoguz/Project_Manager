@@ -12,7 +12,7 @@
   height: 520px;
   margin: 15px auto;
   /* border: 1px solid red; */
-  background-image: linear-gradient(white, rgb(255, 229, 252));
+  background-image: linear-gradient(white, rgb(249, 239, 248));
   box-shadow: 0 4px 8px silver, 0 8px 16px lightgrey;
   border-radius: 5px;
 }
@@ -61,13 +61,13 @@
 }
 
 #taskDetail > div > .left > .iconContainer {
-  box-shadow: 0 0 10px grey, 0 0 4px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   width: 80%;
   height: 40%;
 }
 
 #taskDetail > div > .left > .iconContainer > .icon {
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   border-radius: 10px;
   width: 90%;
   height: 90%;
@@ -80,13 +80,13 @@
 
 #taskDetail > div > .left > .userContainer {
   height: 20%;
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
 }
 
 #taskDetail > div > .left > .userContainer > .icon {
   width: 30%;
   height: 80%;
-  box-shadow: 0 0 5px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   /* border: 1px solid black; */
   border-radius: 5px;
 
@@ -120,7 +120,7 @@
 #taskDetail > div > .left > .stateContainer {
   height: 25%;
   flex-direction: column;
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
 }
 
 #taskDetail > div > .left > .stateContainer > .header {
@@ -163,7 +163,7 @@
   height: 30%;
   width: 90%;
   flex-direction: column;
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   border-radius: 5px;
   /* border: 1px solid black; */
 }
@@ -236,19 +236,19 @@
   height: 30%;
   width: 90%;
   flex-direction: column;
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   border-radius: 5px;
   /* border: 1px solid black; */
 }
 
 #taskDetail > div > .right > .iconContainer {
-  box-shadow: 0 0 10px grey, 0 0 4px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   width: 80%;
   height: 40%;
 }
 
 #taskDetail > div > .right > .iconContainer > .icon {
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
   border-radius: 10px;
   width: 90%;
   height: 90%;
@@ -267,7 +267,7 @@
 #taskDetail > div > .right > .stateContainer {
   height: 25%;
   flex-direction: column;
-  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+ box-shadow: 0 0 5px silver, 0 3px 5px rgb(226, 224, 224), 0 0 2px inset silver;
 }
 
 #taskDetail > div > .right > .stateContainer > .header {
