@@ -30,34 +30,28 @@ $(function () {
 
       performChangePage(1);
 
-      setTimeout(() => {
-        getProjects();
-        getProjectStates();
-        getTaskStates();
-        getUsers();
-
-        let interval = setInterval(() => {
-          if (
-            loadedTables.includes("project") &&
-            loadedTables.includes("project_state") &&
-            loadedTables.includes("task_state") &&
-            loadedTables.includes("user")
-          ) {
-            clearInterval(interval);
-
-            displayTaskDetails(13);
-          }
-        }, 10);
-      }, 200);
-
       // setTimeout(() => {
-      //   prepareAddTaskPage();
-      // }, 100);
+      //   getProjects();
+      //   getProjectStates();
+      //   getTaskStates();
+      //   getUsers();
+
+      //   let interval = setInterval(() => {
+      //     if (
+      //       loadedTables.includes("project") &&
+      //       loadedTables.includes("project_state") &&
+      //       loadedTables.includes("task_state") &&
+      //       loadedTables.includes("user")
+      //     ) {
+      //       clearInterval(interval);
+
+      //       displayTaskDetails(13);
+      //     }
+      //   }, 10);
+      // }, 200);
+
     }
   }, 10);
-
-  // features
-  // only boss can assign task.
 });
 
 function changeBodyPage(pageNumber) {
@@ -3012,6 +3006,7 @@ function displayTaskDetails(id) {
   let user = users[task.user_id];
   let project = findSpecificProject(task.project_id);
   let projectState = findSpecificProjectState(project.state_id);
+  let projectIcon = `url(../images/main/project/${project.state_id}.png)`;
 
   // console.log(task);
   // console.log(user);
@@ -3036,15 +3031,19 @@ function displayTaskDetails(id) {
                               </div>
 
                               <div class="userContainer">
-                              <div class="icon" style="background-image: url(../images/users/${user.photo})"></div>
+                              <div class="icon" style="background-image: url(../images/users/${
+                                user.photo
+                              })"></div>
                                 <div class="text">
                                   <div class="label">Assignee</div>
-                                  <div class="name">${user.name} ${user.surname}</div>                                  
+                                  <div class="name">${user.name} ${
+    user.surname
+  }</div>                                  
                                 </div>
                               </div>
 
                               <div class="stateContainer">
-                                <div class="header">State</div>
+                                <div class="header">Task State</div>
                                 <div>
                                   <div class="icon" style="background-image: ${taskIcon}"></div>
                                   <div class="text">${task.state}</div>
@@ -3055,43 +3054,49 @@ function displayTaskDetails(id) {
                             <div class="middle">
                               <div class="descriptionContainer">
                                 <div class="header">Description</div>
-                                <div class="description">&emsp;${task.description}</div>
+                                <div class="description">&emsp;${
+                                  task.description
+                                }</div>
                               </div>
 
                               <div class="dateContainer">
                                 <div class="box">
                                   <div class="header">Due</div>
-                                  <div class="text">${due}</div>
+                                  <div class="text">${getDateDifferenceMeaningfull(
+                                    due
+                                  )}</div>
                                 </div>
                                 <div class="box">
                                   <div class="header">Start Date</div>
-                                  <div class="text">${startDate}</div>
+                                  <div class="text">${startDate.substring(8,10)}/${startDate.substring(5,7)}/${startDate.substring(0,4)}</div>
                                 </div>
                                 <div class="box">
                                   <div class="header">End Date</div>
-                                  <div class="text">${endDate}</div>
+                                  <div class="text">${endDate.substring(8,10)}/${endDate.substring(5,7)}/${endDate.substring(0,4)}</div>
                                 </div>
                               </div>
 
                               <div class="commentContainer">
-                                <div class="header"></div>
-                                <div class="comment">${task.comment}</div>
+                                <div class="header">Comments</div>
+                                <div class="comment">&emsp;${task.comment}</div>
                               </div>
                             </div>
 
                             <div class="right">
                               <div class="iconContainer">
-                                <div class="icon"></div>
+                                <div class="icon" style="background-image: url(../images/project/${project.photo});"></div>
                               </div>
 
                               <div class="projectNameContainer">
-                                <div class="text">This task is part of ${project.name} project.</div>
+                                <div class="text">This task is part of ${
+                                  project.name
+                                } project.</div>
                               </div>
 
                               <div class="stateContainer">
                                 <div class="header">Project State</div>
                                 <div>
-                                  <div class="icon"></div>
+                                  <div class="icon" style="background-image: ${projectIcon}"></div>
                                   <div class="text">${projectState}</div>
                                 </div>
                               </div>

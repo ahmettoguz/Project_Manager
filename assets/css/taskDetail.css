@@ -39,10 +39,13 @@
 #taskDetail > div > div {
   width: 32%;
   height: 100%;
-  border: 1px solid black;
   overflow: hidden;
   flex-direction: column;
   justify-content: space-around;
+}
+
+#taskDetail > div > div:nth-of-type(2) {
+  box-shadow: 30px 0 10px -32px lightskyblue, -30px 0 10px -32px lightskyblue;
 }
 
 /* #taskDetail > div > .left {
@@ -161,12 +164,14 @@
   width: 90%;
   flex-direction: column;
   box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  border-radius: 5px;
   /* border: 1px solid black; */
 }
-/* 
+
 #taskDetail > div > .middle > .descriptionContainer {
-  border: 1px solid black;
-} */
+  /* border: 1px solid black; */
+  height: 35%;
+}
 
 #taskDetail > div > .middle > .descriptionContainer > .header {
   box-shadow: 0 8px 8px -8px silver;
@@ -184,7 +189,113 @@
   height: 75%;
 }
 
+#taskDetail > div > .middle > .dateContainer {
+  height: 20%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+#taskDetail > div > .middle > .dateContainer > .box {
+  width: 33%;
+  height: 100%;
+  flex-direction: column;
+}
+#taskDetail > div > .middle > .dateContainer > .box > .header {
+  font-size: 19px;
+  height: 35%;
+  width: 100%;
+  box-shadow: 0 8px 8px -8px silver;
+}
+#taskDetail > div > .middle > .dateContainer > .box > .text {
+  text-align: center;
+  font-size: 16px;
+  height: 50%;
+}
+
+#taskDetail > div > .middle > .commentContainer {
+  height: 35%;
+}
+
+#taskDetail > div > .middle > .commentContainer > .header {
+  box-shadow: 0 8px 8px -8px silver;
+  font-size: 20px;
+  width: 100%;
+  height: 25%;
+}
+
+#taskDetail > div > .middle > .commentContainer > .comment {
+  padding: 10px 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 16px;
+  width: 100%;
+  height: 75%;
+}
+
 /* --------------- */
-#taskDetail > div > .right {
-  border: 1px solid black;
+#taskDetail > div > .right > div {
+  height: 30%;
+  width: 90%;
+  flex-direction: column;
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  border-radius: 5px;
+  /* border: 1px solid black; */
+}
+
+#taskDetail > div > .right > .iconContainer {
+  box-shadow: 0 0 10px grey, 0 0 4px inset silver;
+  width: 80%;
+  height: 40%;
+}
+
+#taskDetail > div > .right > .iconContainer > .icon {
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+  border-radius: 10px;
+  width: 90%;
+  height: 90%;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  padding: 10px;
+}
+
+#taskDetail > div > .right > .projectNameContainer {
+  height: 15%;
+  text-align: center;
+}
+
+#taskDetail > div > .right > .stateContainer {
+  height: 25%;
+  flex-direction: column;
+  box-shadow: 0 0 10px silver, 0 0 2px inset silver;
+}
+
+#taskDetail > div > .right > .stateContainer > .header {
+  box-shadow: 0 8px 8px -8px silver;
+  font-size: 24px;
+  width: 90%;
+  height: 25%;
+}
+#taskDetail > div > .right > .stateContainer > div {
+  width: 100%;
+  /* border: 1px solid black; */
+  height: 60%;
+  justify-content: center;
+}
+
+#taskDetail > div > .right > .stateContainer > div > .icon {
+  width: 25%;
+  height: 80%;
+  background-position: right;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* border: 1px solid black; */
+}
+
+#taskDetail > div > .right > .stateContainer > div > .text {
+  width: 60%;
+  height: 80%;
+  justify-content: flex-start;
+  padding-left: 15px;
+  /* border: 1px solid black; */
 }
