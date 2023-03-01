@@ -28,7 +28,7 @@ $(function () {
       assignCompanyInHeader();
       assignUserInHeader();
 
-      performChangePage(1);
+      performChangePage();
 
       // setTimeout(() => {
       //   getProjects();
