@@ -30,26 +30,25 @@ $(function () {
 
       performChangePage();
 
-      // setTimeout(() => {
-      //   getProjects();
-      //   getProjectStates();
-      //   getTaskStates();
-      //   getUsers();
+      setTimeout(() => {
+        getProjects();
+        getProjectStates();
+        getTaskStates();
+        getUsers();
 
-      //   let interval = setInterval(() => {
-      //     if (
-      //       loadedTables.includes("project") &&
-      //       loadedTables.includes("project_state") &&
-      //       loadedTables.includes("task_state") &&
-      //       loadedTables.includes("user")
-      //     ) {
-      //       clearInterval(interval);
+        let interval = setInterval(() => {
+          if (
+            loadedTables.includes("project") &&
+            loadedTables.includes("project_state") &&
+            loadedTables.includes("task_state") &&
+            loadedTables.includes("user")
+          ) {
+            clearInterval(interval);
 
-      //       displayTaskDetails(13);
-      //     }
-      //   }, 10);
-      // }, 200);
-
+            displayTaskDetails(13);
+          }
+        }, 10);
+      }, 200);
     }
   }, 10);
 });
@@ -3022,7 +3021,10 @@ function displayTaskDetails(id) {
 
   output += `
                         <div id="taskDetail">
-                          <header>${task.name}</header>
+                          <header>
+                            <span>${task.name}</span>
+                            <div class="icon" onclick="openTaskEdit(${id})"></div>
+                          </header>
 
                           <div>
                             <div class="left">
@@ -3068,11 +3070,23 @@ function displayTaskDetails(id) {
                                 </div>
                                 <div class="box">
                                   <div class="header">Start Date</div>
-                                  <div class="text">${startDate.substring(8,10)}/${startDate.substring(5,7)}/${startDate.substring(0,4)}</div>
+                                  <div class="text">${startDate.substring(
+                                    8,
+                                    10
+                                  )}/${startDate.substring(
+    5,
+    7
+  )}/${startDate.substring(0, 4)}</div>
                                 </div>
                                 <div class="box">
                                   <div class="header">End Date</div>
-                                  <div class="text">${endDate.substring(8,10)}/${endDate.substring(5,7)}/${endDate.substring(0,4)}</div>
+                                  <div class="text">${endDate.substring(
+                                    8,
+                                    10
+                                  )}/${endDate.substring(
+    5,
+    7
+  )}/${endDate.substring(0, 4)}</div>
                                 </div>
                               </div>
 
@@ -3084,7 +3098,9 @@ function displayTaskDetails(id) {
 
                             <div class="right">
                               <div class="iconContainer">
-                                <div class="icon" style="background-image: url(../images/project/${project.photo});"></div>
+                                <div class="icon" style="background-image: url(../images/project/${
+                                  project.photo
+                                });"></div>
                               </div>
 
                               <div class="projectNameContainer">
@@ -3125,4 +3141,21 @@ function findSpecificProjectState(id) {
   for (let i = 0; i < projectStates.length; i++) {
     if (projectStates[i].id == id) return projectStates[i].state;
   }
+}
+
+function openTaskEdit(id) {
+  let task = findSpecificTask(id);
+  let user = users[task.user_id];
+  let project = findSpecificProject(task.project_id);
+  let projectState = findSpecificProjectState(project.state_id);
+  let projectIcon = `url(../images/main/project/${project.state_id}.png)`;
+
+  let due = task.due;
+  let startDate = task.start_date;
+  let endDate = task.end_date;
+  let taskIcon = `url(../images/main/task/states/${task.state_id}.png)`;
+
+  let output = "asd";
+
+  $("#main > section > div.body").html(output);
 }
