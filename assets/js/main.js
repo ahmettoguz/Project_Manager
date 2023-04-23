@@ -3155,7 +3155,84 @@ function openTaskEdit(id) {
   let endDate = task.end_date;
   let taskIcon = `url(../images/main/task/states/${task.state_id}.png)`;
 
-  let output = "asd";
+  let output = "";
+
+  output += `
+    <div id="editTask">
+      <div class="header">
+        <div class="title"></div>
+      </div>
+
+      <div class="body">
+        <div class="left bodySection">
+          <div class="assigneeContainer">
+            <div class="photo">...</div>
+            <div>
+              <div class="title">Assignee</div>
+              <div class="name">...</div>
+            </div>
+          </div>
+
+          <div class="stateContainer">
+            <div class="header">
+              <div class="title"></div>
+            </div>
+
+            <div class="body">
+              <div class="icon"></div>
+              <select id="editTask_TaskState">
+                <option value="1">1</option>
+                <option value="2">2</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="middle bodySection">
+          <div class="descriptionContainer">
+            <div class="header">
+              <div class="title">Description</div>
+            </div>
+            <div class="body">
+              <input type="text" id="editTask_Description" value="..." />
+            </div>
+          </div>
+
+          <div class="commentContainer">
+            <div class="header">
+              <div class="title">Comments</div>
+            </div>
+            <div class="body">
+              <input type="text" id="editTask_Comment" value="..." />
+            </div>
+          </div>
+        </div>
+        <div class="right bodySection">
+          <div class="endDateContainer">
+            <div class="header">
+              <div class="title">End Date</div>
+            </div>
+            <div class="body">
+              <input type="date" id="editTask_EndDate" />
+            </div>
+          </div>
+
+          <div class="startDateContainer">
+            <div class="header">
+              <div class="title">Start Date</div>
+            </div>
+            <div class="body">
+              <input type="date" id="editTask_StartDate" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer">
+        <div class="btnBack btn">Return</div>
+        <div class="btnSave btn">Save</div>
+      </div>
+    </div>
+
+  `;
 
   $("#main > section > div.body").html(output);
 }
