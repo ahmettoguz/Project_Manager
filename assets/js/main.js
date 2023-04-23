@@ -46,6 +46,7 @@ $(function () {
             clearInterval(interval);
 
             displayTaskDetails(13);
+            openTaskEdit(13);
           }
         }, 10);
       }, 200);
@@ -3157,25 +3158,30 @@ function openTaskEdit(id) {
 
   let output = "";
 
+  // console.log(task);
+  console.log(user);
+
   output += `
     <div id="editTask">
       <div class="header">
-        <div class="title"></div>
+        <div class="title">${task.name}</div>
       </div>
 
       <div class="body">
         <div class="left bodySection">
           <div class="assigneeContainer">
-            <div class="photo">...</div>
-            <div>
+            <div class="header">
+              <div class="photo" style="background-image:url(../images/users/${user.photo})"></div>
+            </div>
+            <div class="body">
               <div class="title">Assignee</div>
-              <div class="name">...</div>
+              <div class="name">${user.name} ${user.surname}</div>
             </div>
           </div>
 
           <div class="stateContainer">
             <div class="header">
-              <div class="title"></div>
+              <div class="title">Task State</div>
             </div>
 
             <div class="body">
@@ -3193,7 +3199,7 @@ function openTaskEdit(id) {
               <div class="title">Description</div>
             </div>
             <div class="body">
-              <input type="text" id="editTask_Description" value="..." />
+              <textarea id="editTask_Description" cols="30" rows="10"></textarea>
             </div>
           </div>
 
@@ -3202,7 +3208,7 @@ function openTaskEdit(id) {
               <div class="title">Comments</div>
             </div>
             <div class="body">
-              <input type="text" id="editTask_Comment" value="..." />
+              <textarea id="editTask_Comment" cols="30" rows="10"></textarea>
             </div>
           </div>
         </div>
