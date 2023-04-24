@@ -3158,8 +3158,8 @@ function openTaskEdit(id) {
 
   let output = "";
 
-  // console.log(task);
-  console.log(user);
+  console.log(task);
+  // console.log(user);
 
   output += `
     <div id="editTask">
@@ -3185,10 +3185,15 @@ function openTaskEdit(id) {
             </div>
 
             <div class="body">
-              <div class="icon"></div>
-              <select id="editTask_TaskState">
-                <option value="1">1</option>
-                <option value="2">2</option>
+              <div class="icon"  style="background-image: url(../images/main/task/states/${task.state_id}.png);"></div>
+              <select id="editTask_TaskState" onchange="changeTaskStateEvent(this)">`;
+  taskStates.forEach((t) => {
+    let selected = "";
+    if (task.state_id == t.id) selected = "selected";
+    output += `
+                <option ${selected} value="${t.id}">${t.state}</option>`;
+  });
+  output += `
               </select>
             </div>
           </div>
@@ -3241,4 +3246,11 @@ function openTaskEdit(id) {
   `;
 
   $("#main > section > div.body").html(output);
+}
+
+function changeTaskStateEvent(element) {
+  let id = $(element).val();
+  $(".stateContainer .icon").css({
+    "background-image": `url("../images/main/task/states/${id}.png")`,
+  });
 }
