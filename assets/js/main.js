@@ -3147,19 +3147,9 @@ function findSpecificProjectState(id) {
 function openTaskEdit(id) {
   let task = findSpecificTask(id);
   let user = users[task.user_id];
-  let project = findSpecificProject(task.project_id);
-  let projectState = findSpecificProjectState(project.state_id);
-  let projectIcon = `url(../images/main/project/${project.state_id}.png)`;
-
-  let due = task.due;
-  let startDate = task.start_date;
-  let endDate = task.end_date;
-  let taskIcon = `url(../images/main/task/states/${task.state_id}.png)`;
-
+  let startDate = task.start_date.substring(0, 10);
+  let endDate = task.end_date.substring(0, 10);
   let output = "";
-
-  console.log(task);
-  // console.log(user);
 
   output += `
     <div id="editTask">
@@ -3218,23 +3208,25 @@ function openTaskEdit(id) {
           </div>
         </div>
         <div class="right bodySection">
-          <div class="endDateContainer">
-            <div class="header">
-              <div class="title">End Date</div>
-            </div>
-            <div class="body">
-              <input type="date" id="editTask_EndDate" />
-            </div>
-          </div>
 
-          <div class="startDateContainer">
+          <div class="startDateContainer dateContainer">
             <div class="header">
               <div class="title">Start Date</div>
             </div>
             <div class="body">
-              <input type="date" id="editTask_StartDate" />
+              <input type="date" id="editTask_StartDate" value="${startDate}" />
             </div>
           </div>
+
+          <div class="endDateContainer dateContainer">
+            <div class="header">
+              <div class="title">End Date</div>
+            </div>
+            <div class="body">
+              <input type="date" id="editTask_EndDate" value="${endDate}" />
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="footer">
