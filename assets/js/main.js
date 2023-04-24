@@ -3204,7 +3204,7 @@ function openTaskEdit(id) {
               <div class="title">Description</div>
             </div>
             <div class="body">
-              <textarea id="editTask_Description" cols="30" rows="10"></textarea>
+              <textarea id="editTask_Description" cols="30" rows="10">${task.description}</textarea>
             </div>
           </div>
 
@@ -3213,7 +3213,7 @@ function openTaskEdit(id) {
               <div class="title">Comments</div>
             </div>
             <div class="body">
-              <textarea id="editTask_Comment" cols="30" rows="10"></textarea>
+              <textarea id="editTask_Comment" cols="30" rows="10">${task.comment}</textarea>
             </div>
           </div>
         </div>
