@@ -216,6 +216,35 @@ input[type="date"] {
 
 /* footer */
 #editTask > .footer {
+  width: 100%;
   height: 8%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  margin-left: 5px;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 15%;
+  height: 90%;
+  position: relative;
+  border: 2px solid grey;
+  transition: 300ms ease;
+  cursor: pointer;
+  user-select: none;
+}
+
+.btn:hover {
+  box-shadow: inset 0 0 2px black, inset 0 0 4px black;
+}
+
+.btn:active {
+  transform: scale(0.9);
+  box-shadow: inset 0 0 2px black, inset 0 0 4px black,
+    0 0 10px rgb(101, 158, 158);
 }
